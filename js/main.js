@@ -90,6 +90,8 @@ function render() {
     
     const readBtn = createButton('read-btn', readStatus);
     const delBtn = createButton('del-btn', 'Delete');
+    readBtn.classList.add('btn-secondary');
+    delBtn.classList.add('btn-danger');
     div.appendChild(readBtn);
     div.appendChild(delBtn);
   });
@@ -98,6 +100,7 @@ function render() {
 function createButton(className, innerText) {
   const button = document.createElement('button');
   button.classList.add(className);
+  button.classList.add('btn');
   button.innerText = innerText;
   return button;
 }
@@ -138,6 +141,7 @@ function submitBook() {
   const title = document.getElementById('title').value
   const author = document.getElementById('author').value;
   const pages = document.getElementById('pages').value;
+  
   const book = {
     title : title,
     author : author,
