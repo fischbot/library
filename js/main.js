@@ -29,8 +29,6 @@ let myLibrary = [
 const addBookBtn = document.getElementById('add-book-btn');
 const addBookForm = document.getElementById('add-book-form');
 const bookList = document.getElementById('book-list');
-const buttons = document.querySelectorAll('button');
-let allButtons = Array.from(buttons);
 
 function Book(title, author, pages, hasRead) {
   this.title = title;
@@ -40,7 +38,6 @@ function Book(title, author, pages, hasRead) {
 }
 
 function toggleRead(bookId) {
-  // TODO
   let text = '';
   let book = myLibrary[bookId];
   console.log(book);
@@ -60,12 +57,10 @@ function addBookToLibrary(book) {
 }
 
 window.addEventListener('load', function() { 
-    allButtons.forEach(function(button) {
-      button.addEventListener('click', clickHandler,false);
-    });
+    render();
+    document.addEventListener('click', clickHandler, false);
     
 }, false);
-
 
 function render() {
   clearBookList();
@@ -104,7 +99,6 @@ function createButton(className, innerText) {
   const button = document.createElement('button');
   button.classList.add(className);
   button.innerText = innerText;
-  allButtons.push(button);
   return button;
 }
 
@@ -118,8 +112,15 @@ function clickHandler(e) {
     case ('close-add-book-form') :
       addBookForm.classList.add('hidden');
       break;
+    case ('submit-btn') :
+      console.log('submitting book info...');
+      submitBook();
+      clearInputs();
+      render();
+      break;
   }
   
+  // Read and Delete Buttons
   if (elementClicked.classList.contains('read-btn')) {
     // TODO get parent of button
     let bookId = elementClicked.parentNode.id;
@@ -128,7 +129,29 @@ function clickHandler(e) {
     let bookId = elementClicked.parentNode.id;
     let entryToRemove = document.getElementById(`${bookId}`);
     bookList.removeChild(entryToRemove);
+    myLibrary.splice(bookId,1);
+    render();
   }
+}
+
+function submitBook() {
+  const title = document.getElementById('title').value
+  const author = document.getElementById('author').value;
+  const pages = document.getElementById('pages').value;
+  const book = {
+    title : title,
+    author : author,
+    pages : pages
+    // hasRead : document.getElementById('hasRead').value
+  };
+  addBookToLibrary(book);
+}
+
+function clearInputs() {
+  const inputs = document.querySelectorAll('input');
+  inputs.forEach(function(input) {
+    input.value = '';
+  });
 }
 
 function clearBookList() {
@@ -136,5 +159,3 @@ function clearBookList() {
     bookList.removeChild(bookList.lastChild);
   }
 }
-
-render();
