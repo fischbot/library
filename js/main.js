@@ -118,8 +118,6 @@ function clickHandler(e) {
     case ('submit-btn') :
       console.log('submitting book info...');
       submitBook();
-      clearInputs();
-      render();
       break;
   }
   
@@ -152,6 +150,8 @@ function submitBook() {
     // hasRead : document.getElementById('hasRead').value
   };
   addBookToLibrary(book);
+  clearInputs();
+  render();
 }
 
 function clearInputs() {
