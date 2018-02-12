@@ -1,0 +1,31 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Library</title>
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+    <body>
+        <!--[if lte IE 9]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
+        <div class="container">
+          <div>
+            <button id="add-book-btn">Add Book</button>
+          </div>
+          <div id="add-book-form" class="hidden">
+            <button id="close-add-book-form">X</button>
+            <!--<form>-->
+              <input type="text" name="title" placeholder="Title">
+              <input type="text" name="author" placeholder="Author">
+              <input type="text" name="pages" placeholder="How many pages?">
+              <input type="checkbox" name="hasRead"><label>Read</label>
+              <input type="submit">
+            <!--</form>-->
+          </div>
+          <div id="book-list"></div>
+        </div>
+      <script src="js/main.js"></script>
+    </body>
+</html>
