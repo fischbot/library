@@ -155,7 +155,8 @@ function submitBook() {
   const author = document.getElementById('author').value;
   const pages = document.getElementById('pages').value;
   
-  if (title === '' || author === '' || pages === '') {
+  // if title is not entered don't allow submission
+  if (title === '') {
     return;
   } 
   const book = {
