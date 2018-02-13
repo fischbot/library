@@ -52,6 +52,21 @@ function toggleRead(bookId) {
   return text;
 }
 
+function toggleFormBtn() {
+  // TODO
+  // toggle form hidden/visible
+  // change text from 'Add Book' to 'Hide Add Book'
+  if (addBookForm.classList.contains('hidden')) {
+    addBookForm.classList.remove('hidden');
+    addBookBtn.innerText = 'Hide Form';
+    addBookBtn.style.background = '#B62C3B';
+  } else {
+    addBookForm.classList.add('hidden');
+    addBookBtn.innerText = 'Add Book';
+    addBookBtn.style.background = '#1DBDBF';
+  }
+}
+
 function addBookToLibrary(book) {
   myLibrary.push(book);
 }
@@ -88,19 +103,17 @@ function render() {
       readStatus = 'Not Read'
     }
     
+    const delBtn = createButton('del-btn', 'X');
     const readBtn = createButton('read-btn', readStatus);
-    const delBtn = createButton('del-btn', 'Delete');
-    readBtn.classList.add('btn-secondary');
-    delBtn.classList.add('btn-danger');
-    div.appendChild(readBtn);
     div.appendChild(delBtn);
+    div.appendChild(readBtn);
+    
   });
 }
 
 function createButton(className, innerText) {
   const button = document.createElement('button');
   button.classList.add(className);
-  button.classList.add('btn');
   button.innerText = innerText;
   return button;
 }
@@ -110,7 +123,9 @@ function clickHandler(e) {
 
   switch(elementClicked.id) {
     case ('add-book-btn') :
-      addBookForm.classList.remove('hidden');
+      // toggle add book form
+      toggleFormBtn();
+      // addBookForm.classList.remove('hidden');
       break;
     case ('close-add-book-form') :
       addBookForm.classList.add('hidden');
