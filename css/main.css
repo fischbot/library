@@ -1,14 +1,125 @@
-html, body { box-sizing: border-box; }
+* { box-sizing: border-box; }
 
-.hidden {
-  display: none;
+body {
+  font-family: sans-serif;
+  font-size: 16px;
 }
 
-div {
-  border: 3px solid #eee;
-  margin: 10px 0;
+.container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .container, #book-list {
   border: none;
 }
+
+button {
+  cursor: pointer;
+  color: #fff;
+  font-size: 1.2em;
+  padding: 10px 15px;
+  border: none;
+}
+
+#add-book-btn {
+  background: #1DBDBF;
+  border-radius: 5px 5px 0 0;
+  outline: none;
+}
+
+#submit-btn {
+  /*background: #1F558E;*/
+  display: block;
+  width: 100%;
+  background: #127A7F;
+  
+}
+
+#submit-btn:hover {
+  /*background: #0E2B4B;*/
+  background: #0B4D50;
+}
+
+#add-book-form {
+  width: 100%;
+  border: 3px solid #1CBDBE;
+  border-top: 0;
+}
+
+#add-book-form>div {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  height: 2em;
+  padding-left: 3px;
+  width: 100%;
+  margin: 7px auto;
+  font-size: 18px;
+}
+
+input[type="checkbox"] {
+  width: auto;
+}
+
+#add-book-btn:hover {
+  /*background: #127D7F;*/
+}
+
+.read-btn {
+  width: 100%;
+  font-size: 1.4em;
+  background: #4D514F;
+  color: #fff;
+  display: block;
+}
+
+.read-btn:hover {
+  background: #2F312F;
+}
+
+.hidden {
+  display: none;
+}
+
+.entry {
+  position: relative;
+  margin: 40px 0;
+  border: 3px solid #7A7F7F;
+}
+
+.entry h2 {
+  text-align: center;
+  /*background: #0A4446;*/
+  background: #7A7F7F;
+  color: #fff;
+  margin: 0;
+  padding: 20px;
+}
+
+.entry h3 {
+  padding: 10px;
+}
+
+.del-btn {
+  background-color: #B72D3B;
+  border-radius: 5px;
+  position: absolute;
+  right: 10px;
+  top: 12px;
+}
+
+.del-btn:hover {
+  background: #6B1C25;
+}
+
+/*@media screen and (min-width: 720px) {*/
+/*  .container {*/
+/*    width: 50%;*/
+/*  }*/
+/*}*/
