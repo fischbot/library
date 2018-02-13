@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>Library</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="css/main.css">
     </head>
     <body>
@@ -11,21 +12,24 @@
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
         <![endif]-->
         <div class="container">
-          <div>
-            <button id="add-book-btn">Add Book</button>
-          </div>
+          <button id="add-book-btn">Add Book</button>
           <div id="add-book-form" class="hidden">
-            <button id="close-add-book-form">X</button>
+            <!--<button id="close-add-book-form" class="btn btn-danger">X</button>-->
             <!--<form>-->
-              <input type="text" id="title" placeholder="Title">
-              <input type="text" id="author" placeholder="Author">
-              <input type="text" id="pages" placeholder="How many pages?">
-              <!--<input type="checkbox" id="hasRead"><label>Read</label>-->
-              <button id="submit-btn">Submit</button>
+              <div>
+                <input type="text" id="title" placeholder="Title">
+                <input type="text" id="author" placeholder="Author">  
+                <input type="text" id="pages" placeholder="How many pages?">  
+                <input type="checkbox" id="hasRead"><label>Read</label>
+                <button id="submit-btn">Submit</button>  
+              </div>
+              
+              
             <!--</form>-->
           </div>
           <div id="book-list"></div>
         </div>
+        
       <script src="js/main.js"></script>
     </body>
 </html>
