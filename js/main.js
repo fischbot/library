@@ -176,10 +176,6 @@ function clickHandler(e) {
       closeModal();
       clearSearches();
       break;
-    // case ('submit-btn') :
-    //   console.log('submitting book info...');
-    //   submitBook();
-    //   break;
     case ('search-btn') :
       runSearch();
       clearSearches();
@@ -208,26 +204,6 @@ function clickHandler(e) {
     clearSearches();
   }
 }
-
-// function submitBook() {
-//   const title = document.getElementById('title').value
-//   const author = document.getElementById('author').value;
-//   const pages = document.getElementById('pages').value;
-  
-//   // if title is not entered don't allow submission
-//   if (title === '') {
-//     return;
-//   } 
-//   const book = {
-//     title : title,
-//     author : author,
-//     pages : pages
-//   };
-  
-//   addBookToLibrary(book);
-//   clearInputs();
-//   render();
-// }
 
 function clearInputs() {
   const inputs = document.querySelectorAll('input');
