@@ -6,35 +6,38 @@ var myLibrary = [
     title : 'The Hobbit',
     authors : 'J.R.R. Tolkien',
     publishedDate : '1966',
-    description : 'Aenean lacinia bibendum nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum.'
+    description : 'Aenean lacinia bibendum nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum.',
+    id : 0
   },
   {
-    title : 'The Hobbit',
+    title : 'The Fellowship of the Ring',
     authors : 'J.R.R. Tolkien',
     publishedDate : '1966',
-    description : 'Aenean lacinia bibendum nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum.'
+    description : 'Aenean lacinia bibendum nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum.',
+    id : 1
   },
   {
-    title : 'The Hobbit',
+    title : 'The Two Towers',
     authors : 'J.R.R. Tolkien',
     publishedDate : '1966',
-    description : 'Aenean lacinia bibendum nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum.'
+    description : 'Aenean lacinia bibendum nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum.',
+    id : 2
   },
   {
-    title : 'The Hobbit',
+    title : 'The Return of the King',
     authors : 'J.R.R. Tolkien',
     publishedDate : '1966',
-    description : 'Aenean lacinia bibendum nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum.'
+    description : 'Aenean lacinia bibendum nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum.',
+    id : 3
   },
   
 ];
 var results = [];
 const addBookBtn = document.getElementById('add-book-btn');
-const addBookForm = document.getElementById('add-book-form');
 const modal = document.getElementById('modal');
 const closeModalBtn = document.getElementById('close-modal-btn');
 const bookList = document.getElementById('book-list');
-let entryId = 0;
+let entryId = 4;
 
 function Book(title, authors, publishedDate, description, categories, imgUrl, hasRead) {
   this.title = title;
@@ -46,8 +49,8 @@ function Book(title, authors, publishedDate, description, categories, imgUrl, ha
   this.hasRead = hasRead;
 }
 
-function setId() {
-  return entryId++;  
+function setId(book) {
+  book.id = entryId++;  
 }
 
 function toggleRead(bookId) {
@@ -64,20 +67,6 @@ function toggleRead(bookId) {
   
   return text;
 }
-
-// function toggleFormBtn() {
-//   // toggle form hidden/visible
-//   // change text from 'Add Book' to 'Hide Add Book'
-//   if (addBookForm.classList.contains('hidden')) {
-//     addBookForm.classList.remove('hidden');
-//     addBookBtn.innerText = 'Hide Form';
-//     addBookBtn.style.background = '#B62C3B';
-//   } else {
-//     addBookForm.classList.add('hidden');
-//     addBookBtn.innerText = 'Add Book';
-//     addBookBtn.style.background = '#1DBDBF';
-//   }
-// }
 
 function addBookToLibrary(book) {
   console.log('adding book');
@@ -102,42 +91,44 @@ function clearSearches() {
 
 function render() {
   clearBookList();
-  myLibrary.forEach(function(book, bookIndex) {
-    const div = document.createElement('div');
-    const h2 = document.createElement('h2');
-    const h3 = document.createElement('h3');
-    const p = document.createElement('p');
-    const p_desc = document.createElement('p');
-    
-    div.classList.add('entry');
-    div.id = bookIndex;
-    bookList.appendChild(div);
-    div.appendChild(h2);
-    h2.innerText = book.title;
-    div.appendChild(h3);
-    h3.innerText = 'by ' + book.authors;
-    div.appendChild(p);
-    p.innerText = 'published: ' + book.publishedDate;
-    div.appendChild(p_desc);
-    p_desc.innerText = book.description;
-    // TODO fix
-    // This is a temporary way of getting read/ not read
-    let readStatus;
-    if (book.hasRead) {
-      readStatus = 'Read';
-    } else {
-      readStatus = 'Not Read'
-    }
-    
-    const delBtn = createButton('del-btn', '');
-    const i = document.createElement('i');
-    i.classList.add('fas', 'fa-minus');
-    delBtn.appendChild(i);
-    const readBtn = createButton('read-btn', readStatus);
-    div.appendChild(delBtn);
-    div.appendChild(readBtn);
-    
-  });
+   
+    myLibrary.forEach(function(book, bookIndex) {                               // bookIndex not in use, but I'm keeping it here incase I need it
+      
+      const elements = createHtmlElementsForEntry();
+      elements.entry.id = book.id;
+      elements.entry.classList.add('entry');
+      
+      appendEntries(elements);
+      addEntryText(elements, book);
+    });
+  
+}
+
+
+// ============== render functions ============================================
+function addEntryText(elements, book) {
+  let readStatus;
+  if (book.hasRead) {
+    readStatus = 'Read';
+  } else {
+    readStatus = 'Not Read' 
+  }
+      
+  elements.readBtn.innerText = readStatus;
+  elements.entryTitle.innerText = book.title;
+  elements.entryAuthor.innerText = 'by ' + book.authors;
+  elements.entryDate.innerText = 'published: ' + book.publishedDate;
+  elements.entryDescription.innerText = book.description;
+}
+
+function appendEntries(elements) {
+  bookList.appendChild(elements.entry);
+  elements.entry.appendChild(elements.entryTitle);
+  elements.entry.appendChild(elements.entryAuthor);
+  elements.entry.appendChild(elements.entryDate);
+  elements.entry.appendChild(elements.entryDescription);
+  elements.entry.appendChild(elements.delBtn);
+  elements.entry.appendChild(elements.readBtn);
 }
 
 function createButton(className, innerText) {
@@ -146,6 +137,23 @@ function createButton(className, innerText) {
   button.innerText = innerText;
   return button;
 }
+
+function createHtmlElementsForEntry() {
+      const delBtn = createButton('del-btn', '-');
+      const readBtn = createButton('read-btn', '');
+
+      return {
+        entry : document.createElement('div'),
+        entryTitle : document.createElement('h2'),
+        entryAuthor : document.createElement('h3'), 
+        entryDate : document.createElement('p'),
+        entryDescription : document.createElement('p'),
+        delBtn : delBtn,
+        readBtn : readBtn
+      }
+}
+
+// ============================================================================
 
 function openSearchModal() {
   modal.classList.remove('hidden');
@@ -156,9 +164,10 @@ function closeModal() {
   // TODO clear search and results
 }
 
+// ============== clickHandler ================================================
 function clickHandler(e) {
   let elementClicked = e.target;  
-
+  
   switch(elementClicked.id) {
     case ('open-search-modal-btn') :
       openSearchModal();
@@ -167,13 +176,10 @@ function clickHandler(e) {
       closeModal();
       clearSearches();
       break;
-    case ('close-add-book-form') :
-      addBookForm.classList.add('hidden');
-      break;
-    case ('submit-btn') :
-      console.log('submitting book info...');
-      submitBook();
-      break;
+    // case ('submit-btn') :
+    //   console.log('submitting book info...');
+    //   submitBook();
+    //   break;
     case ('search-btn') :
       runSearch();
       clearSearches();
@@ -181,15 +187,18 @@ function clickHandler(e) {
   
   // Read and Delete Buttons
   if (elementClicked.classList.contains('read-btn')) {
-    // TODO get parent of button
+                                                                  // TODO review this id process 
     let bookId = elementClicked.parentNode.id;
     elementClicked.innerText = toggleRead(bookId);
+    
   } else if (elementClicked.classList.contains('del-btn')) {
     let bookId = elementClicked.parentNode.id;
+    console.log(bookId);
     let entryToRemove = document.getElementById(`${bookId}`);
     bookList.removeChild(entryToRemove);
     myLibrary.splice(bookId,1);
-    render();
+    // render();
+    
   } else if (elementClicked.classList.contains('add-btn')) {
     // add book to library
     let elementClickedId = e.target.id;
@@ -200,25 +209,25 @@ function clickHandler(e) {
   }
 }
 
-function submitBook() {
-  const title = document.getElementById('title').value
-  const author = document.getElementById('author').value;
-  const pages = document.getElementById('pages').value;
+// function submitBook() {
+//   const title = document.getElementById('title').value
+//   const author = document.getElementById('author').value;
+//   const pages = document.getElementById('pages').value;
   
-  // if title is not entered don't allow submission
-  if (title === '') {
-    return;
-  } 
-  const book = {
-    title : title,
-    author : author,
-    pages : pages
-    // hasRead : document.getElementById('hasRead').value
-  };
-  addBookToLibrary(book);
-  clearInputs();
-  render();
-}
+//   // if title is not entered don't allow submission
+//   if (title === '') {
+//     return;
+//   } 
+//   const book = {
+//     title : title,
+//     author : author,
+//     pages : pages
+//   };
+  
+//   addBookToLibrary(book);
+//   clearInputs();
+//   render();
+// }
 
 function clearInputs() {
   const inputs = document.querySelectorAll('input');
@@ -282,6 +291,7 @@ function runSearch() {
 function storeSelectedBook(id) {
   console.log('storing book'); // debug
   console.log(results[id]); // debug
+  setId(results[id]);
   addBookToLibrary(results[id]);
   clearInputs(); // TODO clear search box
   render();
