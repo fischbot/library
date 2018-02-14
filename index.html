@@ -6,30 +6,30 @@
         <title>Library</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="css/main.css">
+        <script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
     </head>
     <body>
         <!--[if lte IE 9]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
         <![endif]-->
         <div class="container">
-          <button id="add-book-btn">Add Book</button>
-          <div id="add-book-form" class="hidden">
-            <!--<button id="close-add-book-form" class="btn btn-danger">X</button>-->
-            <!--<form>-->
-              <div>
-                <input type="text" id="title" placeholder="Title">
-                <input type="text" id="author" placeholder="Author">  
-                <input type="text" id="pages" placeholder="How many pages?">  
-                <input type="checkbox" id="hasRead"><label>Read</label>
-                <button id="submit-btn">Submit</button>  
-              </div>
-              
-              
-            <!--</form>-->
+            <button id="open-search-modal-btn">Add a book</button>
+            <div id="modal">
+              <div id="search">
+              <input type="search" id="books">
+              <button id="search-btn">Search</button>
+            </div><!-- /#search -->
+            <div id="search-results"></div>
           </div>
+          
+         
           <div id="book-list"></div>
         </div>
-        
+      <script src="https://www.google.com/books/jsapi.js"></script>
       <script src="js/main.js"></script>
+      
     </body>
 </html>
