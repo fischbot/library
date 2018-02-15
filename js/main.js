@@ -296,8 +296,8 @@ function runSearch() {
       alert('Enter a book to search for'); // TODO temporary notification
     } else {
       $.get('https://www.googleapis.com/books/v1/volumes?q=' + search, function(response) {
-        let book = {};
         response.items.forEach(function(item, index) {
+          let book = {};
           const elements = createHtmlElementsForEntry('search');
           console.log(elements);
           elements.addToLibraryBtn.classList.add('add-to-library-btn');
