@@ -91,6 +91,20 @@ function clearSearches() {
   while (searchResults.hasChildNodes()) {
     searchResults.removeChild(searchResults.lastChild);
   }
+// TODO DRY UP if possible - compare with toggleRead()
+function initializeReadStatusButtons() {
+  // check read status and update button colors accordingly
+  myLibrary.forEach(function(book) {
+    console.log(`book id: ${book.id}, ${book.title}`);
+    let entry = document.getElementById(`${book.id}`);
+    console.log(entry);
+    if (book.hasRead) {
+      // TODO get entry that matches book id
+      entry.lastElementChild.classList.add('read');
+    } else {
+      entry.lastElementChild.classList.remove('read');
+    }
+  });
 }
 
 function render() {
