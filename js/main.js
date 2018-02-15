@@ -41,7 +41,7 @@ const addBookBtn = document.getElementById('add-book-btn');
 const modal = document.getElementById('modal');
 const closeModalBtn = document.getElementById('close-modal-btn');
 const bookList = document.getElementById('book-list');
-let entryId = 4;
+let entryId = myLibrary.length;
 
 function Book(title, authors, publishedDate, description, categories, imgUrl, hasRead) {
   this.title = title;
@@ -54,7 +54,7 @@ function Book(title, authors, publishedDate, description, categories, imgUrl, ha
 }
 
 function setId(book) {
-  book.id = entryId++;  
+  book.id = entryId++;
 }
 
 function toggleRead(bookId) {
