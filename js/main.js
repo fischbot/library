@@ -139,14 +139,34 @@ function addEntryText(elements, book) {
   elements.entryDescription.innerText = book.description;
 }
 
-function appendEntries(elements) {
-  bookList.appendChild(elements.entry);
-  elements.entry.appendChild(elements.entryTitle);
-  elements.entry.appendChild(elements.entryAuthor);
-  elements.entry.appendChild(elements.entryDate);
-  elements.entry.appendChild(elements.entryDescription);
-  elements.entry.appendChild(elements.delBtn);
-  elements.entry.appendChild(elements.readBtn);
+function appendEntries(elements, context) {
+  let property = '';
+
+  if (context === 'render') {
+    property = 'entry';
+    bookList.appendChild(elements.entry);
+  }
+
+  if (context === 'search') {
+    property = 'searchResultItem';
+    elements.searchResults.appendChild(elements.searchResultItem);
+  }
+
+  elements[property].appendChild(elements.entryTitle);
+  elements[property].appendChild(elements.entryAuthor);
+  elements[property].appendChild(elements.entryDate);
+  elements[property].appendChild(elements.entryDescription);
+
+  // TODO fix this so it's DRY
+  // I did it this way for now because this is the order I need to append the elements in
+  if (context === 'render') {
+    elements[property].appendChild(elements.delBtn);
+    elements[property].appendChild(elements.readBtn);
+  }
+
+  if (context === 'search') {
+    elements[property].appendChild(elements.addToLibraryBtn);
+  }
 }
 
 function createButton(className, innerText) {
