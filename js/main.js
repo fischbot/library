@@ -129,13 +129,6 @@ function addEntryText(elements, book, context) {
     elements.entryDescription.innerText = book.description.substring(0, 100) + '...' || '[No Description Provided]';
   }
 
-
-
-  // elements.entryTitle.innerText = book.title;
-  // elements.entryAuthor.innerText = 'by ' + book.authors;
-  // elements.entryDate.innerText = 'Published: ' + book.publishedDate;
-
-
   elements.entryTitle.innerText = book.title;
   elements.entryAuthor.innerText = 'by ' + book.authors || '[No Author(s) Listed]';
   elements.entryDate.innerText = 'Published: ' + book.publishedDate || '[No Date Provided]';
