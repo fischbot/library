@@ -321,6 +321,13 @@ function runSearch() {
       });
         
     } 
+function setBookSearchResult(book, item) {
+  book.title = item.volumeInfo.title || '';
+  book.authors = item.volumeInfo.authors || '';
+  book.publishedDate = item.volumeInfo.publishedDate  || '';
+  book.description = item.volumeInfo.description  || '';
+  book.categories = item.volumeInfo.categories  || '';
+  // book.imgUrl = fixImgUrl(item.volumeInfo.imageLinks.thumbnail);
 }
     
 // Store the book selected by the user in the user's library 
