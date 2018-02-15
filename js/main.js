@@ -178,19 +178,28 @@ function createButton(className, innerText) {
   return button;
 }
 
-function createHtmlElementsForEntry() {
-      const delBtn = createButton('del-btn', '-');
-      const readBtn = createButton('read-btn', '');
+function createHtmlElementsForEntry(context) {
+  let elements = {};
 
-      return {
-        entry : document.createElement('div'),
-        entryTitle : document.createElement('h2'),
-        entryAuthor : document.createElement('h3'), 
-        entryDate : document.createElement('p'),
-        entryDescription : document.createElement('p'),
-        delBtn : delBtn,
-        readBtn : readBtn
-      }
+  if (context === 'render') {
+    elements.delBtn = createButton('del-btn', '-');
+    elements.readBtn = createButton('read-btn', '');
+    elements.entry = document.createElement('div');
+  }
+
+  if (context === 'search') {
+    elements.addToLibraryBtn = document.createElement('button');
+    elements.img  = document.createElement('img');
+    elements.searchResults = document.getElementById('search-results');
+    elements.searchResultItem = document.createElement('div');
+  }
+
+  elements.entryTitle = document.createElement('h2');
+  elements.entryAuthor = document.createElement('h3');
+  elements.entryDate = document.createElement('p');
+  elements.entryDescription = document.createElement('p');
+
+  return elements;
 }
 
 // ============================================================================
