@@ -58,9 +58,21 @@ button {
 input {
   height: 2em;
   padding-left: 3px;
+#overlay {
+  position:fixed;
+  top:0;
+  left:0;
+  height:100%;
+  width:100%;
+  z-index:100;
+  background-color:#444444;
+  opacity:0.5;
+  filter:alpha(opacity=50);
+}
   width: 100%;
   margin: 7px auto;
   font-size: 18px;
+  z-index: 9999;
 }
 
 input[type="checkbox"] {

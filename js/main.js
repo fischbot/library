@@ -184,21 +184,23 @@ function closeModal() {
 
 // ============== clickHandler ================================================
 function clickHandler(e) {
-  let elementClicked = e.target;  
-  
+  let elementClicked = e.target;
+
   switch(elementClicked.id) {
     case ('open-search-modal-btn') :
       openSearchModal();
+      togglePageOverlay();
       break;
     case ('close-modal-btn') :
       closeModal();
+      togglePageOverlay();
       clearSearches();
       break;
     case ('search-btn') :
       runSearch();
       clearSearches();
   }
-  
+
   // Read and Delete Buttons
   if (elementClicked.classList.contains('read-btn')) {
                                                                   // TODO review this id process 
@@ -223,6 +225,15 @@ function clickHandler(e) {
   }
 }
 
+function togglePageOverlay() {
+  let overlayPlaceholder = document.querySelector('.overlay-placeholder');
+  if (overlayPlaceholder.id === 'overlay') {
+    overlayPlaceholder.removeAttribute('id');
+  } else {
+    overlayPlaceholder.id = 'overlay';
+  }
+
+}
 function clearInputs() {
   const inputs = document.querySelectorAll('input');
   inputs.forEach(function(input) {
