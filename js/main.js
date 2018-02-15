@@ -55,6 +55,7 @@ function Book(title, authors, publishedDate, description, categories, imgUrl, ha
 
 window.addEventListener('load', function() {
     render();
+    initializeReadStatusButtons();
     document.addEventListener('click', clickHandler, false);
 
 }, false);
@@ -67,39 +68,28 @@ function setId(book) {
   book.id = entryId++;
 }
 
-function toggleRead(bookId) {
+function toggleRead(entry) {
   let text = '';
-  let book = myLibrary[bookId];
-  console.log(book);
+  let book = myLibrary[entry.id];
   book.hasRead = !book.hasRead;
-  
+
   if (book.hasRead) {
     text = 'Read';
+    // TODO get entry that matches book id
+    entry.lastElementChild.classList.add('read');
   } else {
     text = 'Not Read';
+    entry.lastElementChild.classList.remove('read');
   }
-  
+
   return text;
 }
 
-}
-
-
-function clearSearches() {
-  // TODO similar to clearing library
-  results = []; // clear results from previous search
-  clearInputs();
-  const searchResults = document.getElementById('search-results');
-  while (searchResults.hasChildNodes()) {
-    searchResults.removeChild(searchResults.lastChild);
-  }
 // TODO DRY UP if possible - compare with toggleRead()
 function initializeReadStatusButtons() {
   // check read status and update button colors accordingly
   myLibrary.forEach(function(book) {
-    console.log(`book id: ${book.id}, ${book.title}`);
     let entry = document.getElementById(`${book.id}`);
-    console.log(entry);
     if (book.hasRead) {
       // TODO get entry that matches book id
       entry.lastElementChild.classList.add('read');
@@ -108,37 +98,48 @@ function initializeReadStatusButtons() {
     }
   });
 }
-
+// ============== render functions ============================================
 function render() {
   clearBookList();
-   
-    myLibrary.forEach(function(book, bookIndex) {                               // bookIndex not in use, but I'm keeping it here incase I need it
-      
-      const elements = createHtmlElementsForEntry();
+
+    myLibrary.forEach( function(book, bookIndex) {                               // bookIndex not in use, but I'm keeping it here incase I need it
+      const elements = createHtmlElementsForEntry('render');
       elements.entry.id = book.id;
       elements.entry.classList.add('entry');
-      
-      appendEntries(elements);
-      addEntryText(elements, book);
+
+      appendEntries(elements, 'render');
+      addEntryText(elements, book, 'render');
     });
-  
 }
 
+function addEntryText(elements, book, context) {
 
-// ============== render functions ============================================
-function addEntryText(elements, book) {
-  let readStatus;
-  if (book.hasRead) {
-    readStatus = 'Read';
-  } else {
-    readStatus = 'Not Read' 
+  if (context === 'render') {
+    let readStatus;
+    if (book.hasRead) {
+      readStatus = 'Read';
+    } else {
+      readStatus = 'Not Read'
+    }
+    elements.readBtn.innerText = readStatus;
+    elements.entryDescription.innerText = book.description;
   }
-      
-  elements.readBtn.innerText = readStatus;
+
+  if (context === 'search') {
+    elements.entryDescription.innerText = book.description.substring(0, 100) + '...' || '[No Description Provided]';
+  }
+
+
+
+  // elements.entryTitle.innerText = book.title;
+  // elements.entryAuthor.innerText = 'by ' + book.authors;
+  // elements.entryDate.innerText = 'Published: ' + book.publishedDate;
+
+
   elements.entryTitle.innerText = book.title;
-  elements.entryAuthor.innerText = 'by ' + book.authors;
-  elements.entryDate.innerText = 'published: ' + book.publishedDate;
-  elements.entryDescription.innerText = book.description;
+  elements.entryAuthor.innerText = 'by ' + book.authors || '[No Author(s) Listed]';
+  elements.entryDate.innerText = 'Published: ' + book.publishedDate || '[No Date Provided]';
+
 }
 
 function appendEntries(elements, context) {
@@ -234,27 +235,27 @@ function clickHandler(e) {
 
   // Read and Delete Buttons
   if (elementClicked.classList.contains('read-btn')) {
-                                                                  // TODO review this id process 
-    let bookId = elementClicked.parentNode.id;
-    elementClicked.innerText = toggleRead(bookId);
-    
+
+    let entry = elementClicked.parentNode;
+    elementClicked.innerText = toggleRead(entry);
+
   } else if (elementClicked.classList.contains('del-btn')) {
     let bookId = elementClicked.parentNode.id;
-    console.log(bookId);
     let entryToRemove = document.getElementById(`${bookId}`);
     bookList.removeChild(entryToRemove);
     myLibrary.splice(bookId,1);
     // render();
-    
-  } else if (elementClicked.classList.contains('add-btn')) {
+
+  } else if (elementClicked.classList.contains('add-to-library-btn')) {
     // add book to library
     let elementClickedId = e.target.id;
     storeSelectedBook(elementClickedId);
-    // close modal
+    delete results[elementClickedId].searchId;
     closeModal();
     clearSearches();
   }
 }
+// ============== END clickHandler ============================================
 
 function togglePageOverlay() {
   let overlayPlaceholder = document.querySelector('.overlay-placeholder');
@@ -265,6 +266,8 @@ function togglePageOverlay() {
   }
 
 }
+
+// ============== Clearing Functions ==========================================
 function clearInputs() {
   const inputs = document.querySelectorAll('input');
   inputs.forEach(function(input) {
@@ -278,49 +281,67 @@ function clearBookList() {
   }
 }
 
+function clearSearches() {
+  results = []; // clear results from previous search
+  clearInputs();
+  const searchResults = document.getElementById('search-results');
+  while (searchResults.hasChildNodes()) {
+    searchResults.removeChild(searchResults.lastChild);
+  }
+}
+
+// ============== Search Functions ============================================
 
 // TODO split up into multiple functions
 function runSearch() {
-  let search = $('#books').val();
-    
+  // let search = $('#books').val();
+  let search = document.getElementById('books').value;
+
     if (search === '') {
       // TODO
       console.log('Enter a book to search for');
+      alert('Enter a book to search for'); // TODO temporary notification
     } else {
       $.get('https://www.googleapis.com/books/v1/volumes?q=' + search, function(response) {
         let book = {};
-        
         response.items.forEach(function(item, index) {
-          let addBtn = document.createElement('button');
-          addBtn.classList.add('add-btn');
-          addBtn.innerText = 'Add to Library';
-          book.title = item.volumeInfo.title || '';
-          book.authors = item.volumeInfo.authors || '';
-          book.publishedDate = item.volumeInfo.publishedDate  || '';
-          book.description = item.volumeInfo.description  || '';
-          book.categories = item.volumeInfo.categories  || '';
-          let img = document.createElement('img');
-          book.imgUrl = fixImgUrl(item.volumeInfo.imageLinks.thumbnail);
-          img.src = book.imgUrl || '';
-          
-          results.push(book);
-          
-          let searchResults = document.getElementById('search-results');
-          let searchResultItem = document.createElement('div');
-          searchResultItem.classList.add('search-result-item');  
-          addBtn.id = index;
-          searchResults.appendChild(searchResultItem);
+          const elements = createHtmlElementsForEntry('search');
+          console.log(elements);
+          elements.addToLibraryBtn.classList.add('add-to-library-btn');
+          elements.addToLibraryBtn.innerText = 'Add to Library';
+          // elements.img.src = book.imgUrl || '';
+          elements.searchResultItem.classList.add('search-result-item');
 
-          searchResultItem.innerText = `${book.title}
-                                        by ${book.authors}
-                                        Date Published: ${book.publishedDate}`;
+
+          book.searchId = index;
+
+          results.push(book);
+          setBookSearchResult(book, item);
+
+          appendEntries(elements, 'search');
+          // TODO fix the id - might be the problem with it adding the wrong search result to the library
+          // elements.addToLibraryBtn.id = index;
+          elements.addToLibraryBtn.id = book.searchId;
+
+          addEntryText(elements, book, 'search');
+
+          // elements.entryTitle.innerText = book.title;
+          // elements.entryAuthor.innerText = 'by ' + book.authors || '[No Author(s) Listed]';
+          // elements.entryDate.innerText = 'Published: ' + book.publishedDate || '[No Date Provided]';
+          // elements.entryDescription.innerText = book.description.substring(1, 100) + '...' || '[No Description Provided]';
+
+          // elements.searchResultItem.innerText = `${book.title}
+          //                               by ${book.authors}
+          //                               Date Published: ${book.publishedDate}`;
                                         // TODO add unordered list for authors
                                         // TODO img not working
-          searchResultItem.appendChild(addBtn);
+
         });
       });
-        
-    } 
+
+    }
+}
+
 function setBookSearchResult(book, item) {
   book.title = item.volumeInfo.title || '';
   book.authors = item.volumeInfo.authors || '';
@@ -329,11 +350,11 @@ function setBookSearchResult(book, item) {
   book.categories = item.volumeInfo.categories  || '';
   // book.imgUrl = fixImgUrl(item.volumeInfo.imageLinks.thumbnail);
 }
-    
-// Store the book selected by the user in the user's library 
+
+// Store the book selected by the user in the user's library
 function storeSelectedBook(id) {
-  console.log('storing book'); // debug
-  console.log(results[id]); // debug
+  // console.log('storing book'); // debug
+  // console.log(results[id]); // debug
   setId(results[id]);
   addBookToLibrary(results[id]);
   clearInputs(); // TODO clear search box
@@ -344,7 +365,7 @@ function fixImgUrl(url){
   // change http to https
   let strArray = url.split(':')
   return strArray[0] + 's:' + strArray[1];
-  
+
   // example result before fixing
   // http://books.google.com/books/content?id=j2uGDAAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api
 }
