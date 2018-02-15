@@ -196,14 +196,12 @@ function createHtmlElementsForEntry(context) {
 }
 
 // ============================================================================
-
-function openSearchModal() {
-  modal.classList.remove('hidden');
-}
-
-function closeModal() {
-  modal.classList.add('hidden');
-  // TODO clear search and results
+function toggleModal() {
+  if (modal.classList.contains('hidden')) {
+    modal.classList.remove('hidden');
+  } else {
+    modal.classList.add('hidden');
+  }
 }
 
 // ============== clickHandler ================================================
@@ -212,11 +210,11 @@ function clickHandler(e) {
 
   switch(elementClicked.id) {
     case ('open-search-modal-btn') :
-      openSearchModal();
+      toggleModal();
       togglePageOverlay();
       break;
     case ('close-modal-btn') :
-      closeModal();
+      toggleModal();
       togglePageOverlay();
       clearSearches();
       break;
@@ -243,7 +241,8 @@ function clickHandler(e) {
     let elementClickedId = e.target.id;
     storeSelectedBook(elementClickedId);
     delete results[elementClickedId].searchId;
-    closeModal();
+    toggleModal();
+    togglePageOverlay();
     clearSearches();
   }
 }
