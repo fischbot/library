@@ -53,6 +53,16 @@ function Book(title, authors, publishedDate, description, categories, imgUrl, ha
   this.hasRead = hasRead;
 }
 
+window.addEventListener('load', function() {
+    render();
+    document.addEventListener('click', clickHandler, false);
+
+}, false);
+
+function addBookToLibrary(book) {
+  myLibrary.push(book);
+}
+
 function setId(book) {
   book.id = entryId++;
 }
@@ -72,16 +82,8 @@ function toggleRead(bookId) {
   return text;
 }
 
-function addBookToLibrary(book) {
-  console.log('adding book');
-  myLibrary.push(book);
 }
 
-window.addEventListener('load', function() { 
-    render();
-    document.addEventListener('click', clickHandler, false);
-    
-}, false);
 
 function clearSearches() {
   // TODO similar to clearing library
