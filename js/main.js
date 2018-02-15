@@ -324,18 +324,6 @@ function runSearch() {
           elements.addToLibraryBtn.id = book.searchId;
 
           addEntryText(elements, book, 'search');
-
-          // elements.entryTitle.innerText = book.title;
-          // elements.entryAuthor.innerText = 'by ' + book.authors || '[No Author(s) Listed]';
-          // elements.entryDate.innerText = 'Published: ' + book.publishedDate || '[No Date Provided]';
-          // elements.entryDescription.innerText = book.description.substring(1, 100) + '...' || '[No Description Provided]';
-
-          // elements.searchResultItem.innerText = `${book.title}
-          //                               by ${book.authors}
-          //                               Date Published: ${book.publishedDate}`;
-                                        // TODO add unordered list for authors
-                                        // TODO img not working
-
         });
       });
 
