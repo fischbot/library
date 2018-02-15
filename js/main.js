@@ -7,30 +7,34 @@ var myLibrary = [
     authors : 'J.R.R. Tolkien',
     publishedDate : '1966',
     description : 'Aenean lacinia bibendum nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum.',
-    id : 0
+    id : 0,
+    hasRead : true
   },
   {
     title : 'The Fellowship of the Ring',
     authors : 'J.R.R. Tolkien',
     publishedDate : '1966',
     description : 'Aenean lacinia bibendum nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum.',
-    id : 1
+    id : 1,
+    hasRead : false
   },
   {
     title : 'The Two Towers',
     authors : 'J.R.R. Tolkien',
     publishedDate : '1966',
     description : 'Aenean lacinia bibendum nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum.',
-    id : 2
+    id : 2,
+    hasRead : false
   },
   {
     title : 'The Return of the King',
     authors : 'J.R.R. Tolkien',
     publishedDate : '1966',
     description : 'Aenean lacinia bibendum nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum.',
-    id : 3
+    id : 3,
+    hasRead : true
   },
-  
+
 ];
 var results = [];
 const addBookBtn = document.getElementById('add-book-btn');
