@@ -306,10 +306,7 @@ function runSearch() {
           elements.searchResultItem.classList.add('search-result-item');
 
 
-          book.searchId = index;
-
-          results.push(book);
-          setBookSearchResult(book, item);
+          setBookSearchResult(book, item, index);
 
           appendEntries(elements, 'search');
           // TODO fix the id - might be the problem with it adding the wrong search result to the library
@@ -323,12 +320,14 @@ function runSearch() {
     }
 }
 
-function setBookSearchResult(book, item) {
+function setBookSearchResult(book, item, index) {
+  book.searchId = index;
   book.title = item.volumeInfo.title || '';
   book.authors = item.volumeInfo.authors || '';
   book.publishedDate = item.volumeInfo.publishedDate  || '';
   book.description = item.volumeInfo.description  || '';
   book.categories = item.volumeInfo.categories  || '';
+  results.push(book);
   // book.imgUrl = fixImgUrl(item.volumeInfo.imageLinks.thumbnail);
 }
 
