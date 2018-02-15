@@ -101,15 +101,14 @@ function initializeReadStatusButtons() {
 // ============== render functions ============================================
 function render() {
   clearBookList();
+  myLibrary.forEach( function(book, bookIndex) {                               // bookIndex not in use, but I'm keeping it here incase I need it
+    const elements = createHtmlElementsForEntry('render');
+    elements.entry.id = book.id;
+    elements.entry.classList.add('entry');
 
-    myLibrary.forEach( function(book, bookIndex) {                               // bookIndex not in use, but I'm keeping it here incase I need it
-      const elements = createHtmlElementsForEntry('render');
-      elements.entry.id = book.id;
-      elements.entry.classList.add('entry');
-
-      appendEntries(elements, 'render');
-      addEntryText(elements, book, 'render');
-    });
+    appendEntries(elements, 'render');
+    addEntryText(elements, book, 'render');
+  });
 }
 
 function addEntryText(elements, book, context) {
@@ -299,12 +298,10 @@ function runSearch() {
         response.items.forEach(function(item, index) {
           let book = {};
           const elements = createHtmlElementsForEntry('search');
-          console.log(elements);
           elements.addToLibraryBtn.classList.add('add-to-library-btn');
           elements.addToLibraryBtn.innerText = 'Add to Library';
-          // elements.img.src = book.imgUrl || '';
           elements.searchResultItem.classList.add('search-result-item');
-
+          // elements.img.src = book.imgUrl || '';
 
           setBookSearchResult(book, item, index);
 
