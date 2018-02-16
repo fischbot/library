@@ -3,32 +3,62 @@
 body {
   font-family: sans-serif;
   font-size: 16px;
+  margin: 0;
 }
 
-.container {
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
+#page {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  width: 100%;
 }
 
-.container, #book-list {
+.container,
+.main-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.main-container {
+  /* display: flex;
+  flex-direction: column; */
+  position: relative;
+}
+/*
+.main-container,
+#book-list {
   border: none;
+} */
+
+.hidden {
+  display: none;
 }
 
+img {
+  height: auto;
+  width: 100px;
+  align-self: center;
+}
+/* ============= Header ================================== */
+#header {
+  text-align: center;
+}
+
+#header .container {
+  position: relative;
+}
+
+
+/* ============= Buttons ================================= */
 button {
   cursor: pointer;
+  outline: none;
   color: #fff;
   font-size: 1.2em;
-  padding: 10px 15px;
+  padding: 7px;
   border: none;
-}
-
-#add-book-btn {
-  background: #1DBDBF;
-  border-radius: 5px 5px 0 0;
-  outline: none;
 }
 
 #submit-btn {
@@ -36,7 +66,6 @@ button {
   display: block;
   width: 100%;
   background: #127A7F;
-  
 }
 
 #submit-btn:hover {
@@ -44,20 +73,63 @@ button {
   background: #0B4D50;
 }
 
-#add-book-form {
+.read-btn {
   width: 100%;
-  border: 3px solid #1CBDBE;
-  border-top: 0;
+  font-size: 1.4em;
+  background: #4D514F;
+  color: #fff;
+  display: block;
 }
 
-#add-book-form>div {
-  display: flex;
-  flex-direction: column;
+/*.read-btn:hover {*/
+/*  background: #2F312F;*/
+/*}*/
+
+.read {
+    background: #70BF80;
 }
 
-input {
-  height: 2em;
-  padding-left: 3px;
+#open-search-modal-btn {
+  background: #1DBDBF;
+  border-radius: 5px;
+  outline: none;
+  width: 15%;
+}
+
+#open-search-modal-btn,
+#close-modal-btn,
+.del-btn {
+  position: absolute;
+  right: 10px;
+  top: 12px;
+}
+
+#close-modal-btn ,
+.del-btn {
+  background-color: #B72D3B;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
+#close-modal-btn:hover,
+.del-btn:hover {
+  background: #6B1C25;
+}
+
+.add-to-library-btn {
+  color: #fff;
+  background: #1DBDBF;
+}
+
+.add-to-library-btn:hover {
+  background: #117677;
+}
+
+#search-btn {
+  width: 15%;
+  background: #3F8DBF;
+}
+/* ============= Search  ============================= */
 #overlay {
   position:fixed;
   top:0;
@@ -69,39 +141,100 @@ input {
   opacity:0.5;
   filter:alpha(opacity=50);
 }
+
+#modal {
+  position: absolute;
+  top: 7%;
+  /* overflow: auto; */
   width: 100%;
-  margin: 7px auto;
-  font-size: 18px;
+  max-width: 1200px;
+  border: 3px solid #eee;
+  /* margin-top: 5%; /* temporary before I center modal in viewport*/ */
+  position: relative;
+  /* padding:10px; */
   z-index: 9999;
+  background: #fff;
 }
 
-input[type="checkbox"] {
-  width: auto;
+#modal header {
+  display: flex;
+  padding: 20px 0 40px;
 }
 
-#add-book-btn:hover {
-  /*background: #127D7F;*/
-}
-
-.read-btn {
+#search-input-container {
   width: 100%;
-  font-size: 1.4em;
-  background: #4D514F;
-  color: #fff;
-  display: block;
+  max-width: 600px;
+  margin: 0 auto;
+  border: 3px solid #eee;
+  display: flex;
+  justify-content: space-between;
 }
 
-.read-btn:hover {
-  background: #2F312F;
+input[type="search"] {
+  font-size: 1.2em;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
 
-.hidden {
-  display: none;
+/* ============= Search Results ========================== */
+#search-results {
+  display: flex;
+  /*flex-direction: column;*/
+  flex-wrap: wrap;
+}
+
+.search-result-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 278px;
+  margin: 10px;
+  font-size: 14px;
+  background: #eee;
+}
+
+.search-result-item h2 {
+  margin: 0;
+  border-bottom: 2px solid #ddd;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.search-result-item h3 {
+  margin: 5px 0;
+  text-align: right;
+  padding-right: 10px;
+}
+
+.search-result-item p {
+  margin: 5px 0;
+  padding: 10px;
+  text-align: center;
+}
+
+
+
+/* ============= Library Entries ========================= */
+#book-list {
+  display: flex;
+  justify-content: end;
+  flex-wrap: wrap;
+  margin: 60px 0;
+  height: 100%;
+  width: 100%;
 }
 
 .entry {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* flex: 1 1 auto; */
   position: relative;
-  margin: 40px 0;
+  width: 379px;
+  margin: 10px;
   border: 3px solid #7A7F7F;
 }
 
@@ -115,23 +248,29 @@ input[type="checkbox"] {
 }
 
 .entry h3 {
-  padding: 10px;
+  padding: 0 10px;
+  margin: 5px 0;
+  text-align: right;
 }
 
-.del-btn {
-  background-color: #B72D3B;
-  border-radius: 5px;
-  position: absolute;
-  right: 10px;
-  top: 12px;
+.entry p {
+  padding: 0 10px;
 }
 
-.del-btn:hover {
-  background: #6B1C25;
+footer {
+  padding: 40px 0;
+  text-align: center;
+  color: #fff;
+  background: #1BBDBF;
+  font-size: 14px;
 }
 
-/*@media screen and (min-width: 720px) {*/
-/*  .container {*/
-/*    width: 50%;*/
-/*  }*/
-/*}*/
+footer a {
+  color: #fff;
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: #2B4B81;
+  font-weight: bold;
+}
