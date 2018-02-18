@@ -244,9 +244,12 @@ function clickHandler(e) {
   } else if (elementClicked.classList.contains('del-btn')) {
     let bookId = elementClicked.parentNode.id;
     let entryToRemove = document.getElementById(`${bookId}`);
+    let indexOfEntry = myLibrary.findIndex(function(i) {
+      return i.id == bookId;
+    });
+    
     bookList.removeChild(entryToRemove);
-    myLibrary.splice(bookId,1);
-    // render();
+    myLibrary.splice(indexOfEntry,1);
 
   } else if (elementClicked.classList.contains('add-to-library-btn')) {
     // add book to library
