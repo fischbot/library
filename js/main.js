@@ -133,6 +133,11 @@ function addEntryText(elements, book, context) {
   elements.entryTitle.innerText = book.title;
   elements.entryAuthor.innerText = 'by ' + book.authors || '[No Author(s) Listed]';
   elements.entryDate.innerText = 'Published: ' + book.publishedDate || '[No Date Provided]';
+  if (book.imgUrl) {
+    elements.img.src = book.imgUrl;
+  } else {
+    elements.img.src = './img/none.jpg';
+  }
 
   elements.entryPageCount.innerText = book.pageCount + ' pages';
 }
@@ -151,11 +156,12 @@ function appendEntries(elements, context) {
   }
 
   elements[property].appendChild(elements.entryTitle);
-  elements[property].appendChild(elements.img);
   elements[property].appendChild(elements.entryAuthor);
+  elements[property].appendChild(elements.img);
   elements[property].appendChild(elements.entryDate);
   elements[property].appendChild(elements.entryPageCount);
   elements[property].appendChild(elements.entryDescription);
+
 
   // TODO fix this so it's DRY
   // I did it this way for now because this is the order I need to append the elements in
