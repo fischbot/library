@@ -8,6 +8,7 @@ var myLibrary = [
     publishedDate : '1966',
     description : 'Aenean lacinia bibendum nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum.',
     id : 0,
+    imgUrl : 'https://books.google.com/books/content?id=hFfhrCWiLSMC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',
     hasRead : true
   },
   {
@@ -148,6 +149,7 @@ function appendEntries(elements, context) {
   }
 
   elements[property].appendChild(elements.entryTitle);
+  elements[property].appendChild(elements.img);
   elements[property].appendChild(elements.entryAuthor);
   elements[property].appendChild(elements.entryDate);
   elements[property].appendChild(elements.entryDescription);
@@ -182,11 +184,11 @@ function createHtmlElementsForEntry(context) {
 
   if (context === 'search') {
     elements.addToLibraryBtn = document.createElement('button');
-    elements.img  = document.createElement('img');
     elements.searchResults = document.getElementById('search-results');
     elements.searchResultItem = document.createElement('div');
   }
 
+  elements.img  = document.createElement('img');
   elements.entryTitle = document.createElement('h2');
   elements.entryAuthor = document.createElement('h3');
   elements.entryDate = document.createElement('p');
@@ -300,9 +302,13 @@ function runSearch() {
           elements.addToLibraryBtn.classList.add('add-to-library-btn');
           elements.addToLibraryBtn.innerText = 'Add to Library';
           elements.searchResultItem.classList.add('search-result-item');
-          // elements.img.src = book.imgUrl || '';
 
           setBookSearchResult(book, item, index);
+
+          if (book.imgUrl !== undefined) {
+            let img = document.createElement('img');
+            elements.img.src = book.imgUrl;
+          }
 
           appendEntries(elements, 'search');
           // TODO fix the id - might be the problem with it adding the wrong search result to the library
@@ -325,6 +331,11 @@ function setBookSearchResult(book, item, index) {
   book.categories = item.volumeInfo.categories  || '';
   results.push(book);
   // book.imgUrl = fixImgUrl(item.volumeInfo.imageLinks.thumbnail);
+
+  if (item.volumeInfo.imageLinks !== undefined) {
+    book.imgUrl = fixImgUrl(item.volumeInfo.imageLinks.thumbnail);
+    console.log(book.imgUrl);
+  }
 }
 
 // Store the book selected by the user in the user's library
