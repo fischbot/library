@@ -51,6 +51,7 @@ function Book(title, authors, publishedDate, description, categories, imgUrl, ha
   this.description = description;
   this.categories = categories;
   this.imgUrl = imgUrl;
+  this.pageCount = pageCount;
   this.hasRead = hasRead;
 }
 
@@ -133,6 +134,7 @@ function addEntryText(elements, book, context) {
   elements.entryAuthor.innerText = 'by ' + book.authors || '[No Author(s) Listed]';
   elements.entryDate.innerText = 'Published: ' + book.publishedDate || '[No Date Provided]';
 
+  elements.entryPageCount.innerText = book.pageCount + ' pages';
 }
 
 function appendEntries(elements, context) {
@@ -152,6 +154,7 @@ function appendEntries(elements, context) {
   elements[property].appendChild(elements.img);
   elements[property].appendChild(elements.entryAuthor);
   elements[property].appendChild(elements.entryDate);
+  elements[property].appendChild(elements.entryPageCount);
   elements[property].appendChild(elements.entryDescription);
 
   // TODO fix this so it's DRY
@@ -192,6 +195,7 @@ function createHtmlElementsForEntry(context) {
   elements.entryTitle = document.createElement('h2');
   elements.entryAuthor = document.createElement('h3');
   elements.entryDate = document.createElement('p');
+  elements.entryPageCount = document.createElement('p');
   elements.entryDescription = document.createElement('p');
 
   return elements;
