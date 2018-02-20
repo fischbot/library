@@ -8,7 +8,6 @@ const modal = document.getElementById('modal');
 const closeModalBtn = document.getElementById('close-modal-btn');
 const bookList = document.getElementById('book-list');
 const sort = document.getElementById('sort');
-const addYourOwnBook = document.getElementById('add-your-own-book')
 let entryId = 0;
 
 // used for sorting ascending/descending (always start in ascending on page load)
@@ -425,8 +424,6 @@ function clearSearches() {
   while (searchResults.hasChildNodes()) {
     searchResults.removeChild(searchResults.lastChild);
   }
-
-  addYourOwnBook.classList.remove('hidden');
 }
 
 // ============== Search Functions ============================================
@@ -441,7 +438,6 @@ function runSearch() {
       alert('Enter a book to search for'); // TODO temporary notification
     } else {
       $.get('https://www.googleapis.com/books/v1/volumes?q=' + search, function(response) {
-        addYourOwnBook.classList.remove('hidden');
         response.items.forEach(function(item, index) {
           let book = new Book();
           const elements = createHtmlElementsForEntry('search');
@@ -458,8 +454,7 @@ function runSearch() {
           }
 
           appendEntries(elements, 'search');
-          // TODO fix the id - might be the problem with it adding the wrong search result to the library
-          // elements.addToLibraryBtn.id = index;
+
           elements.addToLibraryBtn.id = book.searchId;
 
           addEntryText(elements, book, 'search');
@@ -503,6 +498,7 @@ function fixImgUrl(url){
   return strArray[0] + 's:' + strArray[1];
 }
 
+// =============== SAMPLE DATA ================================================
 // title, authors, publishedDate, description, imgUrl, pageCount, id, hasRead
 
 // Sample data
