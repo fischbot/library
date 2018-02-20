@@ -64,12 +64,13 @@ function chooseSort(prop) {
       let propA = a.pageCount;
       let propB = b.pageCount;
 
-      // assign 0 pages to any book with no page count listed
+      // assign high number of pages to any book with no page count listed
+      // so they get sorted to the end
       if (propA === '[unavailable]') {
-          propA = 0;
+          propA = 99999;
       }
       if (propB === '[unavailable]') {
-          propB = 0;
+          propB = 99999;
       }
 
       if (asc.pageCount) {
