@@ -3,41 +3,66 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Library</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <title>My Library</title>
+        <link href="https://fonts.googleapis.com/css?family=Megrim|Raleway:400,700" rel="stylesheet">
         <link rel="stylesheet" href="css/main.css">
+        <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
         <script
   src="https://code.jquery.com/jquery-3.3.1.js"
   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
   crossorigin="anonymous"></script>
     </head>
     <body>
-        <header id="header">
-          <div class="container">
-            <h1>Library</h1>
-            <button id="open-search-modal-btn">+ Add Book</button>
-          </div>
-        </header>
+        <div id="page">
+          <header id="header">
+            <div class="container">
+              <h1>My Library</h1>
+            </div>
 
-        <div class="main-container">
-          <div class="overlay-placeholder"></div> <!-- TODO do this with JS -->
-          <div id="modal" class="hidden">
-            <header>
-              <button id="close-modal-btn">X</button>
-              <div id="search-input-container">
-                <input type="search" id="books" placeholder="Enter a book title or author">
-                <button id="search-btn">Search</button>
-              </div><!-- /#search -->
-            </header>
-            <div id="search-results"></div>
-          </div><!-- /#modal -->
+            <nav>
+              <div class="container">
+                <h2>Add a Book: </h2>
+                <ul>
+                  <li>
+                    <button id="open-search-modal-btn">Search</button>
+                  </li>
+                  <li>
+                    <button id="open-form-modal-btn">+ Add Your Own</button>
+                  </li>
+                </ul>
+              </div>
+            </nav>
+          </header>
 
+            <div class="main-container">
+              <div class="overlay-placeholder"></div> <!-- TODO do this with JS? -->
+              <div id="modal" class="hidden">
+                <header>
+                  <button id="close-modal-btn">X</button>
+                  <div id="search-input-container">
+                    <input type="search" id="books" placeholder="Enter a book title or author">
+                    <button id="search-btn">Search</button>
+                  </div><!-- /#search -->
+                </header>
+              </div><!-- /#modal -->
 
+              <div id="sort">
+                <button id="sort-by-title">Sort by Title</button>
+                <button id="sort-by-author">Sort by Author</button>
+                <button  id="sort-by-pages">Sort by Pages</button>
+                <button id="sort-by-recent">Sort by Recent</button>
+                <button id="sort-by-read">Sort by Read/Not Read</button>
+              </div>
+              
+              <div id="book-list"></div>
 
-          <div id="book-list"></div>
-        </div>
+            </div><!-- /.main-container -->
+
+          <footer>
+            <p>&copy;2018 Made by <a href="https://github.com/fischbot" target="_blank">fischbot</a></p>
+          </footer>
+        </div><!-- /#page -->
       <script src="https://www.google.com/books/jsapi.js"></script>
       <script src="js/main.js"></script>
-      
     </body>
 </html>
