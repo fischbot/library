@@ -8,7 +8,15 @@ const modal = document.getElementById('modal');
 const closeModalBtn = document.getElementById('close-modal-btn');
 const bookList = document.getElementById('book-list');
 let entryId = 0;
-let asc;
+
+// used for sorting ascending/descending (always start in ascending on page load)
+let asc = {
+  title : true,
+  pageCount : true,
+  authors : true,
+  id : true,
+  hasRead : true,
+}
 
 function Book(title, authors, publishedDate, description, imgUrl, pageCount, id, hasRead) {
   this.title = title || 'title unavailable';
@@ -39,7 +47,7 @@ function chooseSort(prop) {
   if (prop === 'id') {
     // sort by recently added
     myLibrary.sort(function(a, b){
-      if (asc) {
+      if (asc.id) {
         // sort in ascending order
         return a[prop] - b[prop];
       } else {
@@ -62,7 +70,7 @@ function chooseSort(prop) {
           propB = 0;
       }
 
-      if (asc) {
+      if (asc.pageCount) {
         // sort in ascending order
         return propA - propB;
       } else {
@@ -76,7 +84,7 @@ function chooseSort(prop) {
     myLibrary.sort(function(a, b) {
       let propA = a[prop][0].toUpperCase(); // ignore case
       let propB = b[prop][0].toUpperCase();
-      if (asc) {
+      if (asc.authors) {
         // sort in ascending order
         if (propA < propB) {
           return -1;
@@ -102,7 +110,7 @@ function chooseSort(prop) {
   } else if (prop === 'hasRead') {
     // sort by read status
     myLibrary.sort(function(a, b) {
-      if (asc) {
+      if (asc.hasRead) {
         // sort in ascending order
         return a[prop] - b[prop];
       } else {
@@ -112,7 +120,7 @@ function chooseSort(prop) {
     });
   } else {
     // sort by title
-    if (asc) {
+    if (asc.title) {
       // sort in ascending order
       myLibrary.sort(function(a, b) {
         let propA = a[prop].toUpperCase(); // ignore case
@@ -307,27 +315,27 @@ function clickHandler(e) {
       break;
     case ('sort-by-title'):
       chooseSort('title');
-      asc = !asc;
+      asc.title = !asc.title;
       render();
       break;
     case ('sort-by-author'):
       chooseSort('authors');
-      asc = !asc;
+      asc.authors = !asc.authors;
       render();
       break;
     case ('sort-by-pages'):
       chooseSort('pageCount');
-      asc = !asc;
+      asc.pageCount = !asc.pageCount;
       render();
       break;
     case ('sort-by-recent'):
       chooseSort('id');
-      asc = !asc;
+      asc.id = !asc.id;
       render();
       break;
     case ('sort-by-read'):
       chooseSort('hasRead');
-      asc = !asc;
+      asc.hasRead = !asc.hasRead;
       render();
       break;
   }
