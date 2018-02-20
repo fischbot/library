@@ -170,7 +170,12 @@ function setReadStatusButtonColor(book) {
 
 function toggleRead(entry) {
   let text = '';
-  let book = myLibrary[entry.id];
+  // find the book with the ID that matches the entry ID
+  let indexOfEntry = myLibrary.findIndex(function(i) {
+    return i.id == entry.id;
+  });
+  let book = myLibrary[indexOfEntry];
+
   book.hasRead = !book.hasRead;
 
   if (book.hasRead) {
