@@ -36,23 +36,6 @@ function setId() {
   return entryId++;
 }
 
-function toggleRead(entry) {
-  let text = '';
-  let book = myLibrary[entry.id];
-  book.hasRead = !book.hasRead;
-
-  if (book.hasRead) {
-    text = 'Read';
-    // TODO get entry that matches book id
-    entry.lastElementChild.classList.add('read');
-  } else {
-    text = 'Not Read';
-    entry.lastElementChild.classList.remove('read');
-  }
-
-  return text;
-}
-
 function chooseSort(prop) {
   if (prop === 'id') {
     // sort by recently added
@@ -165,6 +148,23 @@ function initializeReadStatusButtons() {
       entry.lastElementChild.classList.remove('read');
     }
   });
+}
+
+function toggleRead(entry) {
+  let text = '';
+  let book = myLibrary[entry.id];
+  book.hasRead = !book.hasRead;
+
+  if (book.hasRead) {
+    text = 'Read';
+    // TODO get entry that matches book id
+    entry.lastElementChild.classList.add('read');
+  } else {
+    text = 'Not Read';
+    entry.lastElementChild.classList.remove('read');
+  }
+
+  return text;
 }
 // ============== render functions ============================================
 function render() {
