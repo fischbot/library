@@ -145,23 +145,19 @@ function addEntryText(elements, book, context) {
       readStatus = 'Not Read'
     }
     elements.readBtn.innerText = readStatus;
-    elements.entryDescription.innerText = book.description;
-  }
-
-  if (context === 'search') {
-    elements.entryDescription.innerText = book.description.substring(0, 100) + '...' || '[No Description Provided]';
   }
 
   elements.entryTitle.innerText = book.title;
-  elements.entryAuthor.innerText = 'by ' + book.authors || '[No Author(s) Listed]';
-  elements.entryDate.innerText = 'Published: ' + book.publishedDate || '[No Date Provided]';
   if (book.imgUrl) {
     elements.img.src = book.imgUrl;
   } else {
     elements.img.src = './img/none.jpg';
   }
 
+  elements.entryAuthor.innerText = 'by ' + book.authors;
+  elements.entryDate.innerText = 'Published: ' + book.publishedDate;
   elements.entryPageCount.innerText = book.pageCount + ' pages';
+  elements.entryDescription.innerText = book.description;
 }
 
 function appendEntries(elements, context) {
@@ -291,7 +287,7 @@ function clickHandler(e) {
     let indexOfEntry = myLibrary.findIndex(function(i) {
       return i.id == bookId;
     });
-    
+
     bookList.removeChild(entryToRemove);
     myLibrary.splice(indexOfEntry,1);
 
