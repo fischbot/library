@@ -45,6 +45,7 @@ function setId() {
   return entryId++;
 }
 
+// TODO refactor this mess
 function chooseSort(prop) {
   if (prop === 'id') {
     // sort by recently added
@@ -362,20 +363,18 @@ function clickHandler(e) {
 
   // Read and Delete Buttons
   if (elementClicked.classList.contains('read-btn')) {
-
+    // get the parent element of the button clicked and use the ID to match
+    // the entry in myLibrary
     let entry = elementClicked.parentNode;
     elementClicked.innerText = toggleRead(entry);
-
   } else if (elementClicked.classList.contains('del-btn')) {
     let bookId = elementClicked.parentNode.id;
     let entryToRemove = document.getElementById(`${bookId}`);
     let indexOfEntry = myLibrary.findIndex(function(i) {
       return i.id == bookId;
     });
-
     bookList.removeChild(entryToRemove);
     myLibrary.splice(indexOfEntry,1);
-
   } else if (elementClicked.classList.contains('add-to-library-btn')) {
     // add book to library
     let elementClickedId = e.target.id;
@@ -430,7 +429,6 @@ function clearSearches() {
 function runSearch() {
   // let search = $('#books').val();
   let search = document.getElementById('books').value;
-
     if (search === '') {
       // TODO
       console.log('Enter a book to search for');
@@ -442,10 +440,13 @@ function runSearch() {
           let book = new Book();
           const elements = createHtmlElementsForEntry('search');
           elements.addToLibraryBtn.classList.add('add-to-library-btn');
+
           elements.addToLibraryBtn.innerText = 'Add to Library';
           elements.searchResultItem.classList.add('search-result-item');
+
           setBookSearchResult(book, item, index);
           elements.searchResultItem.id = book.searchId;
+          // TODO DRY this with render
           if (book.imgUrl !== undefined) {
             let img = document.createElement('img');
             elements.img.src = book.imgUrl;
@@ -479,6 +480,7 @@ function setBookSearchResult(book, item, index) {
 
 // Store the book selected by the user in the user's library
 function storeSelectedBook(id) { // id == book.searchId
+  // TODO find index of id in results
   let index = results.findIndex(function(i) {
     return i.searchId == id;
   });
