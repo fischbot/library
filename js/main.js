@@ -148,17 +148,14 @@ function chooseSort(prop) {
 
 
 // TODO DRY UP if possible - compare with toggleRead()
-function initializeReadStatusButtons() {
-  // check read status and update button colors accordingly
-  myLibrary.forEach(function(book) {
-    let entry = document.getElementById(`${book.id}`);
-    if (book.hasRead) {
-      // TODO get entry that matches book id
-      entry.lastElementChild.classList.add('read');
-    } else {
-      entry.lastElementChild.classList.remove('read');
-    }
-  });
+function setReadStatusButtonColor(book) {
+  let entry = document.getElementById(`${book.id}`);
+  if (book.hasRead) {
+    // TODO get entry that matches book id
+    entry.lastElementChild.classList.add('read');
+  } else {
+    entry.lastElementChild.classList.remove('read');
+  }
 }
 
 function toggleRead(entry) {
