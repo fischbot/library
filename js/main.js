@@ -7,17 +7,18 @@ const addBookBtn = document.getElementById('add-book-btn');
 const modal = document.getElementById('modal');
 const closeModalBtn = document.getElementById('close-modal-btn');
 const bookList = document.getElementById('book-list');
-let entryId = myLibrary.length;
+let entryId = 0;
+let asc;
 
-function Book(title, authors, publishedDate, description, categories, imgUrl, hasRead) {
-  this.title = title;
-  this.authors = authors || 'No author listed';
-  this.publishedDate = publishedDate || 'No Date Listed';
-  this.description = description;
-  this.categories = categories;
-  this.imgUrl = imgUrl;
-  this.pageCount = pageCount;
-  this.hasRead = hasRead;
+function Book(title, authors, publishedDate, description, imgUrl, pageCount, id, hasRead) {
+  this.title = title || 'title unavailable';
+  this.authors = authors || '[unavailable]';
+  this.publishedDate = publishedDate || '[unavailable]';
+  this.description = description || '[description unavailable]';
+  this.imgUrl = imgUrl || undefined;
+  this.pageCount = pageCount || '[unavailable]';
+  this.id = id;
+  this.hasRead = hasRead || false;
 }
 
 window.addEventListener('load', function() {
