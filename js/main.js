@@ -445,10 +445,9 @@ function runSearch() {
         response.items.forEach(function(item, index) {
           let book = new Book();
           const elements = createHtmlElementsForEntry('search');
-          elements.addToLibraryBtn.classList.add('add-to-library-btn');
+          addClassesToElements(elements, 'search');
 
           elements.addToLibraryBtn.innerText = 'Add to Library';
-          elements.searchResultItem.classList.add('search-result-item');
 
           setBookSearchResult(book, item, index);
           elements.searchResultItem.id = book.searchId;
