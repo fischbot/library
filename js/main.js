@@ -156,7 +156,6 @@ function chooseSort(prop) {
   }
 }
 
-
 // TODO DRY UP if possible - compare with toggleRead()
 function setReadStatusButtonColor(book) {
   let entry = document.getElementById(`${book.id}`);
@@ -180,7 +179,6 @@ function toggleRead(entry) {
 
   if (book.hasRead) {
     text = 'Read';
-    // TODO get entry that matches book id
     entry.lastElementChild.classList.add('read');
   } else {
     text = 'Not Read';
@@ -192,16 +190,24 @@ function toggleRead(entry) {
 // ============== render functions ============================================
 function render() {
   clearBookList();
-  myLibrary.forEach( function(book) {
-    const elements = createHtmlElementsForEntry('render');
-    elements.entry.id = book.id;
-    elements.entry.classList.add('entry');
 
-    appendEntries(elements, 'render');
-    addEntryText(elements, book, 'render');
+  if (myLibrary.length === 0) {
+    // if there are no books in library/ all books have been deleted
+    bookList.innerText = 'Your library is empty!'; // TODO needs better solution
+    sort.classList.add('hidden');
+  } else {
+    if (sort.classList.contains('hidden')) {
+      // display sorting bar if there are book entries in the library
+      sort.classList.remove('hidden');
+    }
+    myLibrary.forEach( function(book) {
+      const elements = createHtmlElementsForEntry('render');
+      elements.entry.id = book.id;
+      elements.entry.classList.add('entry');
 
-    setReadStatusButtonColor(book);
-  });
+      appendEntries(elements, 'render');
+      addEntryText(elements, book, 'render');
+
 }
 
 function addEntryText(elements, book, context) {
