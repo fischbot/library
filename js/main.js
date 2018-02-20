@@ -53,6 +53,62 @@ function toggleRead(entry) {
   return text;
 }
 
+function chooseSort(prop) {
+  // TODO
+  // takes a property to sort by and toggles ascending and descending
+  if (prop === 'id') {
+    myLibrary.sort(function(a, b){
+      return a[prop] - b[prop];
+    });
+  } else if (prop === 'authors') {
+    myLibrary.sort(function(a, b) {
+
+      let propA = a[prop][0].toUpperCase(); // ignore upper and lowercase
+      let propB = b[prop][0].toUpperCase(); // ignore upper and lowercase
+      if (propA < propB) {
+        return -1;
+      }
+      if (propA > propB) {
+        return 1;
+      }
+      // names must be equal
+      return 0;
+    });
+  } else {
+    if (asc) {
+      myLibrary.sort(function(a, b) {
+        console.log(a);
+        let propA = a[prop].toUpperCase(); // ignore upper and lowercase
+        let propB = b[prop].toUpperCase(); // ignore upper and lowercase
+        if (propA < propB) {
+          return -1;
+        }
+        if (propA > propB) {
+          return 1;
+        }
+        // names must be equal
+        return 0;
+      });
+    } else {
+      myLibrary.sort(function(a, b) {
+        console.log(a);
+        let propA = a[prop].toUpperCase(); // ignore upper and lowercase
+        let propB = b[prop].toUpperCase(); // ignore upper and lowercase
+        if (propA > propB) {
+          return -1;
+        }
+        if (propA < propB) {
+          return 1;
+        }
+        // names must be equal
+        return 0;
+      });
+    }
+
+  }
+}
+
+
 // TODO DRY UP if possible - compare with toggleRead()
 function initializeReadStatusButtons() {
   // check read status and update button colors accordingly
@@ -199,6 +255,28 @@ function clickHandler(e) {
     case ('search-btn') :
       runSearch();
       clearSearches();
+    case ('sort-by-title'):
+      chooseSort('title');
+      asc = !asc;
+      render();
+      break;
+    case ('sort-by-author'):
+      chooseSort('authors');
+      asc = !asc;
+      render();
+      break;
+    case ('sort-by-pages'):
+      chooseSort('pageCount'); // TODO = doesn't work
+      asc = !asc;
+      render();
+      break;
+
+    case ('sort-by-recent'):
+      chooseSort('id');
+      asc = !asc;
+      render();
+      break;
+
   }
 
   // Read and Delete Buttons
