@@ -317,17 +317,20 @@ function clickHandler(e) {
       render();
       break;
     case ('sort-by-pages'):
-      chooseSort('pageCount'); // TODO = doesn't work
+      chooseSort('pageCount');
       asc = !asc;
       render();
       break;
-
     case ('sort-by-recent'):
       chooseSort('id');
       asc = !asc;
       render();
       break;
-
+    case ('sort-by-read'):
+      chooseSort('hasRead');
+      asc = !asc;
+      render();
+      break;
   }
 
   // Read and Delete Buttons
