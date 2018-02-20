@@ -304,6 +304,7 @@ function clickHandler(e) {
     case ('search-btn') :
       runSearch();
       clearSearches();
+      break;
     case ('sort-by-title'):
       chooseSort('title');
       asc = !asc;
