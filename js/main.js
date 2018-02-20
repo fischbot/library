@@ -350,14 +350,13 @@ function runSearch() {
     } else {
       $.get('https://www.googleapis.com/books/v1/volumes?q=' + search, function(response) {
         response.items.forEach(function(item, index) {
-          let book = {};
+          let book = new Book();
           const elements = createHtmlElementsForEntry('search');
           elements.addToLibraryBtn.classList.add('add-to-library-btn');
           elements.addToLibraryBtn.innerText = 'Add to Library';
           elements.searchResultItem.classList.add('search-result-item');
-
           setBookSearchResult(book, item, index);
-
+          elements.searchResultItem.id = book.searchId;
           if (book.imgUrl !== undefined) {
             let img = document.createElement('img');
             elements.img.src = book.imgUrl;
@@ -390,14 +389,14 @@ function setBookSearchResult(book, item, index) {
 }
 
 // Store the book selected by the user in the user's library
-function storeSelectedBook(id) {
-  // console.log('storing book'); // debug
-  // console.log(results[id]); // debug
-  setId(results[id]);
-  addBookToLibrary(results[id]);
+function storeSelectedBook(id) { // id == book.searchId
+  let index = results.findIndex(function(i) {
+    return i.searchId == id;
+  });
 
   results[index].id = setId();
 
+  addBookToLibrary(results[index]);
   clearInputs(); // TODO clear search box
   render();
 }
