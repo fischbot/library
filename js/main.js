@@ -100,6 +100,17 @@ function chooseSort(prop) {
       }
 
     });
+  } else if (prop === 'hasRead') {
+    // sort by read status
+    myLibrary.sort(function(a, b) {
+      if (asc) {
+        // sort in ascending order
+        return a[prop] - b[prop];
+      } else {
+        // sort in descending order
+        return b[prop] - a[prop];
+      }
+    });
   } else {
     // sort by title
     if (asc) {
