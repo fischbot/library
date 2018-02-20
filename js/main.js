@@ -58,11 +58,35 @@ function chooseSort(prop) {
     // sort by recently added
     myLibrary.sort(function(a, b){
       if (asc) {
+        // sort in ascending order
         return a[prop] - b[prop];
       } else {
+        // sort in descending order
         return b[prop] - a[prop];
       }
 
+    });
+  } else if (prop === 'pageCount') {
+    // sort by amount of pages
+    myLibrary.sort(function(a, b){
+      let propA = a.pageCount;
+      let propB = b.pageCount;
+
+      // assign 0 pages to any book with no page count listed
+      if (propA === '[unavailable]') {
+          propA = 0;
+      }
+      if (propB === '[unavailable]') {
+          propB = 0;
+      }
+
+      if (asc) {
+        // sort in ascending order
+        return propA - propB;
+      } else {
+        // sort in descending order
+        return propB - propA;
+      }
     });
   } else if (prop === 'authors') {
     // sort by author
@@ -71,6 +95,7 @@ function chooseSort(prop) {
       let propA = a[prop][0].toUpperCase(); // ignore case
       let propB = b[prop][0].toUpperCase();
       if (asc) {
+        // sort in ascending order
         if (propA < propB) {
           return -1;
         }
@@ -80,6 +105,7 @@ function chooseSort(prop) {
         // names must be equal
         return 0;
       } else {
+        // sort in descending order
         if (propA > propB) {
           return -1;
         }
@@ -96,8 +122,8 @@ function chooseSort(prop) {
     if (asc) {
       // sort in ascending order
       myLibrary.sort(function(a, b) {
-        let propA = a[prop].toUpperCase(); // ignore upper and lowercase
-        let propB = b[prop].toUpperCase(); // ignore upper and lowercase
+        let propA = a[prop].toUpperCase(); // ignore case
+        let propB = b[prop].toUpperCase();
         if (propA < propB) {
           return -1;
         }
@@ -110,8 +136,8 @@ function chooseSort(prop) {
     } else {
       // sort in descending order
       myLibrary.sort(function(a, b) {
-        let propA = a[prop].toUpperCase(); // ignore upper and lowercase
-        let propB = b[prop].toUpperCase(); // ignore upper and lowercase
+        let propA = a[prop].toUpperCase(); // ignore case
+        let propB = b[prop].toUpperCase();
         if (propA > propB) {
           return -1;
         }
