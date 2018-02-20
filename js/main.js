@@ -176,7 +176,7 @@ function toggleRead(entry) {
 // ============== render functions ============================================
 function render() {
   clearBookList();
-  myLibrary.forEach( function(book, bookIndex) {                               // bookIndex not in use, but I'm keeping it here incase I need it
+  myLibrary.forEach( function(book) {
     const elements = createHtmlElementsForEntry('render');
     elements.entry.id = book.id;
     elements.entry.classList.add('entry');
