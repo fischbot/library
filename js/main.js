@@ -377,17 +377,15 @@ function runSearch() {
 
 function setBookSearchResult(book, item, index) {
   book.searchId = index;
-  book.title = item.volumeInfo.title || '';
-  book.authors = item.volumeInfo.authors || '';
-  book.publishedDate = item.volumeInfo.publishedDate  || '';
-  book.description = item.volumeInfo.description  || '';
-  book.categories = item.volumeInfo.categories  || '';
+  book.title = item.volumeInfo.title || '[unavailable]';
+  book.authors = item.volumeInfo.authors || '[unavailable]' ;
+  book.publishedDate = item.volumeInfo.publishedDate || '[unavailable]';
+  book.description = item.volumeInfo.description || '[description unavailable]';
+  book.pageCount = item.volumeInfo.pageCount || '[unavailable]';
   results.push(book);
-  // book.imgUrl = fixImgUrl(item.volumeInfo.imageLinks.thumbnail);
 
   if (item.volumeInfo.imageLinks !== undefined) {
     book.imgUrl = fixImgUrl(item.volumeInfo.imageLinks.thumbnail);
-    console.log(book.imgUrl);
   }
 }
 
