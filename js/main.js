@@ -380,6 +380,7 @@ function clickHandler(e) {
     });
     bookList.removeChild(entryToRemove);
     myLibrary.splice(indexOfEntry,1);
+    render();
   } else if (elementClicked.classList.contains('add-to-library-btn')) {
     // add book to library
     let elementClickedId = e.target.id;
