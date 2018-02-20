@@ -23,7 +23,6 @@ function Book(title, authors, publishedDate, description, imgUrl, pageCount, id,
 
 window.addEventListener('load', function() {
     render();
-    initializeReadStatusButtons();
     document.addEventListener('click', clickHandler, false);
 
 }, false);
@@ -184,6 +183,8 @@ function render() {
 
     appendEntries(elements, 'render');
     addEntryText(elements, book, 'render');
+
+    setReadStatusButtonColor(book);
   });
 }
 
@@ -354,6 +355,7 @@ function clickHandler(e) {
     toggleModal();
     togglePageOverlay();
     clearSearches();
+    render();
   }
 }
 // ============== END clickHandler ============================================
