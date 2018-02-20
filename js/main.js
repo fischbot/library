@@ -498,7 +498,17 @@ const twoTowers = new Book('The Two Towers', 'J.R.R. Tolkien', '',
                           'Aenean lacinia bibendum nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum.',
                           '', '', setId(), false);
 const rotc = new Book('The Return of the King', 'J.R.R. Tolkien', '', '', '', '', setId(), false);
+
+const prideAndPrejudice = new Book('Pride and Prejudice', 'Jane Austin', 1870, '', 'https://books.google.com/books/content?id=dalDAAAAcAAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', 332, setId(), false);
+
+const animalFarm = new Book('Animal Farm', 'George Orwell', '', 'George Orwell\’s famous satire of the Soviet Union, in which “all animals are equal but some animals are more equal than others.”', 'https://books.google.com/books/content?id=nkalO3OsoeMC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', 144, setId(), true);
+
+const nineteen84 = new Book('1984', 'George Orwell', 2008, '', '',  325, setId(), true);
+
 myLibrary.push(hobbit);
 myLibrary.push(fotr);
 myLibrary.push(twoTowers);
 myLibrary.push(rotc);
+myLibrary.push(prideAndPrejudice);
+myLibrary.push(animalFarm);
+myLibrary.push(nineteen84);
