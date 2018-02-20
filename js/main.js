@@ -1,42 +1,7 @@
 /* global $ */
 
 'use strict'
-var myLibrary = [
-  {
-    title : 'The Hobbit',
-    authors : 'J.R.R. Tolkien',
-    publishedDate : '1966',
-    description : 'Aenean lacinia bibendum nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum.',
-    id : 0,
-    imgUrl : 'https://books.google.com/books/content?id=hFfhrCWiLSMC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',
-    hasRead : true
-  },
-  {
-    title : 'The Fellowship of the Ring',
-    authors : 'J.R.R. Tolkien',
-    publishedDate : '1966',
-    description : 'Aenean lacinia bibendum nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum.',
-    id : 1,
-    hasRead : false
-  },
-  {
-    title : 'The Two Towers',
-    authors : 'J.R.R. Tolkien',
-    publishedDate : '1966',
-    description : 'Aenean lacinia bibendum nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum.',
-    id : 2,
-    hasRead : false
-  },
-  {
-    title : 'The Return of the King',
-    authors : 'J.R.R. Tolkien',
-    publishedDate : '1966',
-    description : 'Aenean lacinia bibendum nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum.',
-    id : 3,
-    hasRead : true
-  },
-
-];
+var myLibrary = [];
 var results = [];
 const addBookBtn = document.getElementById('add-book-btn');
 const modal = document.getElementById('modal');
@@ -365,7 +330,27 @@ function fixImgUrl(url){
   // change http to https
   let strArray = url.split(':')
   return strArray[0] + 's:' + strArray[1];
-
-  // example result before fixing
-  // http://books.google.com/books/content?id=j2uGDAAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api
 }
+
+// title, authors, publishedDate, description, imgUrl, pageCount, id, hasRead
+
+// Sample data
+const hobbit = new Book('The Hobbit', 'J.R.R. Tolkien', '1982',
+                      'Chronicles the adventures of the inhabitants of Middle-earth and Bilbo Baggins,' +
+                      'the hobbit who brought home to The Shire the One Ring of Power',
+                      'https://books.google.com/books/content?id=hFfhrCWiLSMC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',
+                      304, setId(),
+                      true
+);
+const fotr = new Book('The Fellowship of the Ring', 'J.R.R. Tolkien', '',
+                    'Aenean lacinia bibendum nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum.',
+                    '', '', setId(), false
+);
+const twoTowers = new Book('The Two Towers', 'J.R.R. Tolkien', '',
+                          'Aenean lacinia bibendum nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum.',
+                          '', '', setId(), false);
+const rotc = new Book('The Return of the King', 'J.R.R. Tolkien', '', '', '', '', setId(), false);
+myLibrary.push(hobbit);
+myLibrary.push(fotr);
+myLibrary.push(twoTowers);
+myLibrary.push(rotc);
