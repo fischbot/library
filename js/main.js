@@ -208,6 +208,10 @@ function render() {
       appendEntries(elements, 'render');
       addEntryText(elements, book, 'render');
 
+      setReadStatusButtonColor(book);
+    });
+  }
+
 }
 
 function addEntryText(elements, book, context) {
