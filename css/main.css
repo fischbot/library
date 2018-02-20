@@ -1,17 +1,22 @@
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
   font-family: sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   margin: 0;
+  font-family: 'Raleway', sans-serif;
+  background: #fffef5;
 }
 
 #page {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-between; */
   height: 100vh;
   width: 100%;
+  position: relative;
 }
 
 .container,
@@ -22,15 +27,9 @@ body {
 }
 
 .main-container {
-  /* display: flex;
-  flex-direction: column; */
   position: relative;
+  margin-top: 200px;
 }
-/*
-.main-container,
-#book-list {
-  border: none;
-} */
 
 .hidden {
   display: none;
@@ -42,15 +41,71 @@ img {
   align-self: center;
   padding: 10px 0;
 }
+
+h1,
+h2,
+h3 {
+  font-family: 'Megrim', cursive;
+}
+
+h1 {
+  font-size: 4em;
+  letter-spacing: 14px;
+  padding: 10px 0 30px 0;
+}
+
+h2,
+h3 {
+  letter-spacing: 1px;
+}
+
+h1,
+nav {
+  margin: 0;
+}
 /* ============= Header ================================== */
 #header {
   text-align: center;
+  background: #70BF80;
+  color: #fff;
+  padding: 30px 0 0;
+  top: 0;
+  width: 100%;
+  position: fixed;
+  z-index: 1000;
 }
 
-#header .container {
-  position: relative;
+nav {
+  background: #f6f6e4;
+  border-bottom: 2px solid #e9e9b7;
 }
 
+nav .container {
+  display: flex;
+  justify-content: center;
+  padding: 5px 0;
+  align-items: center;
+}
+
+nav h1,
+nav ul {
+  margin: 0;
+}
+
+nav h2 {
+  color: #222;
+  margin-right: 10px;
+}
+
+nav ul {
+
+  padding: 0;
+}
+
+nav li {
+  list-style-type: none;
+  display: inline;
+}
 
 /* ============= Buttons ================================= */
 button {
@@ -77,29 +132,33 @@ button {
 .read-btn {
   width: 100%;
   font-size: 1.4em;
-  background: #4D514F;
+  /* background: #4D514F; */
+  background: #1ABDBF;
   color: #fff;
   display: block;
   position: absolute;
   bottom: 0;
 }
 
-/*.read-btn:hover {*/
-/*  background: #2F312F;*/
-/*}*/
-
 .read {
     background: #70BF80;
 }
 
-#open-search-modal-btn {
-  background: #1DBDBF;
-  border-radius: 5px;
+#open-search-modal-btn,
+#open-form-modal-btn {
   outline: none;
-  width: 15%;
+  margin: 0 10px;
+  background: none;
+  color: #808080;
+  border-bottom: 4px double #808080;
 }
 
-#open-search-modal-btn,
+#open-search-modal-btn:hover,
+#open-form-modal-btn:hover {
+  /* color: #70BF80; */
+  border-bottom: 4px double #70BF80;
+}
+
 #close-modal-btn,
 .del-btn {
   position: absolute;
@@ -142,8 +201,22 @@ button {
 #sort button {
   background: #eee;
   border: 1px solid #B5B9BD;
-  color: #B5B9BD;
+  color: #999EA5;
+  margin: 5px 10px;
 }
+
+#sort button:hover {
+  color: #474c53;
+}
+
+/* ============= Search  ============================= */
+#sort {
+  padding: 30px 0 15px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 /* ============= Search  ============================= */
 #overlay {
   position:fixed;
@@ -196,7 +269,7 @@ input[type="search"] {
 
 /* ============= Search Results ========================== */
 .search-result-item {
-  width: 278px;
+  /* width: 278px; */
   /* margin: 10px; */
   font-size: 14px;
   background: #eee;
@@ -206,7 +279,7 @@ input[type="search"] {
 #book-list,
 #search-results {
   display: flex;
-  /* justify-content: end; */
+  justify-content: center;
   flex-wrap: wrap;
 }
 
@@ -217,26 +290,29 @@ input[type="search"] {
   justify-content: space-between;
   position: relative;
   height: 400px;
+  width: 278px;
   margin: 10px;
-
 }
 
 .entry {
   border: 3px solid #7A7F7F;
   background: #f6f6e4;
-  width: 379px;
+  /* width: 379px; */
+}
+
+.entry:hover {
+  box-shadow: 2px 1px 3px #a2a2a2;
 }
 
 .entry h2,
 .search-result-item h2 {
+  overflow: hidden;
   height: 68px;
   background: #7A7F7F;
   color: #fff;
   text-align: center;
   margin: 0;
   padding: 10px;
-  /* flex: 0; */
-  /* font-size: 0.875em; */
 }
 
 .entry h3,
@@ -258,15 +334,18 @@ input[type="search"] {
   text-align: left;
   padding: 10px;
   line-height: 1.4em;
-  overflow: auto;
+  overflow-y: scroll;
+  font-size: 12px;
 }
 
 footer {
   padding: 40px 0;
+  margin-top: 100px;
   text-align: center;
   color: #fff;
   background: #1BBDBF;
   font-size: 14px;
+  width: 100%;
 }
 
 footer a {
