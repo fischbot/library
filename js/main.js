@@ -32,8 +32,8 @@ function addBookToLibrary(book) {
   myLibrary.push(book);
 }
 
-function setId(book) {
-  book.id = entryId++;
+function setId() {
+  return entryId++;
 }
 
 function toggleRead(entry) {
@@ -323,6 +323,9 @@ function storeSelectedBook(id) {
   // console.log(results[id]); // debug
   setId(results[id]);
   addBookToLibrary(results[id]);
+
+  results[index].id = setId();
+
   clearInputs(); // TODO clear search box
   render();
 }
