@@ -54,30 +54,48 @@ function toggleRead(entry) {
 }
 
 function chooseSort(prop) {
-  // TODO
-  // takes a property to sort by and toggles ascending and descending
   if (prop === 'id') {
+    // sort by recently added
     myLibrary.sort(function(a, b){
-      return a[prop] - b[prop];
+      if (asc) {
+        return a[prop] - b[prop];
+      } else {
+        return b[prop] - a[prop];
+      }
+
     });
   } else if (prop === 'authors') {
+    // sort by author
+    // uses first author if there is more than 1
     myLibrary.sort(function(a, b) {
+      let propA = a[prop][0].toUpperCase(); // ignore case
+      let propB = b[prop][0].toUpperCase();
+      if (asc) {
+        if (propA < propB) {
+          return -1;
+        }
+        if (propA > propB) {
+          return 1;
+        }
+        // names must be equal
+        return 0;
+      } else {
+        if (propA > propB) {
+          return -1;
+        }
+        if (propA < propB) {
+          return 1;
+        }
+        // names must be equal
+        return 0;
+      }
 
-      let propA = a[prop][0].toUpperCase(); // ignore upper and lowercase
-      let propB = b[prop][0].toUpperCase(); // ignore upper and lowercase
-      if (propA < propB) {
-        return -1;
-      }
-      if (propA > propB) {
-        return 1;
-      }
-      // names must be equal
-      return 0;
     });
   } else {
+    // sort by title
     if (asc) {
+      // sort in ascending order
       myLibrary.sort(function(a, b) {
-        console.log(a);
         let propA = a[prop].toUpperCase(); // ignore upper and lowercase
         let propB = b[prop].toUpperCase(); // ignore upper and lowercase
         if (propA < propB) {
@@ -90,8 +108,8 @@ function chooseSort(prop) {
         return 0;
       });
     } else {
+      // sort in descending order
       myLibrary.sort(function(a, b) {
-        console.log(a);
         let propA = a[prop].toUpperCase(); // ignore upper and lowercase
         let propB = b[prop].toUpperCase(); // ignore upper and lowercase
         if (propA > propB) {
