@@ -280,6 +280,11 @@ function createButton(className, innerText) {
   return button;
 }
 
+function addClassesToElements(elements, context) {
+  elements.addToLibraryBtn.classList.add('add-to-library-btn');
+  elements.searchResultItem.classList.add('search-result-item');
+}
+
 function createHtmlElementsForEntry(context) {
   let elements = {};
 
