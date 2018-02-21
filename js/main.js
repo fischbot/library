@@ -1,8 +1,9 @@
 /* global $ */
 
 'use strict'
-var myLibrary = [];
-var results = [];
+let myLibrary = [];
+let results = [];
+let storage = window.localStorage;
 const addBookBtn = document.getElementById('add-book-btn');
 const modal = document.getElementById('modal');
 const closeModalBtn = document.getElementById('close-modal-btn');
@@ -31,6 +32,14 @@ function Book(title, authors, publishedDate, description, imgUrl, pageCount, id,
 }
 
 window.addEventListener('load', function() {
+    if (storage.getItem('library') !== undefined) {
+      // if the library is empty, add sample data
+      // this is so the user can see how the app is supposed to look
+      populateSampleData();
+    } else {
+      // get the stored data
+      retrieveFromLocalStorage();
+    }
     render();
     document.addEventListener('click', clickHandler, false);
 }, false);
@@ -122,6 +131,27 @@ function setReadStatusButtonColor(book) {
   }
 }
 
+// ============== Storage functions ============================================
+function saveToLocalStorage() {
+  let lib = JSON.stringify(myLibrary);
+  localStorage.setItem('library', lib);
+}
+
+function retrieveFromLocalStorage() {
+  let data = localStorage.getItem('library');
+  let localData = JSON.parse(data);
+  localData.forEach(function(book) {
+    myLibrary.push(book);
+  });
+}
+
+function updateLocalStorage() {
+  // clear localStorage
+  storage.clear();
+  // repopulate
+  saveToLocalStorage();
+}
+
 // ============== render functions ============================================
 function render() {
   clearBookList();
@@ -146,7 +176,7 @@ function render() {
       setReadStatusButtonColor(book);
     });
   }
-
+  updateLocalStorage();
 }
 
 function addEntryText(elements, book, context) {
@@ -245,8 +275,6 @@ function createHtmlElementsForEntry(context) {
 }
 
 // ============================================================================
-
-
 
 
 
@@ -458,35 +486,35 @@ function fixImgUrl(url){
 }
 
 // =============== SAMPLE DATA ================================================
-// title, authors, publishedDate, description, imgUrl, pageCount, id, hasRead
+function populateSampleData() {
+  // Sample data
+  const hobbit = new Book('The Hobbit', 'J.R.R. Tolkien', '1982',
+                        'Chronicles the adventures of the inhabitants of Middle-earth and Bilbo Baggins,' +
+                        'the hobbit who brought home to The Shire the One Ring of Power',
+                        'https://books.google.com/books/content?id=hFfhrCWiLSMC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',
+                        304, setId(),
+                        true
+  );
+  const fotr = new Book('The Fellowship of the Ring', 'J.R.R. Tolkien', '',
+                      'Aenean lacinia bibendum nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum.',
+                      '', '', setId(), false
+  );
+  const twoTowers = new Book('The Two Towers', 'J.R.R. Tolkien', '',
+                            'Aenean lacinia bibendum nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum.',
+                            '', '', setId(), false);
+  const rotc = new Book('The Return of the King', 'J.R.R. Tolkien', '', '', '', '', setId(), false);
 
-// Sample data
-const hobbit = new Book('The Hobbit', 'J.R.R. Tolkien', '1982',
-                      'Chronicles the adventures of the inhabitants of Middle-earth and Bilbo Baggins,' +
-                      'the hobbit who brought home to The Shire the One Ring of Power',
-                      'https://books.google.com/books/content?id=hFfhrCWiLSMC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',
-                      304, setId(),
-                      true
-);
-const fotr = new Book('The Fellowship of the Ring', 'J.R.R. Tolkien', '',
-                    'Aenean lacinia bibendum nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum.',
-                    '', '', setId(), false
-);
-const twoTowers = new Book('The Two Towers', 'J.R.R. Tolkien', '',
-                          'Aenean lacinia bibendum nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum.',
-                          '', '', setId(), false);
-const rotc = new Book('The Return of the King', 'J.R.R. Tolkien', '', '', '', '', setId(), false);
+  const prideAndPrejudice = new Book('Pride and Prejudice', 'Jane Austin', 1870, '', 'https://books.google.com/books/content?id=dalDAAAAcAAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', 332, setId(), false);
 
-const prideAndPrejudice = new Book('Pride and Prejudice', 'Jane Austin', 1870, '', 'https://books.google.com/books/content?id=dalDAAAAcAAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', 332, setId(), false);
+  const animalFarm = new Book('Animal Farm', 'George Orwell', '', 'George Orwell\’s famous satire of the Soviet Union, in which “all animals are equal but some animals are more equal than others.”', 'https://books.google.com/books/content?id=nkalO3OsoeMC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', 144, setId(), true);
 
-const animalFarm = new Book('Animal Farm', 'George Orwell', '', 'George Orwell\’s famous satire of the Soviet Union, in which “all animals are equal but some animals are more equal than others.”', 'https://books.google.com/books/content?id=nkalO3OsoeMC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', 144, setId(), true);
+  const nineteen84 = new Book('1984', 'George Orwell', 2008, '', '',  325, setId(), true);
 
-const nineteen84 = new Book('1984', 'George Orwell', 2008, '', '',  325, setId(), true);
-
-myLibrary.push(hobbit);
-myLibrary.push(fotr);
-myLibrary.push(twoTowers);
-myLibrary.push(rotc);
-myLibrary.push(prideAndPrejudice);
-myLibrary.push(animalFarm);
-myLibrary.push(nineteen84);
+  myLibrary.push(hobbit);
+  myLibrary.push(fotr);
+  myLibrary.push(twoTowers);
+  myLibrary.push(rotc);
+  myLibrary.push(prideAndPrejudice);
+  myLibrary.push(animalFarm);
+  myLibrary.push(nineteen84);
+}
