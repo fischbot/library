@@ -9,9 +9,9 @@ const closeModalBtn = document.getElementById('close-modal-btn');
 const bookList = document.getElementById('book-list');
 const sort = document.getElementById('sort');
 let entryId = 0;
-
-// used for sorting ascending/descending (always start in ascending on page load)
 let asc = {
+  // used for sorting ascending/descending
+  // (always start in ascending on page load)
   title : true,
   pageCount : true,
   authors : true,
@@ -44,116 +44,72 @@ function setId() {
   return entryId++;
 }
 
-// TODO refactor this mess
-function chooseSort(prop) {
-  if (prop === 'id') {
-    // sort by recently added
-    myLibrary.sort(function(a, b){
-      if (asc.id) {
-        // sort in ascending order
-        return a[prop] - b[prop];
-      } else {
-        // sort in descending order
-        return b[prop] - a[prop];
+// ============== Sort functions ==============================================
+function titleAndAuthorSort(prop) {
+  myLibrary.sort(function(a, b) {
+    let valueA, valueB;
+    if (prop === 'title') {
+      valueA = a[prop].toUpperCase();       // ignore case
+      valueB = b[prop].toUpperCase();
+    }
+    // TODO fix - not sorting correctly
+    if (prop === 'authors') {                   // uses first author if there is more than 1
+      if (Array.isArray(a[prop])) {
+        valueA = a[prop][0].toUpperCase();    // ignore case
       }
 
-    });
-  } else if (prop === 'pageCount') {
-    // sort by amount of pages
-    myLibrary.sort(function(a, b){
-      let propA = a.pageCount;
-      let propB = b.pageCount;
-
-      // assign high number of pages to any book with no page count listed
-      // so they get sorted to the end
-      if (propA === '[unavailable]') {
-          propA = 99999;
-      }
-      if (propB === '[unavailable]') {
-          propB = 99999;
+      if (Array.isArray(b[prop])) {
+        valueB = b[prop][0].toUpperCase();
       }
 
-      if (asc.pageCount) {
-        // sort in ascending order
-        return propA - propB;
-      } else {
-        // sort in descending order
-        return propB - propA;
+      if (!Array.isArray(a[prop]) && !Array.isArray(b[prop])) {
+        // console.log('not arrays!');
+        valueA = a[prop].toUpperCase();    // ignore case
+        valueB = b[prop].toUpperCase();
       }
-    });
-  } else if (prop === 'authors') {
-    // sort by author
-    // uses first author if there is more than 1
-    myLibrary.sort(function(a, b) {
-      let propA = a[prop][0].toUpperCase(); // ignore case
-      let propB = b[prop][0].toUpperCase();
-      if (asc.authors) {
-        // sort in ascending order
-        if (propA < propB) {
-          return -1;
-        }
-        if (propA > propB) {
-          return 1;
-        }
-        // names must be equal
-        return 0;
-      } else {
-        // sort in descending order
-        if (propA > propB) {
-          return -1;
-        }
-        if (propA < propB) {
-          return 1;
-        }
-        // names must be equal
-        return 0;
-      }
-
-    });
-  } else if (prop === 'hasRead') {
-    // sort by read status
-    myLibrary.sort(function(a, b) {
-      if (asc.hasRead) {
-        // sort in ascending order
-        return a[prop] - b[prop];
-      } else {
-        // sort in descending order
-        return b[prop] - a[prop];
-      }
-    });
-  } else {
-    // sort by title
-    if (asc.title) {
-      // sort in ascending order
-      myLibrary.sort(function(a, b) {
-        let propA = a[prop].toUpperCase(); // ignore case
-        let propB = b[prop].toUpperCase();
-        if (propA < propB) {
-          return -1;
-        }
-        if (propA > propB) {
-          return 1;
-        }
-        // names must be equal
-        return 0;
-      });
-    } else {
-      // sort in descending order
-      myLibrary.sort(function(a, b) {
-        let propA = a[prop].toUpperCase(); // ignore case
-        let propB = b[prop].toUpperCase();
-        if (propA > propB) {
-          return -1;
-        }
-        if (propA < propB) {
-          return 1;
-        }
-        // names must be equal
-        return 0;
-      });
     }
 
-  }
+    console.log(`valueA: ${valueA} | valueB: ${valueB}`)
+
+    if (asc[prop]) {
+      return stringSort(valueA, valueB);        // sort in ascending order
+    } else {
+      return stringSort(valueB, valueA)         // sort in descending order
+    }
+  });
+  asc[prop] = !asc[prop];
+}
+
+function stringSort(value1, value2) {
+    if (value1 < value2) {
+      return -1;
+    }
+    if (value1 > value2) {
+      return 1;
+    }
+    return 0;                     // names must be equal
+}
+
+function readIdAndPageSort(prop) {
+  myLibrary.sort(function(a, b){
+    let valueA = a[prop];
+    let valueB = b[prop];
+    if (prop === 'pageCount') {
+      if (valueA === '[unavailable]') {
+          valueA = 99999;
+      }
+      if (valueB === '[unavailable]') {
+          valueB = 99999;
+      }
+    }
+
+    if (asc[prop]) {             // sort in ascending order
+      return valueA - valueB;
+    } else {                      // sort in descending order
+      return valueB - valueA;
+    }
+  });
+  asc[prop] = !asc[prop];
 }
 
 // TODO DRY UP if possible - compare with toggleRead()
@@ -339,28 +295,24 @@ function clickHandler(e) {
     case ('add-your-own-book-btn') :
       break;
     case ('sort-by-title'):
-      chooseSort('title');
-      asc.title = !asc.title;
+      titleAndAuthorSort('title');
       render();
       break;
     case ('sort-by-author'):
-      chooseSort('authors');
-      asc.authors = !asc.authors;
+
+      titleAndAuthorSort('authors');
       render();
       break;
     case ('sort-by-pages'):
-      chooseSort('pageCount');
-      asc.pageCount = !asc.pageCount;
+      readIdAndPageSort('pageCount');
       render();
       break;
     case ('sort-by-recent'):
-      chooseSort('id');
-      asc.id = !asc.id;
+      readIdAndPageSort('id');
       render();
       break;
     case ('sort-by-read'):
-      chooseSort('hasRead');
-      asc.hasRead = !asc.hasRead;
+      readIdAndPageSort('hasRead');
       render();
       break;
   }
@@ -430,7 +382,6 @@ function clearSearches() {
 
 // TODO split up into multiple functions
 function runSearch() {
-  // let search = $('#books').val();
   let search = document.getElementById('books').value;
     if (search === '') {
       // TODO
