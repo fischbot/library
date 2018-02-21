@@ -33,7 +33,6 @@ function Book(title, authors, publishedDate, description, imgUrl, pageCount, id,
 window.addEventListener('load', function() {
     render();
     document.addEventListener('click', clickHandler, false);
-
 }, false);
 
 function addBookToLibrary(book) {
@@ -123,26 +122,6 @@ function setReadStatusButtonColor(book) {
   }
 }
 
-function toggleRead(entry) {
-  let text = '';
-  // find the book with the ID that matches the entry ID
-  let indexOfEntry = myLibrary.findIndex(function(i) {
-    return i.id == entry.id;
-  });
-  let book = myLibrary[indexOfEntry];
-
-  book.hasRead = !book.hasRead;
-
-  if (book.hasRead) {
-    text = 'Read';
-    entry.lastElementChild.classList.add('read');
-  } else {
-    text = 'Not Read';
-    entry.lastElementChild.classList.remove('read');
-  }
-
-  return text;
-}
 // ============== render functions ============================================
 function render() {
   clearBookList();
@@ -266,18 +245,14 @@ function createHtmlElementsForEntry(context) {
 }
 
 // ============================================================================
-function toggleModal() {
-  if (modal.classList.contains('hidden')) {
-    modal.classList.remove('hidden');
-  } else {
-    modal.classList.add('hidden');
-  }
-}
+
+
+
+
 
 // ============== clickHandler ================================================
 function clickHandler(e) {
   let elementClicked = e.target;
-
   switch(elementClicked.id) {
     case ('open-search-modal-btn') :
       toggleModal();
@@ -299,7 +274,6 @@ function clickHandler(e) {
       render();
       break;
     case ('sort-by-author'):
-
       titleAndAuthorSort('authors');
       render();
       break;
@@ -317,33 +291,59 @@ function clickHandler(e) {
       break;
   }
 
-  // Read and Delete Buttons
   if (elementClicked.classList.contains('read-btn')) {
-    // get the parent element of the button clicked and use the ID to match
-    // the entry in myLibrary
     let entry = elementClicked.parentNode;
     elementClicked.innerText = toggleRead(entry);
   } else if (elementClicked.classList.contains('del-btn')) {
-    let bookId = elementClicked.parentNode.id;
-    let entryToRemove = document.getElementById(`${bookId}`);
-    let indexOfEntry = myLibrary.findIndex(function(i) {
-      return i.id == bookId;
-    });
-    bookList.removeChild(entryToRemove);
-    myLibrary.splice(indexOfEntry,1);
-    render();
+    delBtnHandler(elementClicked);
   } else if (elementClicked.classList.contains('add-to-library-btn')) {
-    // add book to library
-    let elementClickedId = e.target.id;
-    storeSelectedBook(elementClickedId);
-    delete results[elementClickedId].searchId;
-    toggleModal();
-    togglePageOverlay();
-    clearSearches();
-    render();
+    addToLibraryBtnHandler(elementClicked);
   }
 }
-// ============== END clickHandler ============================================
+
+function delBtnHandler(elementClicked) {
+  // delete book from library and remove it from bookList
+  let bookId = elementClicked.parentNode.id;
+  let entryToRemove = document.getElementById(`${bookId}`);
+  let indexOfEntry = myLibrary.findIndex(function(i) {
+    return i.id == bookId;
+  });
+  bookList.removeChild(entryToRemove);
+  myLibrary.splice(indexOfEntry,1);
+  render();
+}
+
+function addToLibraryBtnHandler(elementClicked) {
+  // add book from search results to library
+  let elementClickedId = elementClicked.id;
+  storeSelectedBook(elementClickedId);
+  delete results[elementClickedId].searchId;
+  toggleModal();
+  togglePageOverlay();
+  clearSearches();
+  render();
+}
+
+// ============== Toggle functions ============================================
+function toggleRead(entry) {
+  let text = '';
+  // find the book with the ID that matches the entry ID
+  let indexOfEntry = myLibrary.findIndex(function(i) {
+    return i.id == entry.id;
+  });
+  let book = myLibrary[indexOfEntry];
+
+  book.hasRead = !book.hasRead;
+
+  if (book.hasRead) {
+    text = 'Read';
+    entry.lastElementChild.classList.add('read');
+  } else {
+    text = 'Not Read';
+    entry.lastElementChild.classList.remove('read');
+  }
+  return text;
+}
 
 function togglePageOverlay() {
   let overlayPlaceholder = document.querySelector('.overlay-placeholder');
@@ -353,6 +353,14 @@ function togglePageOverlay() {
     overlayPlaceholder.id = 'overlay';
   }
 
+}
+
+function toggleModal() {
+  if (modal.classList.contains('hidden')) {
+    modal.classList.remove('hidden');
+  } else {
+    modal.classList.add('hidden');
+  }
 }
 
 // ============== Clearing Functions ==========================================
