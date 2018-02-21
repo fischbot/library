@@ -3,7 +3,6 @@
 'use strict'
 let myLibrary = [];
 let results = [];
-let storage = window.localStorage;
 const addBookBtn = document.getElementById('add-book-btn');
 const modal = document.getElementById('modal');
 const closeModalBtn = document.getElementById('close-modal-btn');
@@ -32,13 +31,19 @@ function Book(title, authors, publishedDate, description, imgUrl, pageCount, id,
 }
 
 window.addEventListener('load', function() {
-    if (storage.getItem('library') !== undefined) {
-      // if the library is empty, add sample data
-      // this is so the user can see how the app is supposed to look
-      populateSampleData();
+    if (storageAvailable('localStorage')) {
+      if (!window.localStorage.getItem('library')) {
+        // if the library is empty, add sample data
+        // this is so the user can see how the app is supposed to look
+        populateSampleData();
+      } else {
+        // get the stored data
+        retrieveFromLocalStorage();
+      }
     } else {
-      // get the stored data
-      retrieveFromLocalStorage();
+      alert('Sorry, localStorage is not available with your browser. ' +
+            'You won\'t be able to save your library. :(');
+      populateSampleData();
     }
     render();
     document.addEventListener('click', clickHandler, false);
@@ -134,11 +139,11 @@ function setReadStatusButtonColor(book) {
 // ============== Storage functions ============================================
 function saveToLocalStorage() {
   let lib = JSON.stringify(myLibrary);
-  localStorage.setItem('library', lib);
+  window.localStorage.setItem('library', lib);
 }
 
 function retrieveFromLocalStorage() {
-  let data = localStorage.getItem('library');
+  let data = window.localStorage.getItem('library');
   let localData = JSON.parse(data);
   localData.forEach(function(book) {
     myLibrary.push(book);
@@ -147,11 +152,34 @@ function retrieveFromLocalStorage() {
 
 function updateLocalStorage() {
   // clear localStorage
-  storage.clear();
+  window.localStorage.clear();
   // repopulate
   saveToLocalStorage();
 }
 
+function storageAvailable(type) {
+  try {
+    var storage = window[type],
+        x = '__storage_test__';
+    storage.setItem(x, x);
+    storage.removeItem(x);
+    return true;
+  }
+  catch(e) {
+    return e instanceof DOMException && (
+      // everything except Firefox
+      e.code === 22 ||
+      // Firefox
+      e.code === 1014 ||
+      // test name field too, because code might not be present
+      // everything except Firefox
+      e.name === 'QuotaExceededError' ||
+      // Firefox
+      e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
+      // acknowledge QuotaExceededError only if there's something already stored
+      storage.length !== 0;
+  }
+}
 // ============== render functions ============================================
 function render() {
   clearBookList();
@@ -176,7 +204,11 @@ function render() {
       setReadStatusButtonColor(book);
     });
   }
-  updateLocalStorage();
+
+  if (storageAvailable('localStorage')) {
+    updateLocalStorage();
+  }
+
 }
 
 function addEntryText(elements, book, context) {
