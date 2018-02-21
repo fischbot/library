@@ -19,6 +19,7 @@ let asc = {
   hasRead : true,
 }
 
+// Book constructor
 function Book(title, authors, publishedDate, description, imgUrl, pageCount, id, hasRead) {
   this.title = title || 'title unavailable';
   this.authors = authors || '[unavailable]';
@@ -306,11 +307,7 @@ function createHtmlElementsForEntry(context) {
   return elements;
 }
 
-// ============================================================================
-
-
-
-// ============== clickHandler ================================================
+// ============== Handlers ====================================================
 function clickHandler(e) {
   let elementClicked = e.target;
   switch(elementClicked.id) {
