@@ -1,8 +1,8 @@
 /* global $ */
 
 'use strict'
-var myLibrary = [];
-var results = [];
+let myLibrary = [];
+let results = [];
 const addBookBtn = document.getElementById('add-book-btn');
 const modal = document.getElementById('modal');
 const closeModalBtn = document.getElementById('close-modal-btn');
