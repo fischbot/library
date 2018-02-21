@@ -52,7 +52,7 @@ function titleAndAuthorSort(prop) {
       valueA = a[prop].toUpperCase();       // ignore case
       valueB = b[prop].toUpperCase();
     }
-
+    // TODO fix - not sorting correctly
     if (prop === 'authors') {                   // uses first author if there is more than 1
       if (Array.isArray(a[prop])) {
         valueA = a[prop][0].toUpperCase();    // ignore case
