@@ -33,7 +33,6 @@ function Book(title, authors, publishedDate, description, imgUrl, pageCount, id,
 window.addEventListener('load', function() {
     render();
     document.addEventListener('click', clickHandler, false);
-
 }, false);
 
 function addBookToLibrary(book) {
@@ -254,7 +253,6 @@ function createHtmlElementsForEntry(context) {
 // ============== clickHandler ================================================
 function clickHandler(e) {
   let elementClicked = e.target;
-
   switch(elementClicked.id) {
     case ('open-search-modal-btn') :
       toggleModal();
@@ -276,7 +274,6 @@ function clickHandler(e) {
       render();
       break;
     case ('sort-by-author'):
-
       titleAndAuthorSort('authors');
       render();
       break;
@@ -294,30 +291,39 @@ function clickHandler(e) {
       break;
   }
 
-  // Read and Delete Buttons
   if (elementClicked.classList.contains('read-btn')) {
-    // get the parent element of the button clicked and use the ID to match
-    // the entry in myLibrary
     let entry = elementClicked.parentNode;
     elementClicked.innerText = toggleRead(entry);
   } else if (elementClicked.classList.contains('del-btn')) {
-    let bookId = elementClicked.parentNode.id;
-    let entryToRemove = document.getElementById(`${bookId}`);
-    let indexOfEntry = myLibrary.findIndex(function(i) {
-      return i.id == bookId;
-    });
-    bookList.removeChild(entryToRemove);
-    myLibrary.splice(indexOfEntry,1);
-    render();
+    delBtnHandler(elementClicked);
   } else if (elementClicked.classList.contains('add-to-library-btn')) {
-    // add book to library
-    let elementClickedId = e.target.id;
-    storeSelectedBook(elementClickedId);
-    delete results[elementClickedId].searchId;
-    toggleModal();
-    togglePageOverlay();
-    clearSearches();
-    render();
+    addToLibraryBtnHandler(elementClicked);
+  }
+}
+
+function delBtnHandler(elementClicked) {
+  // delete book from library and remove it from bookList
+  let bookId = elementClicked.parentNode.id;
+  let entryToRemove = document.getElementById(`${bookId}`);
+  let indexOfEntry = myLibrary.findIndex(function(i) {
+    return i.id == bookId;
+  });
+  bookList.removeChild(entryToRemove);
+  myLibrary.splice(indexOfEntry,1);
+  render();
+}
+
+function addToLibraryBtnHandler(elementClicked) {
+  // add book from search results to library
+  let elementClickedId = elementClicked.id;
+  storeSelectedBook(elementClickedId);
+  delete results[elementClickedId].searchId;
+  toggleModal();
+  togglePageOverlay();
+  clearSearches();
+  render();
+}
+
 // ============== Toggle functions ============================================
 function toggleRead(entry) {
   let text = '';
@@ -338,7 +344,6 @@ function toggleRead(entry) {
   }
   return text;
 }
-// ============== END clickHandler ============================================
 
 function togglePageOverlay() {
   let overlayPlaceholder = document.querySelector('.overlay-placeholder');
