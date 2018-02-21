@@ -9,9 +9,9 @@ const closeModalBtn = document.getElementById('close-modal-btn');
 const bookList = document.getElementById('book-list');
 const sort = document.getElementById('sort');
 let entryId = 0;
-
-// used for sorting ascending/descending (always start in ascending on page load)
 let asc = {
+  // used for sorting ascending/descending
+  // (always start in ascending on page load)
   title : true,
   pageCount : true,
   authors : true,
@@ -382,7 +382,6 @@ function clearSearches() {
 
 // TODO split up into multiple functions
 function runSearch() {
-  // let search = $('#books').val();
   let search = document.getElementById('books').value;
     if (search === '') {
       // TODO
