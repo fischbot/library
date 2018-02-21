@@ -123,26 +123,6 @@ function setReadStatusButtonColor(book) {
   }
 }
 
-function toggleRead(entry) {
-  let text = '';
-  // find the book with the ID that matches the entry ID
-  let indexOfEntry = myLibrary.findIndex(function(i) {
-    return i.id == entry.id;
-  });
-  let book = myLibrary[indexOfEntry];
-
-  book.hasRead = !book.hasRead;
-
-  if (book.hasRead) {
-    text = 'Read';
-    entry.lastElementChild.classList.add('read');
-  } else {
-    text = 'Not Read';
-    entry.lastElementChild.classList.remove('read');
-  }
-
-  return text;
-}
 // ============== render functions ============================================
 function render() {
   clearBookList();
@@ -266,13 +246,10 @@ function createHtmlElementsForEntry(context) {
 }
 
 // ============================================================================
-function toggleModal() {
-  if (modal.classList.contains('hidden')) {
-    modal.classList.remove('hidden');
-  } else {
-    modal.classList.add('hidden');
-  }
-}
+
+
+
+
 
 // ============== clickHandler ================================================
 function clickHandler(e) {
@@ -341,7 +318,25 @@ function clickHandler(e) {
     togglePageOverlay();
     clearSearches();
     render();
+// ============== Toggle functions ============================================
+function toggleRead(entry) {
+  let text = '';
+  // find the book with the ID that matches the entry ID
+  let indexOfEntry = myLibrary.findIndex(function(i) {
+    return i.id == entry.id;
+  });
+  let book = myLibrary[indexOfEntry];
+
+  book.hasRead = !book.hasRead;
+
+  if (book.hasRead) {
+    text = 'Read';
+    entry.lastElementChild.classList.add('read');
+  } else {
+    text = 'Not Read';
+    entry.lastElementChild.classList.remove('read');
   }
+  return text;
 }
 // ============== END clickHandler ============================================
 
@@ -353,6 +348,14 @@ function togglePageOverlay() {
     overlayPlaceholder.id = 'overlay';
   }
 
+}
+
+function toggleModal() {
+  if (modal.classList.contains('hidden')) {
+    modal.classList.remove('hidden');
+  } else {
+    modal.classList.add('hidden');
+  }
 }
 
 // ============== Clearing Functions ==========================================
