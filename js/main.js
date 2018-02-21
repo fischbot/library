@@ -3,6 +3,7 @@
 'use strict'
 let myLibrary = [];
 let results = [];
+let storage = window.localStorage;
 const addBookBtn = document.getElementById('add-book-btn');
 const modal = document.getElementById('modal');
 const closeModalBtn = document.getElementById('close-modal-btn');
@@ -31,6 +32,14 @@ function Book(title, authors, publishedDate, description, imgUrl, pageCount, id,
 }
 
 window.addEventListener('load', function() {
+    if (storage.getItem('library') !== undefined) {
+      // if the library is empty, add sample data
+      // this is so the user can see how the app is supposed to look
+      populateSampleData();
+    } else {
+      // get the stored data
+      retrieveFromLocalStorage();
+    }
     render();
     document.addEventListener('click', clickHandler, false);
 }, false);
@@ -122,6 +131,27 @@ function setReadStatusButtonColor(book) {
   }
 }
 
+// ============== Storage functions ============================================
+function saveToLocalStorage() {
+  let lib = JSON.stringify(myLibrary);
+  localStorage.setItem('library', lib);
+}
+
+function retrieveFromLocalStorage() {
+  let data = localStorage.getItem('library');
+  let localData = JSON.parse(data);
+  localData.forEach(function(book) {
+    myLibrary.push(book);
+  });
+}
+
+function updateLocalStorage() {
+  // clear localStorage
+  storage.clear();
+  // repopulate
+  saveToLocalStorage();
+}
+
 // ============== render functions ============================================
 function render() {
   clearBookList();
@@ -146,7 +176,7 @@ function render() {
       setReadStatusButtonColor(book);
     });
   }
-
+  updateLocalStorage();
 }
 
 function addEntryText(elements, book, context) {
@@ -245,8 +275,6 @@ function createHtmlElementsForEntry(context) {
 }
 
 // ============================================================================
-
-
 
 
 
