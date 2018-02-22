@@ -403,13 +403,14 @@ function toggleRead(entry) {
 }
 
 function togglePageOverlay() {
-  let overlayPlaceholder = document.querySelector('.overlay-placeholder');
-  if (overlayPlaceholder.id === 'overlay') {
-    overlayPlaceholder.removeAttribute('id');
+  let page = document.getElementById('page');
+  if (document.getElementById('overlay')) {
+    page.removeChild(document.getElementById('overlay'));
   } else {
-    overlayPlaceholder.id = 'overlay';
+    let overlay = document.createElement('div');
+    page.appendChild(overlay);
+    overlay.id = 'overlay';
   }
-
 }
 
 function toggleModal() {
