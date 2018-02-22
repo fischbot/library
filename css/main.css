@@ -139,12 +139,9 @@ button {
 .read-btn {
   width: 100%;
   font-size: 1.4em;
-  /* background: #4D514F; */
   background: #1ABDBF;
   color: #fff;
-  display: block;
-  position: absolute;
-  bottom: 0;
+  grid-column: 1 / -1;
 }
 
 .read {
@@ -259,12 +256,14 @@ button {
 }
 
 #search-input-container {
-  width: 100%;
+  width: 70%;
   max-width: 600px;
   margin: 0 auto;
-  border: 3px solid #eee;
-  display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-content: center;
+  display: grid;
+  grid-template-columns:  1fr;
+  grid-template-rows: 1fr 1fr;
 }
 
 input[type="search"] {
@@ -287,20 +286,20 @@ input[type="search"] {
 /* ============= Library Entries ========================= */
 #book-list,
 #search-results {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 5px;
+  margin: 0 2%;
 }
 
 .entry,
  .search-result-item {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   position: relative;
   height: 400px;
-  width: 278px;
-  margin: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 3fr 30px;
+  grid-template-rows: 60px auto auto auto 1fr auto;
+  grid-row-gap: 10px;
 }
 
 .entry {
@@ -314,20 +313,29 @@ input[type="search"] {
 
 .entry h2,
 .search-result-item h2 {
-  overflow: hidden;
-  height: 68px;
   background: #7A7F7F;
   color: #fff;
   text-align: center;
   margin: 0;
-  padding: 10px;
+  padding-right: 20px;
+  font-size: 1.25em;
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
 }
 
 .entry h3,
 .search-result-item h3 {
-  padding: 5px 10px;
+  font-size: 1.14em;
+  padding: 0 10px;
   margin: 5px 0;
   text-align: right;
+  grid-column: 1 / -1;
+}
+
 .entry img {
   height: auto;
   width: 100px;
@@ -339,18 +347,25 @@ input[type="search"] {
 
 .entry p,
 .search-result-item p {
-  padding: 3px 10px;
   margin: 0;
-  text-align: center;
+  grid-column: 3 / span 2;
+
 }
 
-.entry p:last-of-type,
-.search-result-item p:last-of-type {
-  text-align: left;
-  padding: 10px;
+p.entry-publish-date {
+  align-self: end;
+}
+
+p.entry-publish-date,
+p.entry-page-count {
+  justify-self: center;
+}
+
+p.entry-description {
+  padding: 0 10px;
   line-height: 1.4em;
   overflow-y: scroll;
-  font-size: 12px;
+  grid-column: 1 / -1;
 }
 
 footer {
