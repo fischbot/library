@@ -201,7 +201,7 @@ function render() {
 
       appendEntries(elements, 'render');
       addEntryText(elements, book, 'render');
-
+      addClassesToElements(elements, 'render');
       setReadStatusButtonColor(book);
     });
   }
@@ -278,8 +278,16 @@ function createButton(className, innerText) {
 }
 
 function addClassesToElements(elements, context) {
-  elements.addToLibraryBtn.classList.add('add-to-library-btn');
-  elements.searchResultItem.classList.add('search-result-item');
+
+  if (context === 'search') {
+    console.log(elements);
+    elements.addToLibraryBtn.classList.add('add-to-library-btn');
+    elements.searchResultItem.classList.add('search-result-item');
+  }
+
+  elements.entryDate.classList.add('entry-publish-date');
+  elements.entryPageCount.classList.add('entry-page-count');
+  elements.entryDescription.classList.add('entry-description');
 }
 
 function createHtmlElementsForEntry(context) {
@@ -458,9 +466,6 @@ function runSearch() {
         response.items.forEach(function(item, index) {
           let book = new Book();
           const elements = createHtmlElementsForEntry('search');
-          addClassesToElements(elements, 'search');
-
-          elements.addToLibraryBtn.innerText = 'Add to Library';
 
           setBookSearchResult(book, item, index);
           elements.searchResultItem.id = book.searchId;
@@ -471,9 +476,9 @@ function runSearch() {
           }
 
           appendEntries(elements, 'search');
-
+          addClassesToElements(elements, 'search');
           elements.addToLibraryBtn.id = book.searchId;
-
+          elements.addToLibraryBtn.innerText = 'Add to Library';
           addEntryText(elements, book, 'search');
         });
       });
