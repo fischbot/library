@@ -20,6 +20,17 @@ input[type="search"]::-webkit-search-results-button,
 input[type="search"]::-webkit-search-results-decoration {
   display: none;
 }
+
+ul {
+
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
+  display: inline;
+}
+
 #page {
   /* display: flex;
   flex-direction: column;
@@ -105,16 +116,6 @@ nav ul {
 nav h2 {
   color: #222;
   margin-right: 10px;
-}
-
-nav ul {
-
-  padding: 0;
-}
-
-nav li {
-  list-style-type: none;
-  display: inline;
 }
 
 /* ============= Buttons ================================= */
