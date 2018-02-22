@@ -144,8 +144,17 @@ button {
   grid-column: 1 / -1;
 }
 
+.read-btn:hover {
+  background: #15A8AC;
+}
+
+/* read must be after .read-btn */
 .read {
     background: #70BF80;
+}
+
+.read:hover {
+  background: #6BAE7C;
 }
 
 #open-search-modal-btn,
