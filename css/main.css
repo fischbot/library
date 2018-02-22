@@ -90,15 +90,21 @@ nav {
 }
 
 nav {
-  background: #f6f6e4;
-  border-bottom: 2px solid #e9e9b7;
+  background: #e2efd8;
 }
 
-nav .container {
+/* nav:hover {
+  background: #C5D3C0;
+} */
+
+nav .container,
+#sort .container {
   display: flex;
   justify-content: center;
   padding: 5px 0;
   align-items: center;
+  padding: 0 1%;
+  font-size: 0.875em;
 }
 
 nav h1,
@@ -106,7 +112,8 @@ nav ul {
   margin: 0;
 }
 
-nav h2 {
+nav h2,
+#sort h2 {
   color: #222;
   margin-right: 10px;
 }
@@ -203,23 +210,30 @@ button {
 }
 
 #sort button {
+#sort button,
+#open-search-modal-btn,
+#open-form-modal-btn {
   background: #eee;
   border: 1px solid #B5B9BD;
   color: #999EA5;
   margin: 5px 10px;
 }
 
-#sort button:hover {
+#sort button:hover,
+#open-search-modal-btn:hover,
+#open-form-modal-btn:hover {
   color: #474c53;
 }
 
-/* ============= Search  ============================= */
+/* ============= Sort  ============================= */
 #sort {
-  padding: 30px 0 15px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  background: #F7F7E7;
+  border-bottom: 3px solid #e9e9b7;
 }
+
+/* #sort:hover {
+  background: #E1E2D7;
+} */
 
 /* ============= Search  ============================= */
 #overlay {
