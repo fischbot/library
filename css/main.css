@@ -32,9 +32,6 @@ li {
 }
 
 #page {
-  /* display: flex;
-  flex-direction: column;
-  justify-content: space-between; */
   height: 100vh;
   width: 100%;
   position: relative;
@@ -129,16 +126,15 @@ button {
 }
 
 #submit-btn {
-  /*background: #1F558E;*/
   display: block;
   width: 100%;
   background: #127A7F;
 }
 
 #submit-btn:hover {
-  /*background: #0E2B4B;*/
   background: #0B4D50;
 }
+
 
 .read-btn {
   width: 100%;
@@ -163,10 +159,8 @@ button {
   color: #808080;
   border-bottom: 4px double #808080;
 }
-
 #open-search-modal-btn:hover,
 #open-form-modal-btn:hover {
-  /* color: #70BF80; */
   border-bottom: 4px double #70BF80;
 }
 
@@ -251,13 +245,10 @@ button {
 #modal {
   position: absolute;
   top: 7%;
-  /* overflow: auto; */
   width: 100%;
   max-width: 1200px;
   border: 3px solid #eee;
-  /* margin-top: 5%; /* temporary before I center modal in viewport*/ */
   position: relative;
-  /* padding:10px; */
   z-index: 9999;
   background: #fff;
 }
@@ -315,7 +306,6 @@ input[type="search"] {
 .entry {
   border: 3px solid #7A7F7F;
   background: #f6f6e4;
-  /* width: 379px; */
 }
 
 .entry:hover {
