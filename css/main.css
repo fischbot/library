@@ -396,3 +396,53 @@ footer a:hover {
   color: #2B4B81;
   font-weight: bold;
 }
+
+
+
+@media screen and (min-width: 578px) {
+  h1 {
+    font-size: 4em;
+  }
+  nav .container {
+    font-size: 1em;
+  }
+
+  .entry img {
+    width: 70px;
+  }
+
+  p.entry-description {
+    font-size: 12px;
+  }
+
+  #search-input-container {
+    grid-template-columns:  1fr 17%;
+    grid-template-rows: 1fr;
+  }
+
+  #search-btn {
+    height: 30px;
+    padding: 0;
+  }
+
+  #book-list,
+  #search-results {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  #book-list,
+  #search-results {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  #book-list,
+  #search-results {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    margin: 0;
+  }
+}
