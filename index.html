@@ -27,15 +27,28 @@
                     <button id="open-search-modal-btn">Search</button>
                   </li>
                   <li>
-                    <button id="open-form-modal-btn">+ Add Your Own</button>
+                    <button id="open-form-modal-btn">Add Your Own</button>
                   </li>
                 </ul>
               </div>
             </nav>
+
+            <div id="sort">
+              <div class="container">
+                <h2>Sort by:</h2>
+                <ul>
+                  <li><button id="sort-by-title">Title</button></li>
+                  <!-- <li><button id="sort-by-author">Sort by Author</button></li> -->
+                  <li><button  id="sort-by-pages">Pages</button></li>
+                  <li><button id="sort-by-recent">Recent</button></li>
+                  <li><button id="sort-by-read">Read/Not Read</button></li>
+                </ul>
+              </div>
+            </div>
           </header>
 
             <div class="main-container">
-              <div class="overlay-placeholder"></div> <!-- TODO do this with JS? -->
+
               <div id="modal" class="hidden">
                 <header>
                   <button id="close-modal-btn">X</button>
@@ -46,14 +59,6 @@
                 </header>
                 <div id="search-results"></div>
               </div><!-- /#modal -->
-
-              <div id="sort">
-                <button id="sort-by-title">Sort by Title</button>
-                <!-- <button id="sort-by-author">Sort by Author</button> -->
-                <button  id="sort-by-pages">Sort by Pages</button>
-                <button id="sort-by-recent">Sort by Recent</button>
-                <button id="sort-by-read">Sort by Read/Not Read</button>
-              </div>
 
               <div id="book-list"></div>
 
