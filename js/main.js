@@ -177,8 +177,11 @@ function retrieveFromLocalStorage() {
 function updateLocalStorage() {
   // clear localStorage
   window.localStorage.clear();
-  // repopulate
-  saveToLocalStorage();
+  // repopulate if there's something in the library
+  if (myLibrary.length !== 0) {
+    saveToLocalStorage();
+  }
+
 }
 
 function storageAvailable(type) {
