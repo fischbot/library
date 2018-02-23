@@ -234,18 +234,22 @@ function clickHandler(e) {
   let elementClicked = e.target;
   switch(elementClicked.id) {
     case ('open-search-modal-btn') :
-      toggleModalAndOverlay();
+      toggleModalAndOverlay('#search-modal');
       break;
-    case ('close-modal-btn') :
-      toggleModalAndOverlay();
+    case ('close-search-modal-btn') :
+      toggleModalAndOverlay('#search-modal');
       clearSearches();
       break;
     case ('search-btn') :
       runSearch();
       clearSearches();
       break;
-    case ('add-your-own-book-btn') :
-      toggleModalAndOverlay();
+    case ('open-form-modal-btn') :
+      toggleModalAndOverlay('#add-own-book-modal');
+      break;
+    case ('close-add-own-modal-btn') :
+      toggleModalAndOverlay('#add-own-book-modal');
+      clearInputs();
       break;
     case ('sort-by-title'):
       titleAndAuthorSort('title');
@@ -300,15 +304,15 @@ function addToLibraryBtnHandler(elementClicked) {
   let elementClickedId = elementClicked.id;
   storeSelectedBook(elementClickedId);
   delete results[elementClickedId].searchId;
-  toggleModalAndOverlay();
+  toggleModalAndOverlay('#search-modal');
   clearSearches();
   render();
 }
 
 
 // ============== Toggle functions ============================================
-function toggleModalAndOverlay() {
-  toggleModal();
+function toggleModalAndOverlay(modalId) {
+  toggleModal(modalId);
   togglePageOverlay();
 }
 
@@ -343,7 +347,8 @@ function togglePageOverlay() {
   }
 }
 
-function toggleModal() {
+function toggleModal(modalId) {
+  let modal = retrieveDomElement(`${modalId}`);
   if (modal.classList.contains('hidden')) {
     modal.classList.remove('hidden');
   } else {
