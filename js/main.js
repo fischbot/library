@@ -195,7 +195,7 @@ function render() {
       sort.classList.remove('hidden');
     }
     myLibrary.forEach( function(book) {
-      const elements = createHtmlElementsForEntry('render');
+      const elements = createHtmlElementsForEntryAndSearchResults('render');
       elements.entry.id = book.id;
       elements.entry.classList.add('entry');
 
@@ -316,7 +316,7 @@ function createHtmlElement(elementType, classNameOrId, specifyClassOrId) {
   elements.entryDescription.classList.add('entry-description');
 }
 
-function createHtmlElementsForEntry(context) {
+function createHtmlElementsForEntryAndSearchResults(context) {
   let elements = {};
 
   if (context === 'render') {
@@ -491,7 +491,7 @@ function runSearch() {
       $.get('https://www.googleapis.com/books/v1/volumes?q=' + search, function(response) {
         response.items.forEach(function(item, index) {
           let book = new Book();
-          const elements = createHtmlElementsForEntry('search');
+          const elements = createHtmlElementsForEntryAndSearchResults('search');
 
           setBookSearchResult(book, item, index);
           elements.searchResultItem.id = book.searchId;
