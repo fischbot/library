@@ -186,8 +186,9 @@ function render() {
 
   if (myLibrary.length === 0) {
     // if there are no books in library/ all books have been deleted
-    bookList.innerText = 'Your library is empty!'; // TODO needs better solution
+    emptyMsg();
     sort.classList.add('hidden');
+
   } else {
     if (sort.classList.contains('hidden')) {
       // display sorting bar if there are book entries in the library
@@ -208,6 +209,12 @@ function render() {
     updateLocalStorage();
   }
 
+}
+
+function emptyMsg() {
+  let emptyLibraryMsg = createHtmlElement('h2', 'empty-library-msg', 'id');
+  emptyLibraryMsg.innerText = 'Your library is empty!';
+  appendChildToParent('#book-list', emptyLibraryMsg);
 }
 
 function addEntryText(elements, book, context) {
