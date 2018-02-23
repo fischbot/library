@@ -305,29 +305,32 @@ function createHtmlElement(elementType, classNameOrId, specifyClassOrId) {
     }
   }
 
+  return element;
 }
 
+// returns an object of elements for search or render
 function createHtmlElementsForEntryAndSearchResults(context) {
   let elements = {};
-
+  let prefix;
   if (context === 'render') {
     elements.delBtn = createButton('del-btn', '-');
     elements.readBtn = createButton('read-btn', '');
-    elements.entry = document.createElement('div');
+    elements.entry = createHtmlElement('div', 'entry', 'class');
+    prefix = 'entry-';
   }
 
   if (context === 'search') {
-    elements.addToLibraryBtn = document.createElement('button');
-    elements.searchResults = document.getElementById('search-results');
-    elements.searchResultItem = document.createElement('div');
+    elements.addToLibraryBtn = createHtmlElement('button', 'add-to-library-btn', 'class');
+    elements.searchResultItem = createHtmlElement('div', 'search-result-item', 'class');
+    prefix = 'search-result-';
   }
 
-  elements.img  = document.createElement('img');
-  elements.entryTitle = document.createElement('h2');
-  elements.entryAuthor = document.createElement('h3');
-  elements.entryDate = document.createElement('p');
-  elements.entryPageCount = document.createElement('p');
-  elements.entryDescription = document.createElement('p');
+  elements.img = createHtmlElement('img', prefix + 'img', 'class');
+  elements.entryTitle = createHtmlElement('h2', prefix +  'title', 'class');
+  elements.entryAuthor = createHtmlElement('h3', prefix + 'author', 'class');
+  elements.entryDate = createHtmlElement('p', prefix + 'publish-date', 'class');
+  elements.entryPageCount = createHtmlElement('p', prefix + 'page-count', 'class');
+  elements.entryDescription = createHtmlElement('p', prefix + 'description', 'class');
 
   return elements;
 }
