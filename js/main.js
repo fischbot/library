@@ -126,11 +126,9 @@ function readIdAndPageSort(prop) {
   asc[prop] = !asc[prop];
 }
 
-// TODO DRY UP if possible - compare with toggleRead()
 function setReadStatusButtonColor(book) {
   let entry = document.getElementById(`${book.id}`);
   if (book.hasRead) {
-    // TODO get entry that matches book id
     entry.lastElementChild.classList.add('read');
   } else {
     entry.lastElementChild.classList.remove('read');
@@ -480,7 +478,7 @@ function runSearch() {
     if (search === '') {
       // TODO
       console.log('Enter a book to search for');
-      alert('Enter a book to search for'); // TODO temporary notification
+      alert('Enter a book to search for');
     } else {
       $.get('https://www.googleapis.com/books/v1/volumes?q=' + search, function(response) {
         response.items.forEach(function(item, index) {
@@ -505,6 +503,7 @@ function runSearch() {
     }
 }
 
+// Store book info retrieved from API into book object
 function setBookSearchResult(book, item, index) {
   book.searchId = index;
   book.title = item.volumeInfo.title || '[unavailable]';
@@ -519,7 +518,7 @@ function setBookSearchResult(book, item, index) {
   }
 }
 
-// Store the book selected by the user in the user's library
+// Store the book obj selected by the user in the user's library
 function storeSelectedBook(id) { // id == book.searchId
   // TODO find index of id in results
   let index = results.findIndex(function(i) {
@@ -533,8 +532,8 @@ function storeSelectedBook(id) { // id == book.searchId
   render();
 }
 
+// change http to https
 function fixImgUrl(url){
-  // change http to https
   let strArray = url.split(':')
   return strArray[0] + 's:' + strArray[1];
 }
