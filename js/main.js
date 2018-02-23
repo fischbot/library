@@ -70,6 +70,19 @@ function setId() {
   return entryId++;
 }
 
+// returns a value 1 greater than the highest number ID value
+// used to assign IDs to books added from 'search' and 'add your own' form
+// fixes the error of multiple books ending up with the same ID, which
+// was occuring when using setId()
+function findHighestIdValue() {
+  let temp = myLibrary.slice();
+  temp.sort(function(a, b) {
+    return b.id - a.id;
+  });
+  let value = parseInt(temp[0].id);
+  return value + 1;
+}
+
 // ============== Sort functions ==============================================
 function titleAndAuthorSort(prop) {
   myLibrary.sort(function(a, b) {
@@ -445,7 +458,7 @@ function storeSelectedBook(id) { // id == book.searchId
     return i.searchId == id;
   });
 
-  results[index].id = setId();
+  results[index].id = findHighestIdValue();
 
   addBookToLibrary(results[index]);
   clearInputs(); // TODO clear search box
@@ -467,7 +480,7 @@ function storeFormData() {
   book.description = document.getElementById('add-own-description').value || '[description unavailable]';
   book.pageCount = document.getElementById('add-own-page-count').value || '[unavailable]';
   book.imgUrl = document.getElementById('add-own-img').value;
-  book.id = setId();
+  book.id = findHighestIdValue();
   addBookToLibrary(book);
   render();
 }
