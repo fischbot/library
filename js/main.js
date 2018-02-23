@@ -245,7 +245,7 @@ function appendEntries(elements, context) {
 
   if (context === 'search') {
     property = 'searchResultItem';
-    appendChildToParent('search-results', elements.searchResultItem);
+    appendChildToParent('#search-results', elements.searchResultItem);
   }
 
   elements[property].appendChild(elements.entryTitle);
@@ -276,21 +276,14 @@ function createButton(className, innerText) {
 }
 
 function appendChildToParent(parentIdTagOrClassName, child) {
-  let parent;
-  if (document.getElementById(`${parentIdTagOrClassName}`)) {
-    // id
-    parent = document.getElementById(`${parentIdTagOrClassName}`);
-  } else { // class or tag
-    if (document.querySelector('.' + `${parentIdTagOrClassName}`)) {
-      // class
-      parentIdTagOrClassName = '.' + parentIdTagOrClassName;
-      parent = document.querySelector(`${parentIdTagOrClassName}`);
-    } else {
-      // tag
-      parent = document.querySelector(`${parentIdTagOrClassName}`);
-    }
+  let parent = document.querySelector(`${parentIdTagOrClassName}`);
+  if (parent !== null) {
+    parent.appendChild(child);
+  } else {
+    // TODO proper error handling
+    console.error(`Cannot append ${child} to ${parent}`);
   }
-  parent.appendChild(child);
+
 }
 
 // returns a single html element with the provided class or id
