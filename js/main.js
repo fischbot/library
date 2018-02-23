@@ -320,10 +320,6 @@ function delBtnHandler(elementClicked) {
   bookList.removeChild(entryToRemove);
   myLibrary.splice(indexOfEntry,1);
   render();
-
-  if (myLibrary === 0) {
-    window.localStorage.clear();
-  }
 }
 
 function addToLibraryBtnHandler(elementClicked) {
@@ -456,7 +452,6 @@ function setBookSearchResult(book, item, index) {
 
 // Store the book obj selected by the user in the user's library
 function storeSelectedBook(id) { // id == book.searchId
-  // TODO find index of id in results
   let index = results.findIndex(function(i) {
     return i.searchId == id;
   });
