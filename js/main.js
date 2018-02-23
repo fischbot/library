@@ -33,7 +33,8 @@ function Book(title, authors, publishedDate, description, imgUrl, pageCount, id,
 
 window.addEventListener('load', function() {
     if (storageAvailable('localStorage')) {
-      if (!window.localStorage.getItem('library')) {
+      if (window.localStorage.library === undefined ||
+          window.localStorage.library === '[]') {
         // if the library is empty, add sample data
         // this is so the user can see how the app is supposed to look
         populateSampleData();
@@ -555,7 +556,7 @@ function populateSampleData() {
 
   const nineteen84 = new Book('1984', 'George Orwell', 2008, '', '',  325, setId(), true);
 
-  const got = new Book('A Game of Thrones 4-Book Bundle', '2011-03-22', 'George R. R. Martin', 'George R. R. Martin\'s A Song of Ice and Fire series has become, in many ways, the gold standard for modern epic fantasy. Martin—dubbed the "American Tolkien" by Time magazine—has created a world that is as rich and vital as any piece of historical fiction, set in an age of knights and chivalry and filled with a plethora of fascinating, multidimensional characters that you love, hate to love, or love to hate as they struggle for control of a divided kingdom. It is this very vitality that has led it to be adapted as the HBO miniseries “Game of Thrones.” This bundle includes the following novels: A GAME OF THRONES A CLASH OF KINGS A STORM OF SWORDS A FEAST FOR CROWS', 'https://books.google.com/books/content?id=mA8A4BYWB1IC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', 3264, setId(), false);
+  const got = new Book('A Game of Thrones 4-Book Bundle', 'George R. R. Martin', '2011-03-22', 'George R. R. Martin\'s A Song of Ice and Fire series has become, in many ways, the gold standard for modern epic fantasy. Martin—dubbed the "American Tolkien" by Time magazine—has created a world that is as rich and vital as any piece of historical fiction, set in an age of knights and chivalry and filled with a plethora of fascinating, multidimensional characters that you love, hate to love, or love to hate as they struggle for control of a divided kingdom. It is this very vitality that has led it to be adapted as the HBO miniseries “Game of Thrones.” This bundle includes the following novels: A GAME OF THRONES A CLASH OF KINGS A STORM OF SWORDS A FEAST FOR CROWS', 'https://books.google.com/books/content?id=mA8A4BYWB1IC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', 3264, setId(), false);
 
   myLibrary.push(hobbit);
   myLibrary.push(fotr);
