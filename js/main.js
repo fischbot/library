@@ -41,24 +41,25 @@ function initializeDomElements() {
 }
 
 window.addEventListener('load', function() {
-    if (storageAvailable('localStorage')) {
-      if (window.localStorage.library === undefined ||
-          window.localStorage.library === '[]') {
-        // if the library is empty, add sample data
-        // this is so the user can see how the app is supposed to look
-        populateSampleData();
-      } else {
-        // get the stored data
-        retrieveFromLocalStorage();
-      }
-    } else {
-      alert('Sorry, localStorage is not available with your browser. ' +
-            'You won\'t be able to save your library. :(');
   initializeDomElements();
+  if (storageAvailable('localStorage')) {
+    if (window.localStorage.library === undefined ||
+        window.localStorage.library === '[]') {
+      // if the library is empty, add sample data
+      // this is so the user can see how the app is supposed to look
       populateSampleData();
+    } else {
+      // get the stored data
+      retrieveFromLocalStorage();
     }
-    render();
-    document.addEventListener('click', clickHandler, false);
+  } else {
+    alert('Sorry, localStorage is not available with your browser. ' +
+          'You won\'t be able to save your library. :(');
+    populateSampleData();
+  }
+
+  render();
+  document.addEventListener('click', clickHandler, false);
 }, false);
 
 function addBookToLibrary(book) {
@@ -457,7 +458,6 @@ function createHtmlElement(elementType, classNameOrId) {
   let value = classNameOrId.slice(1);
   if (classNameOrId !== '') {
     if (classNameOrId[0] === '.') {
-      let className = classNameOrId.slice(1);
       element.classList.add(`${value}`);
     } else {
       element.id = value;
