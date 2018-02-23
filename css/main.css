@@ -139,7 +139,8 @@ button {
   background: #127A7F;
 }
 
-#submit-btn:hover {
+#submit-btn:hover,
+#search-btn:hover {
   background: #0B4D50;
 }
 
