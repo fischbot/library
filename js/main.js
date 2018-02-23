@@ -4,7 +4,7 @@
 let myLibrary = [];
 let results = [];
 let addBookBtn,
-    modal,
+    // modal,
     closeModalBtn,
     bookList,
     sort;
@@ -33,7 +33,7 @@ function Book(title, authors, publishedDate, description, imgUrl, pageCount, id,
 
 function initializeDomElements() {
   addBookBtn = retrieveDomElement('#add-book-btn');
-  modal = retrieveDomElement('#modal');
+  // modal = retrieveDomElement('#modal');
   closeModalBtn = retrieveDomElement('#close-search-modal-btn');
   bookList = retrieveDomElement('#book-list');
   sort = retrieveDomElement('#sort');
