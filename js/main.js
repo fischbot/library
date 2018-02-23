@@ -3,11 +3,11 @@
 'use strict'
 let myLibrary = [];
 let results = [];
-const addBookBtn = document.getElementById('add-book-btn');
-const modal = document.getElementById('modal');
-const closeModalBtn = document.getElementById('close-modal-btn');
-const bookList = document.getElementById('book-list');
-const sort = document.getElementById('sort');
+let addBookBtn,
+    modal,
+    closeModalBtn,
+    bookList,
+    sort;
 let entryId = 0;
 let asc = {
   // used for sorting ascending/descending
@@ -31,6 +31,15 @@ function Book(title, authors, publishedDate, description, imgUrl, pageCount, id,
   this.hasRead = hasRead || false;
 }
 
+function initializeDomElements() {
+  addBookBtn = retrieveDomElement('#add-book-btn');
+  modal = retrieveDomElement('#modal');
+  closeModalBtn = retrieveDomElement('#close-modal-btn');
+  bookList = retrieveDomElement('#book-list');
+  sort = retrieveDomElement('#sort');
+
+}
+
 window.addEventListener('load', function() {
     if (storageAvailable('localStorage')) {
       if (window.localStorage.library === undefined ||
@@ -45,6 +54,7 @@ window.addEventListener('load', function() {
     } else {
       alert('Sorry, localStorage is not available with your browser. ' +
             'You won\'t be able to save your library. :(');
+  initializeDomElements();
       populateSampleData();
     }
     render();
