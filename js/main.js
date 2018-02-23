@@ -186,8 +186,9 @@ function render() {
 
   if (myLibrary.length === 0) {
     // if there are no books in library/ all books have been deleted
-    bookList.innerText = 'Your library is empty!'; // TODO needs better solution
+    emptyMsg();
     sort.classList.add('hidden');
+
   } else {
     if (sort.classList.contains('hidden')) {
       // display sorting bar if there are book entries in the library
@@ -208,6 +209,12 @@ function render() {
     updateLocalStorage();
   }
 
+}
+
+function emptyMsg() {
+  let emptyLibraryMsg = createHtmlElement('h2', 'empty-library-msg', 'id');
+  emptyLibraryMsg.innerText = 'Your library is empty!';
+  appendChildToParent('#book-list', emptyLibraryMsg);
 }
 
 function addEntryText(elements, book, context) {
@@ -245,7 +252,7 @@ function appendEntries(elements, context) {
 
   if (context === 'search') {
     property = 'searchResultItem';
-    appendChildToParent('search-results', elements.searchResultItem);
+    appendChildToParent('#search-results', elements.searchResultItem);
   }
 
   elements[property].appendChild(elements.entryTitle);
@@ -276,21 +283,14 @@ function createButton(className, innerText) {
 }
 
 function appendChildToParent(parentIdTagOrClassName, child) {
-  let parent;
-  if (document.getElementById(`${parentIdTagOrClassName}`)) {
-    // id
-    parent = document.getElementById(`${parentIdTagOrClassName}`);
-  } else { // class or tag
-    if (document.querySelector('.' + `${parentIdTagOrClassName}`)) {
-      // class
-      parentIdTagOrClassName = '.' + parentIdTagOrClassName;
-      parent = document.querySelector(`${parentIdTagOrClassName}`);
-    } else {
-      // tag
-      parent = document.querySelector(`${parentIdTagOrClassName}`);
-    }
+  let parent = document.querySelector(`${parentIdTagOrClassName}`);
+  if (parent !== null) {
+    parent.appendChild(child);
+  } else {
+    // TODO proper error handling
+    console.error(`Cannot append ${child} to ${parent}`);
   }
-  parent.appendChild(child);
+
 }
 
 // returns a single html element with the provided class or id
@@ -395,6 +395,10 @@ function delBtnHandler(elementClicked) {
   bookList.removeChild(entryToRemove);
   myLibrary.splice(indexOfEntry,1);
   render();
+
+  if (myLibrary === 0) {
+    window.localStorage.clear();
+  }
 }
 
 function addToLibraryBtnHandler(elementClicked) {
