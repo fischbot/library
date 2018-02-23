@@ -126,11 +126,9 @@ function readIdAndPageSort(prop) {
   asc[prop] = !asc[prop];
 }
 
-// TODO DRY UP if possible - compare with toggleRead()
 function setReadStatusButtonColor(book) {
   let entry = document.getElementById(`${book.id}`);
   if (book.hasRead) {
-    // TODO get entry that matches book id
     entry.lastElementChild.classList.add('read');
   } else {
     entry.lastElementChild.classList.remove('read');
@@ -195,13 +193,12 @@ function render() {
       sort.classList.remove('hidden');
     }
     myLibrary.forEach( function(book) {
-      const elements = createHtmlElementsForEntry('render');
+      const elements = createHtmlElementsForEntryAndSearchResults('render');
       elements.entry.id = book.id;
       elements.entry.classList.add('entry');
 
       appendEntries(elements, 'render');
       addEntryText(elements, book, 'render');
-      addClassesToElements(elements, 'render');
       setReadStatusButtonColor(book);
     });
   }
@@ -247,7 +244,7 @@ function appendEntries(elements, context) {
 
   if (context === 'search') {
     property = 'searchResultItem';
-    elements.searchResults.appendChild(elements.searchResultItem);
+    appendChildToParent('search-results', elements.searchResultItem);
   }
 
   elements[property].appendChild(elements.entryTitle);
@@ -277,40 +274,61 @@ function createButton(className, innerText) {
   return button;
 }
 
-function addClassesToElements(elements, context) {
-
-  if (context === 'search') {
-    console.log(elements);
-    elements.addToLibraryBtn.classList.add('add-to-library-btn');
-    elements.searchResultItem.classList.add('search-result-item');
+function appendChildToParent(parentIdTagOrClassName, child) {
+  let parent;
+  if (document.getElementById(`${parentIdTagOrClassName}`)) {
+    // id
+    parent = document.getElementById(`${parentIdTagOrClassName}`);
+  } else { // class or tag
+    if (document.querySelector('.' + `${parentIdTagOrClassName}`)) {
+      // class
+      parentIdTagOrClassName = '.' + parentIdTagOrClassName;
+      parent = document.querySelector(`${parentIdTagOrClassName}`);
+    } else {
+      // tag
+      parent = document.querySelector(`${parentIdTagOrClassName}`);
+    }
   }
-
-  elements.entryDate.classList.add('entry-publish-date');
-  elements.entryPageCount.classList.add('entry-page-count');
-  elements.entryDescription.classList.add('entry-description');
+  parent.appendChild(child);
 }
 
-function createHtmlElementsForEntry(context) {
-  let elements = {};
+// returns a single html element with the provided class or id
+function createHtmlElement(elementType, classNameOrId, specifyClassOrId) {
+  let element = document.createElement(`${elementType}`);
+  if (classNameOrId !== '') {
+    if (specifyClassOrId.toLowerCase() === 'class') {
+      element.classList.add(`${classNameOrId}`);
+    } else {
+      element.id = classNameOrId;
+    }
+  }
 
+  return element;
+}
+
+// returns an object of elements for search or render
+function createHtmlElementsForEntryAndSearchResults(context) {
+  let elements = {};
+  let prefix;
   if (context === 'render') {
     elements.delBtn = createButton('del-btn', '-');
     elements.readBtn = createButton('read-btn', '');
-    elements.entry = document.createElement('div');
+    elements.entry = createHtmlElement('div', 'entry', 'class');
+    prefix = 'entry-';
   }
 
   if (context === 'search') {
-    elements.addToLibraryBtn = document.createElement('button');
-    elements.searchResults = document.getElementById('search-results');
-    elements.searchResultItem = document.createElement('div');
+    elements.addToLibraryBtn = createHtmlElement('button', 'add-to-library-btn', 'class');
+    elements.searchResultItem = createHtmlElement('div', 'search-result-item', 'class');
+    prefix = 'search-result-';
   }
 
-  elements.img  = document.createElement('img');
-  elements.entryTitle = document.createElement('h2');
-  elements.entryAuthor = document.createElement('h3');
-  elements.entryDate = document.createElement('p');
-  elements.entryPageCount = document.createElement('p');
-  elements.entryDescription = document.createElement('p');
+  elements.img = createHtmlElement('img', prefix + 'img', 'class');
+  elements.entryTitle = createHtmlElement('h2', prefix +  'title', 'class');
+  elements.entryAuthor = createHtmlElement('h3', prefix + 'author', 'class');
+  elements.entryDate = createHtmlElement('p', prefix + 'publish-date', 'class');
+  elements.entryPageCount = createHtmlElement('p', prefix + 'page-count', 'class');
+  elements.entryDescription = createHtmlElement('p', prefix + 'description', 'class');
 
   return elements;
 }
@@ -460,12 +478,12 @@ function runSearch() {
     if (search === '') {
       // TODO
       console.log('Enter a book to search for');
-      alert('Enter a book to search for'); // TODO temporary notification
+      alert('Enter a book to search for');
     } else {
       $.get('https://www.googleapis.com/books/v1/volumes?q=' + search, function(response) {
         response.items.forEach(function(item, index) {
           let book = new Book();
-          const elements = createHtmlElementsForEntry('search');
+          const elements = createHtmlElementsForEntryAndSearchResults('search');
 
           setBookSearchResult(book, item, index);
           elements.searchResultItem.id = book.searchId;
@@ -476,7 +494,6 @@ function runSearch() {
           }
 
           appendEntries(elements, 'search');
-          addClassesToElements(elements, 'search');
           elements.addToLibraryBtn.id = book.searchId;
           elements.addToLibraryBtn.innerText = 'Add to Library';
           addEntryText(elements, book, 'search');
@@ -486,6 +503,7 @@ function runSearch() {
     }
 }
 
+// Store book info retrieved from API into book object
 function setBookSearchResult(book, item, index) {
   book.searchId = index;
   book.title = item.volumeInfo.title || '[unavailable]';
@@ -500,7 +518,7 @@ function setBookSearchResult(book, item, index) {
   }
 }
 
-// Store the book selected by the user in the user's library
+// Store the book obj selected by the user in the user's library
 function storeSelectedBook(id) { // id == book.searchId
   // TODO find index of id in results
   let index = results.findIndex(function(i) {
@@ -514,8 +532,8 @@ function storeSelectedBook(id) { // id == book.searchId
   render();
 }
 
+// change http to https
 function fixImgUrl(url){
-  // change http to https
   let strArray = url.split(':')
   return strArray[0] + 's:' + strArray[1];
 }
@@ -534,22 +552,13 @@ function populateSampleData() {
                       'Aenean lacinia bibendum nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum.',
                       '', '', setId(), false
   );
-  const twoTowers = new Book('The Two Towers', 'J.R.R. Tolkien', '',
-                            'Aenean lacinia bibendum nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum.',
-                            '', '', setId(), false);
-  const rotc = new Book('The Return of the King', 'J.R.R. Tolkien', '', '', '', '', setId(), false);
-
-  const prideAndPrejudice = new Book('Pride and Prejudice', 'Jane Austin', 1870, '', 'https://books.google.com/books/content?id=dalDAAAAcAAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', 332, setId(), false);
-
-  const animalFarm = new Book('Animal Farm', 'George Orwell', '', 'George Orwell\’s famous satire of the Soviet Union, in which “all animals are equal but some animals are more equal than others.”', 'https://books.google.com/books/content?id=nkalO3OsoeMC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', 144, setId(), true);
 
   const nineteen84 = new Book('1984', 'George Orwell', 2008, '', '',  325, setId(), true);
 
+  const got = new Book('A Game of Thrones 4-Book Bundle', '2011-03-22', 'George R. R. Martin', 'George R. R. Martin\'s A Song of Ice and Fire series has become, in many ways, the gold standard for modern epic fantasy. Martin—dubbed the "American Tolkien" by Time magazine—has created a world that is as rich and vital as any piece of historical fiction, set in an age of knights and chivalry and filled with a plethora of fascinating, multidimensional characters that you love, hate to love, or love to hate as they struggle for control of a divided kingdom. It is this very vitality that has led it to be adapted as the HBO miniseries “Game of Thrones.” This bundle includes the following novels: A GAME OF THRONES A CLASH OF KINGS A STORM OF SWORDS A FEAST FOR CROWS', 'https://books.google.com/books/content?id=mA8A4BYWB1IC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', 3264, setId(), false);
+
   myLibrary.push(hobbit);
   myLibrary.push(fotr);
-  myLibrary.push(twoTowers);
-  myLibrary.push(rotc);
-  myLibrary.push(prideAndPrejudice);
-  myLibrary.push(animalFarm);
   myLibrary.push(nineteen84);
+  myLibrary.push(got);
 }
