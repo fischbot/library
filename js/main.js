@@ -212,7 +212,7 @@ function render() {
 }
 
 function emptyMsg() {
-  let emptyLibraryMsg = createHtmlElement('h2', 'empty-library-msg', 'id');
+  let emptyLibraryMsg = createHtmlElement('h2', '#empty-library-msg');
   emptyLibraryMsg.innerText = 'Your library is empty!';
   appendChildToParent('#book-list', emptyLibraryMsg);
 }
@@ -294,18 +294,20 @@ function appendChildToParent(parentIdTagOrClassName, child) {
 }
 
 // returns a single html element with the provided class or id
-function createHtmlElement(elementType, classNameOrId, specifyClassOrId) {
+function createHtmlElement(elementType, classNameOrId) {
   let element = document.createElement(`${elementType}`);
+  let value = classNameOrId.slice(1);
   if (classNameOrId !== '') {
-    if (specifyClassOrId.toLowerCase() === 'class') {
-      element.classList.add(`${classNameOrId}`);
+    if (classNameOrId[0] === '.') {
+      let className = classNameOrId.slice(1);
+      element.classList.add(`${value}`);
     } else {
-      element.id = classNameOrId;
+      element.id = value;
     }
   }
-
   return element;
 }
+
 
 // returns an object of elements for search or render
 function createHtmlElementsForEntryAndSearchResults(context) {
@@ -314,22 +316,22 @@ function createHtmlElementsForEntryAndSearchResults(context) {
   if (context === 'render') {
     elements.delBtn = createButton('del-btn', '-');
     elements.readBtn = createButton('read-btn', '');
-    elements.entry = createHtmlElement('div', 'entry', 'class');
+    elements.entry = createHtmlElement('div', '.entry');
     prefix = 'entry-';
   }
 
   if (context === 'search') {
-    elements.addToLibraryBtn = createHtmlElement('button', 'add-to-library-btn', 'class');
-    elements.searchResultItem = createHtmlElement('div', 'search-result-item', 'class');
+    elements.addToLibraryBtn = createHtmlElement('button', '.add-to-library-btn');
+    elements.searchResultItem = createHtmlElement('div', '.search-result-item');
     prefix = 'search-result-';
   }
 
-  elements.img = createHtmlElement('img', prefix + 'img', 'class');
-  elements.entryTitle = createHtmlElement('h2', prefix +  'title', 'class');
-  elements.entryAuthor = createHtmlElement('h3', prefix + 'author', 'class');
-  elements.entryDate = createHtmlElement('p', prefix + 'publish-date', 'class');
-  elements.entryPageCount = createHtmlElement('p', prefix + 'page-count', 'class');
-  elements.entryDescription = createHtmlElement('p', prefix + 'description', 'class');
+  elements.img = createHtmlElement('img', '.' + prefix + 'img');
+  elements.entryTitle = createHtmlElement('h2', '.' + prefix +  'title');
+  elements.entryAuthor = createHtmlElement('h3', '.' + prefix + 'author');
+  elements.entryDate = createHtmlElement('p', '.' + prefix + 'publish-date');
+  elements.entryPageCount = createHtmlElement('p', '.' + prefix + 'page-count');
+  elements.entryDescription = createHtmlElement('p', '.' + prefix + 'description');
 
   return elements;
 }
