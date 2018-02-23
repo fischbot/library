@@ -233,6 +233,7 @@ function emptyMsg() {
 function clickHandler(e) {
   let elementClicked = e.target;
   switch(elementClicked.id) {
+    // Search for book using API =======================================
     case ('open-search-modal-btn') :
       toggleModalAndOverlay('#search-modal');
       break;
@@ -259,6 +260,7 @@ function clickHandler(e) {
       clearInputs();
       toggleModalAndOverlay('#add-own-book-modal');
       break;
+    // Library sorting =================================================
     case ('sort-by-title'):
       titleAndAuthorSort('title');
       render();
@@ -281,6 +283,7 @@ function clickHandler(e) {
       break;
   }
 
+  // Button actions using classes =======================================
   if (elementClicked.classList.contains('read-btn')) {
     let entry = elementClicked.parentNode;
     elementClicked.innerText = toggleRead(entry);
