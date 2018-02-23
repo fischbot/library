@@ -244,7 +244,7 @@ function appendEntries(elements, context) {
 
   if (context === 'search') {
     property = 'searchResultItem';
-    elements.searchResults.appendChild(elements.searchResultItem);
+    appendChildToParent('search-results', elements.searchResultItem);
   }
 
   elements[property].appendChild(elements.entryTitle);
