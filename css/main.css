@@ -189,6 +189,7 @@ button {
 }
 
 #close-search-modal-btn,
+#close-add-own-modal-btn,
 .del-btn {
   position: absolute;
   background-color: #B72D3B;
@@ -205,6 +206,7 @@ button {
 }
 
 #close-search-modal-btn:hover,
+#close-add-own-modal-btn:hover,
 .del-btn:hover {
   background: #6B1C25;
 }
@@ -248,6 +250,7 @@ button {
 }
 
 #search-modal,
+#add-own-book-modal {
   position: absolute;
   top: 0;
   width: 100%;
@@ -261,6 +264,11 @@ button {
 #modal header {
   display: flex;
   padding: 20px 0 40px;
+}
+
+
+#add-own-book-modal {
+  /* TODO */
 }
 
 #search-input-container {
