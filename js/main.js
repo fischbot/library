@@ -229,25 +229,15 @@ function emptyMsg() {
   appendChildToParent('#book-list', emptyLibraryMsg);
 }
 
-
-
-
-
-
-
-
-
 // ============== Handlers ====================================================
 function clickHandler(e) {
   let elementClicked = e.target;
   switch(elementClicked.id) {
     case ('open-search-modal-btn') :
-      toggleModal();
-      togglePageOverlay();
+      toggleModalAndOverlay();
       break;
     case ('close-modal-btn') :
-      toggleModal();
-      togglePageOverlay();
+      toggleModalAndOverlay();
       clearSearches();
       break;
     case ('search-btn') :
@@ -255,6 +245,7 @@ function clickHandler(e) {
       clearSearches();
       break;
     case ('add-your-own-book-btn') :
+      toggleModalAndOverlay();
       break;
     case ('sort-by-title'):
       titleAndAuthorSort('title');
@@ -309,13 +300,18 @@ function addToLibraryBtnHandler(elementClicked) {
   let elementClickedId = elementClicked.id;
   storeSelectedBook(elementClickedId);
   delete results[elementClickedId].searchId;
-  toggleModal();
-  togglePageOverlay();
+  toggleModalAndOverlay();
   clearSearches();
   render();
 }
 
+
 // ============== Toggle functions ============================================
+function toggleModalAndOverlay() {
+  toggleModal();
+  togglePageOverlay();
+}
+
 function toggleRead(entry) {
   let text = '';
   // find the book with the ID that matches the entry ID
