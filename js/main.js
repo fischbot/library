@@ -180,7 +180,8 @@ function storageAvailable(type) {
       storage.length !== 0;
   }
 }
-// ============== render functions ============================================
+
+// ============== render ======================================================
 function render() {
   clearBookList();
 
@@ -217,124 +218,13 @@ function emptyMsg() {
   appendChildToParent('#book-list', emptyLibraryMsg);
 }
 
-function addEntryText(elements, book, context) {
-
-  if (context === 'render') {
-    let readStatus;
-    if (book.hasRead) {
-      readStatus = 'Read';
-    } else {
-      readStatus = 'Not Read'
-    }
-    elements.readBtn.innerText = readStatus;
-  }
-
-  elements.entryTitle.innerText = book.title;
-  if (book.imgUrl) {
-    elements.img.src = book.imgUrl;
-  } else {
-    elements.img.src = './img/none.jpg';
-  }
-
-  elements.entryAuthor.innerText = 'by ' + book.authors;
-  elements.entryDate.innerText = 'Published: ' + book.publishedDate;
-  elements.entryPageCount.innerText = book.pageCount + ' pages';
-  elements.entryDescription.innerText = book.description;
-}
-
-function appendEntries(elements, context) {
-  let property = '';
-
-  if (context === 'render') {
-    property = 'entry';
-    bookList.appendChild(elements.entry);
-  }
-
-  if (context === 'search') {
-    property = 'searchResultItem';
-    appendChildToParent('#search-results', elements.searchResultItem);
-  }
-
-  elements[property].appendChild(elements.entryTitle);
-  elements[property].appendChild(elements.entryAuthor);
-  elements[property].appendChild(elements.img);
-  elements[property].appendChild(elements.entryDate);
-  elements[property].appendChild(elements.entryPageCount);
-  elements[property].appendChild(elements.entryDescription);
 
 
-  // TODO fix this so it's DRY
-  // I did it this way for now because this is the order I need to append the elements in
-  if (context === 'render') {
-    elements[property].appendChild(elements.delBtn);
-    elements[property].appendChild(elements.readBtn);
-  }
-
-  if (context === 'search') {
-    elements[property].appendChild(elements.addToLibraryBtn);
-  }
-}
-
-function createButton(className, innerText) {
-  const button = document.createElement('button');
-  button.classList.add(className);
-  button.innerText = innerText;
-  return button;
-}
-
-function appendChildToParent(parentIdTagOrClassName, child) {
-  let parent = document.querySelector(`${parentIdTagOrClassName}`);
-  if (parent !== null) {
-    parent.appendChild(child);
-  } else {
-    // TODO proper error handling
-    console.error(`Cannot append ${child} to ${parent}`);
-  }
-
-}
-
-// returns a single html element with the provided class or id
-function createHtmlElement(elementType, classNameOrId) {
-  let element = document.createElement(`${elementType}`);
-  let value = classNameOrId.slice(1);
-  if (classNameOrId !== '') {
-    if (classNameOrId[0] === '.') {
-      let className = classNameOrId.slice(1);
-      element.classList.add(`${value}`);
-    } else {
-      element.id = value;
-    }
-  }
-  return element;
-}
 
 
-// returns an object of elements for search or render
-function createHtmlElementsForEntryAndSearchResults(context) {
-  let elements = {};
-  let prefix;
-  if (context === 'render') {
-    elements.delBtn = createButton('del-btn', '-');
-    elements.readBtn = createButton('read-btn', '');
-    elements.entry = createHtmlElement('div', '.entry');
-    prefix = 'entry-';
-  }
 
-  if (context === 'search') {
-    elements.addToLibraryBtn = createHtmlElement('button', '.add-to-library-btn');
-    elements.searchResultItem = createHtmlElement('div', '.search-result-item');
-    prefix = 'search-result-';
-  }
 
-  elements.img = createHtmlElement('img', '.' + prefix + 'img');
-  elements.entryTitle = createHtmlElement('h2', '.' + prefix +  'title');
-  elements.entryAuthor = createHtmlElement('h3', '.' + prefix + 'author');
-  elements.entryDate = createHtmlElement('p', '.' + prefix + 'publish-date');
-  elements.entryPageCount = createHtmlElement('p', '.' + prefix + 'page-count');
-  elements.entryDescription = createHtmlElement('p', '.' + prefix + 'description');
 
-  return elements;
-}
 
 // ============== Handlers ====================================================
 function clickHandler(e) {
@@ -543,6 +433,125 @@ function storeSelectedBook(id) { // id == book.searchId
 function fixImgUrl(url){
   let strArray = url.split(':')
   return strArray[0] + 's:' + strArray[1];
+}
+
+// =============== General Element Creation ===================================
+// returns a single html element with the provided class or id
+function createHtmlElement(elementType, classNameOrId) {
+  let element = document.createElement(`${elementType}`);
+  let value = classNameOrId.slice(1);
+  if (classNameOrId !== '') {
+    if (classNameOrId[0] === '.') {
+      let className = classNameOrId.slice(1);
+      element.classList.add(`${value}`);
+    } else {
+      element.id = value;
+    }
+  }
+  return element;
+}
+
+function appendChildToParent(parentIdTagOrClassName, child) {
+  let parent = document.querySelector(`${parentIdTagOrClassName}`);
+  if (parent !== null) {
+    parent.appendChild(child);
+  } else {
+    // TODO proper error handling
+    console.error(`Cannot append ${child} to ${parent}`);
+  }
+}
+
+function createButton(className, innerText) {
+  const button = document.createElement('button');
+  button.classList.add(className);
+  button.innerText = innerText;
+  return button;
+}
+
+// ========== Element Creation for Entries and Search =========================
+// returns an object of elements for search or render
+function createHtmlElementsForEntryAndSearchResults(context) {
+  let elements = {};
+  let prefix;
+  if (context === 'render') {
+    elements.delBtn = createButton('del-btn', '-');
+    elements.readBtn = createButton('read-btn', '');
+    elements.entry = createHtmlElement('div', '.entry');
+    prefix = 'entry-';
+  }
+
+  if (context === 'search') {
+    elements.addToLibraryBtn = createHtmlElement('button', '.add-to-library-btn');
+    elements.searchResultItem = createHtmlElement('div', '.search-result-item');
+    prefix = 'search-result-';
+  }
+
+  elements.img = createHtmlElement('img', '.' + prefix + 'img');
+  elements.entryTitle = createHtmlElement('h2', '.' + prefix +  'title');
+  elements.entryAuthor = createHtmlElement('h3', '.' + prefix + 'author');
+  elements.entryDate = createHtmlElement('p', '.' + prefix + 'publish-date');
+  elements.entryPageCount = createHtmlElement('p', '.' + prefix + 'page-count');
+  elements.entryDescription = createHtmlElement('p', '.' + prefix + 'description');
+
+  return elements;
+}
+
+function appendEntries(elements, context) {
+  let property = '';
+
+  if (context === 'render') {
+    property = 'entry';
+    bookList.appendChild(elements.entry);
+  }
+
+  if (context === 'search') {
+    property = 'searchResultItem';
+    appendChildToParent('#search-results', elements.searchResultItem);
+  }
+
+  elements[property].appendChild(elements.entryTitle);
+  elements[property].appendChild(elements.entryAuthor);
+  elements[property].appendChild(elements.img);
+  elements[property].appendChild(elements.entryDate);
+  elements[property].appendChild(elements.entryPageCount);
+  elements[property].appendChild(elements.entryDescription);
+
+
+  // TODO fix this so it's DRY
+  // I did it this way for now because this is the order I need to append the elements in
+  if (context === 'render') {
+    elements[property].appendChild(elements.delBtn);
+    elements[property].appendChild(elements.readBtn);
+  }
+
+  if (context === 'search') {
+    elements[property].appendChild(elements.addToLibraryBtn);
+  }
+}
+
+function addEntryText(elements, book, context) {
+
+  if (context === 'render') {
+    let readStatus;
+    if (book.hasRead) {
+      readStatus = 'Read';
+    } else {
+      readStatus = 'Not Read'
+    }
+    elements.readBtn.innerText = readStatus;
+  }
+
+  elements.entryTitle.innerText = book.title;
+  if (book.imgUrl) {
+    elements.img.src = book.imgUrl;
+  } else {
+    elements.img.src = './img/none.jpg';
+  }
+
+  elements.entryAuthor.innerText = 'by ' + book.authors;
+  elements.entryDate.innerText = 'Published: ' + book.publishedDate;
+  elements.entryPageCount.innerText = book.pageCount + ' pages';
+  elements.entryDescription.innerText = book.description;
 }
 
 // =============== SAMPLE DATA ================================================
