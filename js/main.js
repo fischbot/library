@@ -244,12 +244,20 @@ function clickHandler(e) {
       runSearch();
       clearSearches();
       break;
+    // Add book using form =============================================
     case ('open-form-modal-btn') :
       toggleModalAndOverlay('#add-own-book-modal');
       break;
     case ('close-add-own-modal-btn') :
       toggleModalAndOverlay('#add-own-book-modal');
       clearInputs();
+      break;
+    case ('submit-btn') :
+      // add book to library and close modal
+      // TODO add book to library
+      storeFormData();
+      clearInputs();
+      toggleModalAndOverlay('#add-own-book-modal');
       break;
     case ('sort-by-title'):
       titleAndAuthorSort('title');
@@ -445,6 +453,20 @@ function storeSelectedBook(id) { // id == book.searchId
 function fixImgUrl(url){
   let strArray = url.split(':')
   return strArray[0] + 's:' + strArray[1];
+}
+
+// =============== Add Book From Form =========================================
+function storeFormData() {
+  let book = {};
+  book.title = document.getElementById('add-own-title').value || '[unavailable]';
+  book.authors = document.getElementById('add-own-authors').value || '[unavailable]';
+  book.publishedDate = document.getElementById('add-own-publish-date').value || '[unavailable]';
+  book.description = document.getElementById('add-own-description').value || '[description unavailable]';
+  book.pageCount = document.getElementById('add-own-page-count').value || '[unavailable]';
+  book.imgUrl = document.getElementById('add-own-img').value;
+  book.id = setId();
+  addBookToLibrary(book);
+  render();
 }
 
 // =============== General Element Creation ===================================
