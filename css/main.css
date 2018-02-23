@@ -188,7 +188,7 @@ button {
   color: #808080;
 }
 
-#close-modal-btn,
+#close-search-modal-btn,
 .del-btn {
   position: absolute;
   background-color: #B72D3B;
@@ -204,7 +204,7 @@ button {
   background-color: rgba(183, 45, 59, 0.6);
 }
 
-#close-modal-btn:hover,
+#close-search-modal-btn:hover,
 .del-btn:hover {
   background: #6B1C25;
 }
@@ -247,7 +247,7 @@ button {
   -webkit-filter: opacity(.9);
 }
 
-#modal {
+#search-modal,
   position: absolute;
   top: 0;
   width: 100%;

@@ -34,7 +34,7 @@ function Book(title, authors, publishedDate, description, imgUrl, pageCount, id,
 function initializeDomElements() {
   addBookBtn = retrieveDomElement('#add-book-btn');
   modal = retrieveDomElement('#modal');
-  closeModalBtn = retrieveDomElement('#close-modal-btn');
+  closeModalBtn = retrieveDomElement('#close-search-modal-btn');
   bookList = retrieveDomElement('#book-list');
   sort = retrieveDomElement('#sort');
 
