@@ -261,11 +261,14 @@ button {
   background: #fff;
 }
 
-#modal header {
+#search-modal header {
   display: flex;
   padding: 20px 0 40px;
 }
 
+#search-modal {
+
+}
 
 #add-own-book-modal {
   /* TODO */
