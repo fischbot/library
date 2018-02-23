@@ -33,7 +33,8 @@ function Book(title, authors, publishedDate, description, imgUrl, pageCount, id,
 
 window.addEventListener('load', function() {
     if (storageAvailable('localStorage')) {
-      if (!window.localStorage.getItem('library')) {
+      if (window.localStorage.library === undefined ||
+          window.localStorage.library === '[]') {
         // if the library is empty, add sample data
         // this is so the user can see how the app is supposed to look
         populateSampleData();
