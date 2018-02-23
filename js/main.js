@@ -300,6 +300,15 @@ function appendChildToParent(parentIdTagOrClassName, child) {
     console.log(elements);
     elements.addToLibraryBtn.classList.add('add-to-library-btn');
     elements.searchResultItem.classList.add('search-result-item');
+// returns a single html element with the provided class or id
+function createHtmlElement(elementType, classNameOrId, specifyClassOrId) {
+  let element = document.createElement(`${elementType}`);
+  if (classNameOrId !== '') {
+    if (specifyClassOrId.toLowerCase() === 'class') {
+      element.classList.add(`${classNameOrId}`);
+    } else {
+      element.id = classNameOrId;
+    }
   }
 
   elements.entryDate.classList.add('entry-publish-date');
