@@ -252,10 +252,9 @@ button {
 
 #search-modal,
 #add-own-book-modal {
-  position: absolute;
-  top: 0;
-  width: 100%;
+  width: 96%;
   max-width: 1200px;
+  margin: 100px auto 0;
   border: 3px solid #eee;
   position: relative;
   z-index: 9999;
