@@ -278,6 +278,23 @@ function createButton(className, innerText) {
 }
 
 function addClassesToElements(elements, context) {
+function appendChildToParent(parentIdTagOrClassName, child) {
+  let parent;
+  if (document.getElementById(`${parentIdTagOrClassName}`)) {
+    // id
+    parent = document.getElementById(`${parentIdTagOrClassName}`);
+  } else { // class or tag
+    if (document.querySelector('.' + `${parentIdTagOrClassName}`)) {
+      // class
+      parentIdTagOrClassName = '.' + parentIdTagOrClassName;
+      parent = document.querySelector(`${parentIdTagOrClassName}`);
+    } else {
+      // tag
+      parent = document.querySelector(`${parentIdTagOrClassName}`);
+    }
+  }
+  parent.appendChild(child);
+}
 
   if (context === 'search') {
     console.log(elements);
