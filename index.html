@@ -47,31 +47,32 @@
             </div>
           </header>
 
+          <div id="search-modal" class="hidden">
+            <header>
+              <button id="close-search-modal-btn">X</button>
+              <div id="search-input-container">
+                <input type="search" id="books" placeholder="Enter a book title or author">
+                <button id="search-btn">Search</button>
+              </div><!-- /#search -->
+            </header>
+            <div id="search-results"></div>
+          </div><!-- /#search-modal -->
+          <div id="add-own-book-modal" class="hidden">
+            <button id="close-add-own-modal-btn">X</button>
+            <div id="add-own-book-form-container">
+              <label>Title: </label><input type="text" id="add-own-title" placeholder="Title" required>
+              <label>Author: </label><input type="text" id="add-own-authors" placeholder="Author">
+              <label>Page Count: </label><input type="number" id="add-own-page-count" placeholder="How many pages?" min="1">
+              <label>Year Published: </label><input type="date" id="add-own-publish-date" placeholder="Year Published">
+              <label>Image :</label><input type="text" id="add-own-img" placeholder="Image URL">
+              <label>Description: </label><textarea id="add-own-description"></textarea>
+              <button id="submit-btn">Submit</button>
+            </div>
+          </div><!-- /#add-own-book-modal -->
+
             <div class="main-container">
 
-              <div id="search-modal" class="hidden">
-                <header>
-                  <button id="close-search-modal-btn">X</button>
-                  <div id="search-input-container">
-                    <input type="search" id="books" placeholder="Enter a book title or author">
-                    <button id="search-btn">Search</button>
-                  </div><!-- /#search -->
-                </header>
-                <div id="search-results"></div>
-              </div><!-- /#search-modal -->
 
-              <div id="add-own-book-modal" class="hidden">
-                <button id="close-add-own-modal-btn">X</button>
-                <div id="add-own-book-form-container">
-                  <label>Title: </label><input type="text" id="add-own-title" placeholder="Title" required>
-                  <label>Author: </label><input type="text" id="add-own-authors" placeholder="Author">
-                  <label>Page Count: </label><input type="number" id="add-own-page-count" placeholder="How many pages?" min="1">
-                  <label>Year Published: </label><input type="date" id="add-own-publish-date" placeholder="Year Published">
-                  <label>Image :</label><input type="text" id="add-own-img" placeholder="Image URL">
-                  <label>Description: </label><textarea id="add-own-description"></textarea>
-                  <button id="submit-btn">Submit</button>
-                </div>
-              </div><!-- /#add-own-book-modal -->
 
               <div id="book-list"></div>
 
