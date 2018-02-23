@@ -446,6 +446,11 @@ function fixImgUrl(url){
 }
 
 // =============== General Element Creation ===================================
+function retrieveDomElement(classIdOrTag) {
+  // TODO error handling
+  return document.querySelector(`${classIdOrTag}`)
+}
+
 // returns a single html element with the provided class or id
 function createHtmlElement(elementType, classNameOrId) {
   let element = document.createElement(`${elementType}`);
