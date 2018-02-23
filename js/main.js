@@ -395,6 +395,10 @@ function delBtnHandler(elementClicked) {
   bookList.removeChild(entryToRemove);
   myLibrary.splice(indexOfEntry,1);
   render();
+
+  if (myLibrary === 0) {
+    window.localStorage.clear();
+  }
 }
 
 function addToLibraryBtnHandler(elementClicked) {
