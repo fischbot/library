@@ -451,10 +451,8 @@ function runSearch() {
     } else {
       $.get("https://www.googleapis.com/books/v1/volumes?q=" + search, function(response) {
         response.items.forEach(function(item, index) {
-          let book = new Book();
-          const elements = createHtmlElementsForEntryAndSearchResults('search');
-
-          setBookSearchResult(book, item, index);
+          let book = setBookSearchResult(item, index);
+          const elements = createHtmlElementsForEntryAndSearchResults("search");
           elements.searchResultItem.id = book.searchId;
 
           if (book.imgUrl !== undefined) {
@@ -473,18 +471,21 @@ function runSearch() {
 }
 
 // Store book info retrieved from API into book object
-function setBookSearchResult(book, item, index) {
+function setBookSearchResult(item, index) {
+  let book = new Book(item.volumeInfo.title,
+                      item.volumeInfo.authors,
+                      item.volumeInfo.publishedDate,
+                      item.volumeInfo.description,
+                      item.volumeInfo.imgUrl,
+                      item.volumeInfo.pageCount,
+                      '', '');
   book.searchId = index;
-  book.title = item.volumeInfo.title || '[unavailable]';
-  book.authors = item.volumeInfo.authors || '[unavailable]' ;
-  book.publishedDate = item.volumeInfo.publishedDate || '[unavailable]';
-  book.description = item.volumeInfo.description || '[description unavailable]';
-  book.pageCount = item.volumeInfo.pageCount || '[unavailable]';
-  results.push(book);
 
   if (item.volumeInfo.imageLinks !== undefined) {
     book.imgUrl = fixImgUrl(item.volumeInfo.imageLinks.thumbnail);
   }
+  results.push(book);
+  return book;
 }
 
 // Store the book obj selected by the user in the user"s library
