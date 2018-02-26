@@ -312,6 +312,9 @@ function clickHandler(e) {
       readIdAndPageSort("hasRead");
       render();
       break;
+    case ("back-to-top-btn") :
+      backToTop();
+      break;
   }
 
   // Button actions using classes =======================================
