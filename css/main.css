@@ -168,6 +168,7 @@ button {
   cursor: pointer;
   outline: none;
   color: #fff;
+  background: none;
   font-size: 1.2em;
   padding: 7px;
   border: none;
