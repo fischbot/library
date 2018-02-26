@@ -93,17 +93,22 @@ nav {
   width: 100%;
   position: fixed;
   z-index: 1000;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto auto;
 }
 
-nav {
+/* ============= Nav ================================== */
+nav .container {
+  position: relative;
+}
+
+#add-book-menu {
   background: #e2efd8;
 }
 
-/* nav:hover {
-  background: #C5D3C0;
-} */
-
-nav .container,
+#add-book-menu .container,
 #sort .container {
   display: flex;
   justify-content: center;
