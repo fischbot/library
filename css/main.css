@@ -124,6 +124,23 @@ nav h2,
 }
 
 /* ============= Buttons ================================= */
+#back-to-top-btn {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 299;
+  border: none;
+  background-color: rgba(11, 77, 80, 0.3);
+  color: #fff;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+#back-to-top-btn:hover {
+  background-color: rgba(11, 77, 80, 0.6);
+}
+
 button {
   cursor: pointer;
   outline: none;

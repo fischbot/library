@@ -60,7 +60,26 @@ window.addEventListener("load", function() {
 
   render();
   document.addEventListener("click", clickHandler, false);
+
+  window.onscroll = function() {
+    showBackToTopBtn();
+  };
 }, false);
+
+function showBackToTopBtn() {
+  let backToTopBtn = retrieveDomElement("#back-to-top-btn");
+  if (document.body.scrollTop > 20 ||
+      document.documentElement.scrollTop > 20) {
+        backToTopBtn.style.display = "block";
+      } else {
+        backToTopBtn.style.display = "none";
+      }
+}
+
+function backToTop() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
 
 function addBookToLibrary(book) {
   myLibrary.push(book);
