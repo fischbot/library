@@ -455,11 +455,6 @@ function runSearch() {
           const elements = createHtmlElementsForEntryAndSearchResults("search");
           elements.searchResultItem.id = book.searchId;
 
-          if (book.imgUrl !== undefined) {
-            let img = document.createElement("img");
-            elements.img.src = book.imgUrl;
-          }
-
           appendEntries(elements, "search");
           elements.addToLibraryBtn.id = book.searchId;
           elements.addToLibraryBtn.innerText = "Add to Library";
