@@ -180,6 +180,12 @@ button {
   background: #127A7F;
 }
 
+
+#submit-btn,
+#search-btn {
+  outline: initial;
+}
+
 #submit-btn:hover,
 #search-btn:hover {
   background: #0B4D50;
@@ -196,8 +202,6 @@ button {
 
 .add-to-library-btn,
 .read-btn {
-  /* height: 40px; */
-  /* flex: 0 0 auto; */
   grid-column: 1 / -1;
 }
 
@@ -224,7 +228,6 @@ button {
 
 #open-search-modal-btn,
 #open-form-modal-btn {
-  outline: none;
   margin: 5px 10px;
   background: none;
   color: #808080;
@@ -327,8 +330,6 @@ button {
   grid-template-rows: 1fr 1fr;
 }
 
-
-/* input[type="search"] { */
 input,
 textarea {
   /* enable you to style input in safari */
@@ -340,7 +341,6 @@ textarea {
   height: 100%;
   border: 0;
   height: 30px;
-  outline: none;
   border: 1px solid #eee;
 }
 
@@ -465,12 +465,10 @@ footer a:hover {
   font-weight: bold;
 }
 
-
-
+/* ============================================================================
+                                MEDIA QUERIES
+ ============================================================================ */
 @media screen and (min-width: 578px) {
-  h1 {
-    font-size: 4em;
-  }
   nav .container {
     font-size: 1em;
   }
