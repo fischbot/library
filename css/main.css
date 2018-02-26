@@ -51,7 +51,8 @@ li {
   flex: 1;
 }
 
-.hidden {
+.hidden,
+.closed-menu {
   display: none;
 }
 
@@ -62,9 +63,9 @@ h3 {
 }
 
 h1 {
-  font-size: 2em;
   letter-spacing: 14px;
-  padding: 10px 0 30px 0;
+  font-size: 2em;
+  padding: 10px 0 30px;
 }
 
 h2,
@@ -92,17 +93,22 @@ nav {
   width: 100%;
   position: fixed;
   z-index: 1000;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto auto;
 }
 
-nav {
+/* ============= Nav ================================== */
+nav .container {
+  position: relative;
+}
+
+#add-book-menu {
   background: #e2efd8;
 }
 
-/* nav:hover {
-  background: #C5D3C0;
-} */
-
-nav .container,
+#add-book-menu .container,
 #sort .container {
   display: flex;
   justify-content: center;
@@ -112,6 +118,23 @@ nav .container,
   font-size: 0.875em;
 }
 
+
+
+#menu-btn {
+  font-size: 2.2em;
+  padding: 5px 0;
+  margin: 0;
+}
+
+#menu-btn-icon:hover {
+  color: #3F6C4B;
+}
+
+#menu-btn-icon {
+  color: #fff;
+}
+
+}
 nav h1,
 nav ul {
   margin: 0;
@@ -124,10 +147,28 @@ nav h2,
 }
 
 /* ============= Buttons ================================= */
+#back-to-top-btn {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 299;
+  border: none;
+  background-color: rgba(11, 77, 80, 0.3);
+  color: #fff;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+#back-to-top-btn:hover {
+  background-color: rgba(11, 77, 80, 0.6);
+}
+
 button {
   cursor: pointer;
   outline: none;
   color: #fff;
+  background: none;
   font-size: 1.2em;
   padding: 7px;
   border: none;
@@ -137,6 +178,12 @@ button {
   display: block;
   width: 100%;
   background: #127A7F;
+}
+
+
+#submit-btn,
+#search-btn {
+  outline: initial;
 }
 
 #submit-btn:hover,
@@ -155,8 +202,6 @@ button {
 
 .add-to-library-btn,
 .read-btn {
-  /* height: 40px; */
-  /* flex: 0 0 auto; */
   grid-column: 1 / -1;
 }
 
@@ -183,7 +228,6 @@ button {
 
 #open-search-modal-btn,
 #open-form-modal-btn {
-  outline: none;
   margin: 5px 10px;
   background: none;
   color: #808080;
@@ -286,8 +330,6 @@ button {
   grid-template-rows: 1fr 1fr;
 }
 
-
-/* input[type="search"] { */
 input,
 textarea {
   /* enable you to style input in safari */
@@ -299,7 +341,6 @@ textarea {
   height: 100%;
   border: 0;
   height: 30px;
-  outline: none;
   border: 1px solid #eee;
 }
 
@@ -424,12 +465,10 @@ footer a:hover {
   font-weight: bold;
 }
 
-
-
+/* ============================================================================
+                                MEDIA QUERIES
+ ============================================================================ */
 @media screen and (min-width: 578px) {
-  h1 {
-    font-size: 4em;
-  }
   nav .container {
     font-size: 1em;
   }
