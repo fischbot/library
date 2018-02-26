@@ -508,14 +508,15 @@ function fixImgUrl(url){
 
 // =============== Add Book From Form =========================================
 function storeFormData() {
-  let book = {};
-  book.title = document.getElementById("add-own-title").value || "[unavailable]";
-  book.authors = document.getElementById("add-own-authors").value || "[unavailable]";
-  book.publishedDate = document.getElementById("add-own-publish-date").value || "[unavailable]";
-  book.description = document.getElementById("add-own-description").value || "[description unavailable]";
-  book.pageCount = document.getElementById("add-own-page-count").value || "[unavailable]";
-  book.imgUrl = document.getElementById("add-own-img").value;
-  book.id = findHighestIdValue();
+  let book = new Book(
+    document.getElementById("add-own-title").value,
+    document.getElementById("add-own-authors").value,
+    document.getElementById("add-own-publish-date").value,
+    document.getElementById("add-own-description").value,
+    document.getElementById("add-own-img").value,
+    document.getElementById("add-own-page-count").value,
+    findHighestIdValue(),
+    false);
   addBookToLibrary(book);
   render();
 }
