@@ -94,6 +94,10 @@ function setId() {
 // fixes the error of multiple books ending up with the same ID, which
 // was occuring when using setId()
 function findHighestIdValue() {
+  if (myLibrary.length === 0) {
+    return setId();
+  }
+
   let temp = myLibrary.slice();
   temp.sort(function(a, b) {
     return b.id - a.id;
