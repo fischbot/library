@@ -51,7 +51,8 @@ li {
   flex: 1;
 }
 
-.hidden {
+.hidden,
+.closed-menu {
   display: none;
 }
 
@@ -112,6 +113,23 @@ nav .container,
   font-size: 0.875em;
 }
 
+
+
+#menu-btn {
+  font-size: 2.2em;
+  padding: 5px 0;
+  margin: 0;
+}
+
+#menu-btn-icon:hover {
+  color: #3F6C4B;
+}
+
+#menu-btn-icon {
+  color: #fff;
+}
+
+}
 nav h1,
 nav ul {
   margin: 0;
