@@ -62,11 +62,11 @@ window.addEventListener("load", function() {
   document.addEventListener("click", clickHandler, false);
 
   window.onscroll = function() {
-    showBackToTopBtn();
+    showHideBackToTopBtn();
   };
 }, false);
 
-function showBackToTopBtn() {
+function showHideBackToTopBtn() {
   let backToTopBtn = retrieveDomElement("#back-to-top-btn");
   if (document.body.scrollTop > 20 ||
       document.documentElement.scrollTop > 20) {
