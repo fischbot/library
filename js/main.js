@@ -312,6 +312,10 @@ function clickHandler(e) {
       readIdAndPageSort("hasRead");
       render();
       break;
+    case ("menu-btn") :
+    case ("menu-btn-icon") :
+      toggleNav();
+      break;
     case ("back-to-top-btn") :
       backToTop();
       break;
@@ -352,6 +356,23 @@ function addToLibraryBtnHandler(elementClicked) {
 
 
 // ============== Toggle functions ============================================
+function toggleNav() {
+  let addBookMenu = retrieveDomElement("#add-book-menu");
+  let menuBtnIcon = retrieveDomElement("#menu-btn-icon");
+  let menuBtn = retrieveDomElement("#menu-btn");
+  if (addBookMenu.classList.contains("closed-menu")) {
+    addBookMenu.classList.remove("closed-menu");
+    sort.classList.remove("closed-menu");
+    menuBtnIcon.classList.remove("fa-angle-down");
+    menuBtnIcon.classList.add("fa-angle-up");
+  } else {
+    addBookMenu.classList.add("closed-menu");
+    sort.classList.add("closed-menu");
+    menuBtnIcon.classList.remove("fa-angle-up");
+    menuBtnIcon.classList.add("fa-angle-down");
+  }
+}
+
 function toggleModalAndOverlay(modalId) {
   toggleModal(modalId);
   togglePageOverlay();
