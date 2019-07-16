@@ -465,6 +465,10 @@ function runSearch() {
           addEntryText(elements, book, "search");
         });
       })
+      .catch(error => {
+        alert('Something went wrong');
+        console.error('There was an error:', error)
+      })
   }
 }
 
