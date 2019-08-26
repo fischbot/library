@@ -14,15 +14,14 @@ body {
     get rid of superfluous padding
     https://css-tricks.com/webkit-html5-search-inputs/
  */
-input[type="search"]::-webkit-search-decoration,
-input[type="search"]::-webkit-search-cancel-button,
-input[type="search"]::-webkit-search-results-button,
-input[type="search"]::-webkit-search-results-decoration {
+input[type='search']::-webkit-search-decoration,
+input[type='search']::-webkit-search-cancel-button,
+input[type='search']::-webkit-search-results-button,
+input[type='search']::-webkit-search-results-decoration {
   display: none;
 }
 
 ul {
-
   padding: 0;
 }
 
@@ -86,7 +85,7 @@ nav {
 /* ============= Header ================================== */
 #header {
   text-align: center;
-  background: #70BF80;
+  background: #70bf80;
   color: #fff;
   padding: 30px 0 0;
   top: 0;
@@ -118,8 +117,6 @@ nav .container {
   font-size: 0.875em;
 }
 
-
-
 #menu-btn {
   font-size: 2.2em;
   padding: 5px 0;
@@ -127,14 +124,13 @@ nav .container {
 }
 
 #menu-btn-icon:hover {
-  color: #3F6C4B;
+  color: #3f6c4b;
 }
 
 #menu-btn-icon {
   color: #fff;
 }
 
-}
 nav h1,
 nav ul {
   margin: 0;
@@ -177,9 +173,8 @@ button {
 #submit-btn {
   display: block;
   width: 100%;
-  background: #127A7F;
+  background: #127a7f;
 }
-
 
 #submit-btn,
 #search-btn {
@@ -188,12 +183,12 @@ button {
 
 #submit-btn:hover,
 #search-btn:hover {
-  background: #0B4D50;
+  background: #0b4d50;
 }
 
 .add-to-library-btn {
   color: #fff;
-  background: #1DBDBF;
+  background: #1dbdbf;
 }
 
 .add-to-library-btn:hover {
@@ -208,22 +203,21 @@ button {
 .read-btn {
   width: 100%;
   font-size: 1.4em;
-  background: #1ABDBF;
+  background: #1abdbf;
   color: #fff;
-
 }
 
 .read-btn:hover {
-  background: #15A8AC;
+  background: #15a8ac;
 }
 
 /* read must be after .read-btn */
 .read {
-    background: #70BF80;
+  background: #70bf80;
 }
 
 .read:hover {
-  background: #6BAE7C;
+  background: #6bae7c;
 }
 
 #open-search-modal-btn,
@@ -237,7 +231,7 @@ button {
 #close-add-own-modal-btn,
 .del-btn {
   position: absolute;
-  background-color: #B72D3B;
+  background-color: #b72d3b;
   right: 10px;
   top: 12px;
   border-radius: 5px;
@@ -253,15 +247,15 @@ button {
 #close-search-modal-btn:hover,
 #close-add-own-modal-btn:hover,
 .del-btn:hover {
-  background: #6B1C25;
+  background: #6b1c25;
 }
 
 #sort button,
 #open-search-modal-btn,
 #open-form-modal-btn {
   background: #eee;
-  border: 1px solid #B5B9BD;
-  color: #999EA5;
+  border: 1px solid #b5b9bd;
+  color: #999ea5;
   margin: 5px 10px;
 }
 
@@ -273,7 +267,7 @@ button {
 
 /* ============= Sort  ============================= */
 #sort {
-  background: #F7F7E7;
+  background: #f7f7e7;
   border-bottom: 3px solid #e9e9b7;
 }
 
@@ -283,15 +277,15 @@ button {
 
 /* ============= Search Modal  ============================= */
 #overlay {
-  position:fixed;
-  top:0;
-  left:0;
-  height:100%;
-  width:100%;
-  z-index:1001;
-  background-color:#222;
-  filter: opacity(.9);
-  -webkit-filter: opacity(.9);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1001;
+  background-color: #222;
+  filter: opacity(0.9);
+  -webkit-filter: opacity(0.9);
 }
 
 #search-modal,
@@ -311,7 +305,6 @@ button {
 }
 
 #search-modal {
-
 }
 
 #add-own-book-modal {
@@ -326,15 +319,15 @@ button {
   justify-content: center;
   align-content: center;
   display: grid;
-  grid-template-columns:  1fr;
+  grid-template-columns: 1fr;
   grid-template-rows: 1fr 1fr;
 }
 
 input,
 textarea {
   /* enable you to style input in safari */
-  -moz-appearance:none;
-  -webkit-appearance:none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
   font-size: 1em;
   padding-left: 5px;
   width: 100%;
@@ -345,8 +338,8 @@ textarea {
 }
 
 #search-btn {
-  width: 100%;;
-  background: #3F8DBF;
+  width: 100%;
+  background: #3f8dbf;
 }
 
 /* ============= Library and Search Result Entries ========================= */
@@ -363,14 +356,14 @@ textarea {
 }
 
 .entry,
- .search-result-item {
+.search-result-item {
   position: relative;
   height: 400px;
   display: grid;
   grid-template-columns: 1fr 1fr 3fr 30px;
   grid-template-rows: 60px auto auto auto 1fr auto;
   grid-row-gap: 10px;
-  border: 3px solid #7A7F7F;
+  border: 3px solid #7a7f7f;
 }
 
 .entry {
@@ -379,7 +372,6 @@ textarea {
 
 .search-result-item {
   background: #eee;
-
 }
 
 .entry:hover,
@@ -389,7 +381,7 @@ textarea {
 
 h2.entry-title,
 h2.search-result-title {
-  background: #7A7F7F;
+  background: #7a7f7f;
   color: #fff;
   text-align: center;
   margin: 0;
@@ -400,7 +392,6 @@ h2.search-result-title {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
 }
 
 h3.entry-author,
@@ -426,7 +417,6 @@ img.search-result-img {
 .search-result-item p {
   margin: 0;
   grid-column: 3 / span 2;
-
 }
 
 p.entry-publish-date,
@@ -454,7 +444,7 @@ footer {
   margin-top: 100px;
   text-align: center;
   color: #fff;
-  background: #1BBDBF;
+  background: #1bbdbf;
   font-size: 14px;
   width: 100%;
 }
@@ -465,7 +455,7 @@ footer a {
 }
 
 footer a:hover {
-  color: #2B4B81;
+  color: #2b4b81;
   font-weight: bold;
 }
 
@@ -483,7 +473,7 @@ footer a:hover {
   }
 
   #search-input-container {
-    grid-template-columns:  1fr 17%;
+    grid-template-columns: 1fr 17%;
     grid-template-rows: 1fr;
   }
 
