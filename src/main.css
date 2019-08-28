@@ -195,29 +195,8 @@ button {
   background: #117677;
 }
 
-.add-to-library-btn,
-.read-btn {
+.add-to-library-btn {
   grid-column: 1 / -1;
-}
-
-.read-btn {
-  width: 100%;
-  font-size: 1.4em;
-  background: #1abdbf;
-  color: #fff;
-}
-
-.read-btn:hover {
-  background: #15a8ac;
-}
-
-/* read must be after .read-btn */
-.read {
-  background: #70bf80;
-}
-
-.read:hover {
-  background: #6bae7c;
 }
 
 #open-search-modal-btn,
@@ -228,8 +207,7 @@ button {
 }
 
 #close-search-modal-btn,
-#close-add-own-modal-btn,
-.del-btn {
+#close-add-own-modal-btn {
   position: absolute;
   background-color: #b72d3b;
   right: 10px;
@@ -238,15 +216,8 @@ button {
   padding: 5px 10px;
 }
 
-.del-btn {
-  right: 5px;
-  top: 5px;
-  background-color: rgba(183, 45, 59, 0.6);
-}
-
 #close-search-modal-btn:hover,
-#close-add-own-modal-btn:hover,
-.del-btn:hover {
+#close-add-own-modal-btn:hover {
   background: #6b1c25;
 }
 
@@ -343,7 +314,6 @@ textarea {
 }
 
 /* ============= Library and Search Result Entries ========================= */
-#book-list,
 #search-results {
   display: grid;
   grid-template-columns: 1fr;
@@ -351,11 +321,6 @@ textarea {
   margin: 0 2%;
 }
 
-#book-list {
-  margin-top: 30px;
-}
-
-.entry,
 .search-result-item {
   position: relative;
   height: 400px;
@@ -366,20 +331,14 @@ textarea {
   border: 3px solid #7a7f7f;
 }
 
-.entry {
-  background: #f6f6e4;
-}
-
 .search-result-item {
   background: #eee;
 }
 
-.entry:hover,
 .search-result-item:hover {
   box-shadow: 2px 1px 3px #a2a2a2;
 }
 
-h2.entry-title,
 h2.search-result-title {
   background: #7a7f7f;
   color: #fff;
@@ -394,7 +353,6 @@ h2.search-result-title {
   justify-content: center;
 }
 
-h3.entry-author,
 h3.search-result-author {
   font-size: 1.14em;
   padding: 0 10px;
@@ -403,7 +361,6 @@ h3.search-result-author {
   grid-column: 1 / -1;
 }
 
-img.entry-img,
 img.search-result-img {
   height: auto;
   width: 100px;
@@ -413,25 +370,19 @@ img.search-result-img {
   justify-self: end;
 }
 
-.entry p,
 .search-result-item p {
   margin: 0;
   grid-column: 3 / span 2;
 }
 
-p.entry-publish-date,
 p.search-result-publish-date {
   align-self: end;
 }
-
-p.entry-publish-date,
-p.entry-page-count,
 p.search-result-publish-date,
 p.search-result-page-count {
   justify-self: center;
 }
 
-p.entry-description,
 p.search-result-description {
   padding: 0 10px;
   line-height: 1.4em;
