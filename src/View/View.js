@@ -4,6 +4,13 @@ class View {
   constructor() {
     this.bookList = document.getElementById('book-list');
   }
+
+  updateReadView(target) {
+    const isRead = target.classList.contains('read');
+    target.innerText = isRead ? 'Not Read' : 'Read';
+    isRead ? target.classList.remove('read') : target.classList.add('read');
+  }
+
   renderLibrary(books) {
     if (!books) {
       let emptyMsg = createViewElement(
@@ -35,6 +42,7 @@ function createViewElement(type, classes, id, content) {
 
 function createBookView(book) {
   const container = createViewElement('div', ['book'], book.id);
+
   const values = [
     createViewElement('h2', ['book-title'], '', book.title),
     createViewElement('h3', ['book-author'], '', book.author),

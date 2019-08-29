@@ -25,6 +25,10 @@ class Book {
       .split(' ')
       .join('-');
   }
+
+  changeReadStatus(book) {
+    return !book.hasRead;
+  }
 }
 
 export default Book;
