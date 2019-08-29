@@ -1,10 +1,9 @@
 import Book from '../Book/Book';
-import sampleData from '../assets/sample_data';
+import books from '../assets/sample_data';
 
 class Library {
   constructor() {
-    this.books = [...sampleData];
-    let book = new Book('Test book', ['me', 'myself'], '2019');
+    this.books = [...books];
   }
 
   // display book
