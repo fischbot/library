@@ -6,10 +6,7 @@ import './main.css';
 (function() {
   const library = new Library();
   const view = new View();
-  document.addEventListener(
-    'click',
-    e => handleClick(e, library.books, view.updateReadView),
-    false
-  );
-  view.renderLibrary(library.books);
+  const { books } = library;
+  document.addEventListener('click', e => handleClick(e, books, view), false);
+  view.renderLibrary(books);
 })();

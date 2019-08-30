@@ -1,8 +1,10 @@
-function handleClick(e, books, updateReadView) {
-  const classes = Array.prototype.slice.call(e.target.classList, 0);
-
-  if (classes.indexOf('book-has-read-btn') !== -1) {
-    handleReadStatus(e.target, books, updateReadView);
+function handleClick(e, books, view) {
+  const target = e.target;
+  const id = target.id;
+  if (target.classList.contains('book-has-read-btn')) {
+    handleReadStatus(e.target, books, view.updateReadView);
+  } else if (target.classList.contains('add-book-buttons')) {
+    view.renderBookForm(id);
   }
 }
 
