@@ -52,7 +52,7 @@ li {
 
 .hidden,
 .closed-menu {
-  display: none;
+  display: none !important;
 }
 
 h1,
@@ -206,8 +206,7 @@ button {
   color: #808080;
 }
 
-#close-search-modal-btn,
-#close-add-own-modal-btn {
+.close-modal-btn {
   position: absolute;
   background-color: #b72d3b;
   right: 10px;
@@ -260,14 +259,34 @@ button {
 }
 
 #search-modal,
-#add-own-book-modal {
-  width: 96%;
+#custom-book-modal {
+  /* width: 96%;
   max-width: 1200px;
-  margin: 100px auto 0;
+  margin: 100px auto 0; */
   border: 3px solid #eee;
-  position: relative;
+  position: absolute;
   z-index: 9999;
   background: #fff;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.flex-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  width: 40%;
+  margin: 0 auto;
+  padding: 20px 40px;
+  background: white;
+  position: relative;
 }
 
 #search-modal header {
@@ -275,15 +294,8 @@ button {
   padding: 20px 0 40px;
 }
 
-#search-modal {
-}
-
-#add-own-book-modal {
-  /* TODO */
-}
-
 #search-input-container,
-#add-own-book-form-container {
+#custom-book-form-container {
   width: 70%;
   max-width: 600px;
   margin: 0 auto;
@@ -293,6 +305,12 @@ button {
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 1fr;
 }
+
+/* .add-book-form {
+  width: 100vw;
+  height: 100vh;
+  background: red;
+} */
 
 input,
 textarea {
