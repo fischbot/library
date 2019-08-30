@@ -9,7 +9,7 @@ function handleClick(e, books, updateReadView) {
 function handleReadStatus(target, books, updateReadView) {
   for (let book of books) {
     if (book.id === target.parentNode.id) {
-      book.hasRead = book.changeReadStatus(book);
+      book.hasRead = book.toggleReadStatus(book);
       updateReadView(target);
       break;
     }

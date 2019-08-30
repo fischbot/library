@@ -26,7 +26,7 @@ class Book {
       .join('-');
   }
 
-  changeReadStatus(book) {
+  toggleReadStatus(book) {
     return !book.hasRead;
   }
 }
