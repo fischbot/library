@@ -11,7 +11,7 @@ class Library {
   }
   // remove individual book
   remove(bookToRemove) {
-    this.books = this.books.filter(book => book.id !== bookToRemove.id);
+    this.books = this.books.filter(book => book.id !== bookToRemove);
   }
 }
 
