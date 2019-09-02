@@ -1,13 +1,17 @@
 import Library from './Library/Library';
-import View from './View/View';
+import ViewUserLibrary from './ViewUserLibrary/ViewUserLibrary';
 import handleClick from './utils/handleClick';
 import sampleData from './assets/sample_data';
 import './main.css';
 
 (function() {
   const library = new Library(sampleData);
-  const view = new View();
+  const userLibraryView = new ViewUserLibrary('book-list');
   const { books } = library;
-  document.addEventListener('click', e => handleClick(e, books, view), false);
-  view.renderLibrary('book-list', books);
+  document.addEventListener(
+    'click',
+    e => handleClick(e, library, userLibraryView),
+    false
+  );
+  userLibraryView.render(books);
 })();

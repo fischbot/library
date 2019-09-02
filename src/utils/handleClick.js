@@ -1,17 +1,22 @@
-import sort from './sort';
 import Search from '../Search/Search';
 
-function handleClick(e, books, view) {
+function handleClick(e, library, userLibraryView) {
   const target = e.target;
   const id = target.id;
+
   if (target.classList.contains('book-has-read-btn')) {
-    handleReadStatus(target, books, view.updateReadView);
+    // update read view
+    userLibraryView.handleClick(target, library.books);
   } else if (target.classList.contains('add-book-buttons')) {
+    // display add book form
     view.renderBookForm(id);
   } else if (target.classList.contains('sort-btn')) {
-    // ex: id = 'sort-by-authors', sortType = 'authors'
-    const sortType = id.slice(id.lastIndexOf('-') + 1);
-    handleSort(sortType, books, view);
+    // sort library
+    userLibraryView.sort(id, library.books);
+  } else if (target.classList.contains('book-delete-btn')) {
+    // delete the selected book
+    library.remove(target.parentNode.id);
+    userLibraryView.updateView(library.books);
   } else if (id === 'search-btn') {
     // run search
     const search = new Search();
@@ -22,22 +27,14 @@ function handleClick(e, books, view) {
   }
 }
 
-function handleReadStatus(target, books, updateReadView) {
-  for (let book of books) {
-    if (book.id === target.parentNode.id) {
-      book.hasRead = book.toggleReadStatus(book);
-      updateReadView(target);
-      break;
-    }
-  }
-}
-
-function handleSort(type, books, view) {
-  if (type === 'title' || type === 'authors') books = sort.strings(type, books);
-
-  if (type === 'pages') books = sort.byPages(type, books);
-
-  view.updateLibraryView(books);
-}
+// function handleReadStatus(target, books, updateReadView) {
+//   for (let book of books) {
+//     if (book.id === target.parentNode.id) {
+//       book.hasRead = book.toggleReadStatus(book);
+//       updateReadView(target);
+//       break;
+//     }
+//   }
+// }
 
 export default handleClick;

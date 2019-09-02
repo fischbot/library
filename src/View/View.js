@@ -1,4 +1,3 @@
-import { viewLibrary, clearLibraryView } from './viewLibrary';
 import viewSearchResults from './viewSearchResults';
 import viewAddBookForm from './viewAddBookForm';
 import { toggleModalView } from '../utils/viewHelpers';
@@ -6,14 +5,8 @@ import { toggleModalView } from '../utils/viewHelpers';
 import './View.styles.css';
 
 class View {
-  constructor() {
-    this.bookList = document.getElementById('book-list');
-  }
-
-  updateReadView(target) {
-    const isRead = target.classList.contains('read');
-    target.innerText = isRead ? 'Not Read' : 'Read';
-    isRead ? target.classList.remove('read') : target.classList.add('read');
+  constructor(parentId) {
+    this.parent = document.getElementById(parentId);
   }
 
   createViewElement(type, classes, id, content) {
@@ -30,14 +23,10 @@ class View {
     return document.getElementById(id);
   }
 
-  renderLibrary(parentId, books) {
-    const parent = this.getElement(parentId);
-    viewLibrary(parent, books, this.createViewElement);
-  }
-
-  updateLibraryView(books) {
-    clearLibraryView(this.bookList);
-    this.renderLibrary(books);
+  clearView(parent) {
+    while (parent.hasChildNodes()) {
+      parent.removeChild(parent.lastChild);
+    }
   }
 
   renderBookForm(id) {
