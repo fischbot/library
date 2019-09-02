@@ -10,7 +10,7 @@ function handleClick(e, books, view) {
   } else if (target.classList.contains('sort-btn')) {
     // ex: id = 'sort-by-authors', sortType = 'authors'
     const sortType = id.slice(id.lastIndexOf('-') + 1);
-    handleSort(sortType, books);
+    handleSort(sortType, books, view);
   }
 }
 
@@ -24,9 +24,9 @@ function handleReadStatus(target, books, updateReadView) {
   }
 }
 
-function handleSort(type, books) {
+function handleSort(type, books, view) {
   if (type === 'title' || type === 'authors') books = sort.strings(type, books);
-  console.log(books);
+  view.updateLibraryView(books);
 }
 
 export default handleClick;

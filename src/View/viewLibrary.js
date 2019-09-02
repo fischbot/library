@@ -15,6 +15,12 @@ function viewLibrary(bookList, books, createViewElement) {
   });
 }
 
+function clearLibraryView(bookList) {
+  while (bookList.hasChildNodes()) {
+    bookList.removeChild(bookList.lastChild);
+  }
+}
+
 function createBookView(book, createViewElement) {
   const container = createViewElement('div', ['book'], book.id);
 
@@ -42,4 +48,4 @@ function createBookView(book, createViewElement) {
   return container;
 }
 
-export default viewLibrary;
+export { viewLibrary, clearLibraryView };

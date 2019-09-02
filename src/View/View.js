@@ -1,4 +1,4 @@
-import viewLibrary from './viewLibrary';
+import { viewLibrary, clearLibraryView } from './viewLibrary';
 import viewAddBookForm from './viewAddBookForm';
 import './View.styles.css';
 
@@ -25,6 +25,11 @@ class View {
 
   renderLibrary(books) {
     viewLibrary(this.bookList, books, this.createViewElement);
+  }
+
+  updateLibraryView(books) {
+    clearLibraryView(this.bookList);
+    this.renderLibrary(books);
   }
 
   renderBookForm(id) {
