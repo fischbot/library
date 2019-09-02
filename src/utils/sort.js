@@ -17,7 +17,7 @@ sort.strings = (type, books) => {
         ? lowerCase(a[type][0], b[type][0])
         : [a[type].toLowerCase(), b[type].toLowerCase()];
 
-    return compareStrings(values[0], values[1], type);
+    return compareValues(values[0], values[1], type);
   });
 
   sort.updateSortOrder(type);
@@ -27,8 +27,10 @@ sort.strings = (type, books) => {
 
 sort.updateSortOrder = type => (sort.asc[type] = !sort.asc[type]);
 
-const compareStrings = (a, b, type) =>
-  sort.asc[type] ? stringSort(a, b) : stringSort(b, a);
+const compareValues = (a, b, type) => {
+  const sortFunc = typeof a === 'string' ? stringSort : numberSort;
+  return sort.asc[type] ? sortFunc(a, b) : sortFunc(b, a);
+};
 
 const stringSort = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
 
