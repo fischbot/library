@@ -34,7 +34,7 @@ function createBookView(book, createViewElement) {
       '',
       `Published: ${book.publishedDate}`
     ),
-    createViewElement('p', ['book-page-count'], '', `${book.pageCount} pages`),
+    createViewElement('p', ['book-page-count'], '', `${book.pages} pages`),
     createViewElement('p', ['book-description'], '', book.description),
     createViewElement(
       'button',
