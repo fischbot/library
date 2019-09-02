@@ -15,7 +15,7 @@ class Book {
     this.description = description;
     this.imgUrl = imgUrl;
     this.pages = pages;
-    this.id = this.createId(title);
+    this.id = this.createId(`${title} ${publishedDate}`);
     this.hasRead = hasRead;
   }
 
