@@ -10,7 +10,7 @@ const sampleData = [
     `,
     imgUrl:
       'https://books.google.com/books/content?id=hFfhrCWiLSMC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',
-    pageCount: '',
+    pages: 300,
     id: '',
     hasRead: true
   },
@@ -22,7 +22,7 @@ const sampleData = [
       Aenean lacinia bibendum nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum.
     `,
     imgUrl: '',
-    pageCount: '',
+    pages: 492,
     id: '',
     hasRead: false
   },
@@ -35,7 +35,7 @@ const sampleData = [
     `,
     imgUrl:
       'https://books.google.com/books/content?id=mA8A4BYWB1IC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',
-    pageCount: '3264',
+    pages: 3264,
     id: '',
     hasRead: false
   }
@@ -48,7 +48,7 @@ const books = sampleData.map(book => {
     publishedDate,
     description,
     imgUrl,
-    pageCount,
+    pages,
     id,
     hasRead
   } = book;
@@ -58,7 +58,7 @@ const books = sampleData.map(book => {
     publishedDate,
     description,
     imgUrl,
-    pageCount,
+    pages,
     id,
     hasRead
   );

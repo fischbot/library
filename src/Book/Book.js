@@ -5,7 +5,7 @@ class Book {
     publishedDate,
     description,
     imgUrl,
-    pageCount,
+    pages,
     id,
     hasRead
   ) {
@@ -14,7 +14,7 @@ class Book {
     this.publishedDate = publishedDate;
     this.description = description;
     this.imgUrl = imgUrl;
-    this.pageCount = pageCount;
+    this.pages = pages;
     this.id = this.createId(title);
     this.hasRead = hasRead;
   }
