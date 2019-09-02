@@ -1,17 +1,17 @@
-function viewLibrary(bookList, books, createViewElement) {
-  if (!books) {
+function viewLibrary(parent, books, createViewElement) {
+  if (books.length === 0) {
     let emptyMsg = createViewElement(
       'p',
       [],
       'empty-library-msg',
       'Your library is empty!'
     );
-    this.bookList.appendChild(emptyMsg);
+    parent.appendChild(emptyMsg);
   }
-  // TODO clear previous
+
   books.map(book => {
     const b = createBookView(book, createViewElement);
-    bookList.appendChild(b);
+    parent.appendChild(b);
   });
 }
 
@@ -23,7 +23,7 @@ function clearLibraryView(bookList) {
 
 function createBookView(book, createViewElement) {
   const container = createViewElement('div', ['book'], book.id);
-
+  // const b = book.map(value => (value ? value : '[unavailable]'));
   const values = [
     createViewElement('h2', ['book-title'], '', book.title),
     createViewElement('h3', ['book-author'], '', book.author),

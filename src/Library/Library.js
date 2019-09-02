@@ -1,14 +1,11 @@
 import Book from '../Book/Book';
-import books from '../assets/sample_data';
 
 class Library {
-  constructor() {
+  constructor(books = []) {
     this.books = [...books];
   }
 
-  // display book
-
-  // add book from API/Custom
+  // add individual book
   add(book) {
     this.books = [...this.books, book];
   }
@@ -16,8 +13,6 @@ class Library {
   remove(bookToRemove) {
     this.books = this.books.filter(book => book.id !== bookToRemove.id);
   }
-
-  // sort library
 }
 
 export default Library;

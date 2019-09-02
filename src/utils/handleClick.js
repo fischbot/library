@@ -1,4 +1,5 @@
 import sort from './sort';
+import Search from '../Search/Search';
 
 function handleClick(e, books, view) {
   const target = e.target;
@@ -11,6 +12,13 @@ function handleClick(e, books, view) {
     // ex: id = 'sort-by-authors', sortType = 'authors'
     const sortType = id.slice(id.lastIndexOf('-') + 1);
     handleSort(sortType, books, view);
+  } else if (id === 'search-btn') {
+    // run search
+    const search = new Search();
+    search.run();
+    // display results
+
+    view.renderSearchResults(search.results.books);
   }
 }
 

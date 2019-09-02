@@ -1,5 +1,8 @@
 import { viewLibrary, clearLibraryView } from './viewLibrary';
+import viewSearchResults from './viewSearchResults';
 import viewAddBookForm from './viewAddBookForm';
+import { toggleModalView } from '../utils/viewHelpers';
+
 import './View.styles.css';
 
 class View {
@@ -23,8 +26,13 @@ class View {
     return elem;
   }
 
-  renderLibrary(books) {
-    viewLibrary(this.bookList, books, this.createViewElement);
+  getElement(id) {
+    return document.getElementById(id);
+  }
+
+  renderLibrary(parentId, books) {
+    const parent = this.getElement(parentId);
+    viewLibrary(parent, books, this.createViewElement);
   }
 
   updateLibraryView(books) {
@@ -34,6 +42,16 @@ class View {
 
   renderBookForm(id) {
     viewAddBookForm(id);
+  }
+
+  renderSearchResults(books) {
+    // const resultsContainer = document.getElementById('search-results');
+    // // close search form
+    // toggleModalView('search-modal');
+    // toggleModalView('search-results');
+    // // viewSearchResults(resultsContainer, books, this.createViewElement);
+    // this.renderLibrary('search-result-booklist', books);
+    createSearchView(this.createViewElement);
   }
 }
 
