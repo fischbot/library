@@ -1,7 +1,5 @@
 const sort = {};
-/**
-  @desc
-*/
+
 sort.asc = {
   title: true,
   pageCount: true,
@@ -26,21 +24,6 @@ sort.strings = (type, books) => {
 };
 
 sort.updateSortOrder = type => (sort.asc[type] = !sort.asc[type]);
-
-sort.byTitle = (books, order) =>
-  [...books].sort((a, b) =>
-    compareStrings(a.title.toLowerCase(), b.title.toLowerCase(), order)
-  );
-
-sort.byAuthor = (books, order) =>
-  // if more than one author per book, use first listed
-  [...books].sort((a, b) =>
-    compareStrings(
-      a.authors[0].toLowerCase(),
-      b.authors[0].toLowerCase(),
-      order
-    )
-  );
 
 const lowerCase = (...txt) => txt.map(t => t.toLowerCase());
 
