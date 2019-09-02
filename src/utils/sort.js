@@ -1,3 +1,5 @@
+import { loweCase } from './helpers';
+
 const sort = {};
 
 sort.asc = {
@@ -24,8 +26,6 @@ sort.strings = (type, books) => {
 };
 
 sort.updateSortOrder = type => (sort.asc[type] = !sort.asc[type]);
-
-const lowerCase = (...txt) => txt.map(t => t.toLowerCase());
 
 const compareStrings = (a, b, type) =>
   sort.asc[type] ? stringSort(a, b) : stringSort(b, a);
