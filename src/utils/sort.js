@@ -1,4 +1,4 @@
-import { loweCase } from './helpers';
+import { lowerCase } from './helpers';
 
 const sort = {};
 
