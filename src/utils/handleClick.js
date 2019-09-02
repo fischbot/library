@@ -26,6 +26,9 @@ function handleReadStatus(target, books, updateReadView) {
 
 function handleSort(type, books, view) {
   if (type === 'title' || type === 'authors') books = sort.strings(type, books);
+
+  if (type === 'pages') books = sort.byPages(type, books);
+
   view.updateLibraryView(books);
 }
 

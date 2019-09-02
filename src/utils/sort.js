@@ -25,6 +25,17 @@ sort.strings = (type, books) => {
   return sorted;
 };
 
+sort.byPages = (type, books) => {
+  const sorted = [...books].sort((a, b) => {
+    const valueA = a[type];
+    const valueB = b[type];
+    return compareValues(valueA, valueB, type);
+  });
+
+  sort.updateSortOrder(type);
+  return sorted;
+};
+
 sort.updateSortOrder = type => (sort.asc[type] = !sort.asc[type]);
 
 const compareValues = (a, b, type) => {
