@@ -1,37 +1,33 @@
 import Book from '../Book/Book';
 import Library from '../Library/Library';
+import ViewLibrary from '../ViewLibrary/ViewLibrary';
+import Modal from '../Modal/Modal';
 
-class Search {
-  constructor() {
-    this.API_URL = 'https://www.googleapis.com/books/v1/volumes?q=';
-    this.searchValue = document.getElementById('book-search').value;
+class Search extends ViewLibrary {
+  constructor(searchInputId) {
+    super();
+    this.searchValue = document.getElementById(searchInputId).value;
     this.results = new Library();
+    const modal = new Modal('search-results');
+    this.parent = modal.parent;
   }
 
   run() {
+    const API_URL = 'https://www.googleapis.com/books/v1/volumes?q=';
     let books = [];
-    fetch(`${this.API_URL}${this.searchValue}`)
+    fetch(`${API_URL}${this.searchValue}`)
       .then(response => response.json())
       .then(response => {
         books = response.items.map(item => {
           const book = this.createBook(item);
           this.results.add(book);
         });
-        console.log(this.results.books);
-        // response.items.forEach(function(item, index) {
-        //   let book = setBookSearchResult(item, index);
-        //   const elements = createHtmlElementsForEntryAndSearchResults('search');
-        //   elements.searchResultItem.id = book.searchId;
 
-        //   appendEntries(elements, 'search');
-        //   elements.addToLibraryBtn.id = book.searchId;
-        //   elements.addToLibraryBtn.innerText = 'Add to Library';
-        //   addEntryText(elements, book, 'search');
-        // });
+        this.render(this.results.books);
       })
       .catch(error => {
-        alert('Something went wrong');
-        console.error('There was an error:', error);
+        this.emptyMsg('Something went wrong');
+        console.error('Error:', error);
       });
   }
 
