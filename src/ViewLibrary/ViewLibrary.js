@@ -10,12 +10,12 @@ class ViewLibrary extends View {
     this.render(books);
   }
 
-  emptyMsg() {
+  emptyMsg(content) {
     const emptyMsg = this.createViewElement(
       'p',
       [],
       'empty-library-msg',
-      'Your library is empty!'
+      content
     );
     this.parent.appendChild(emptyMsg);
   }
@@ -52,7 +52,7 @@ class ViewLibrary extends View {
   }
 
   render(books) {
-    if (books.length === 0) this.emptyMsg(this.parent);
+    if (books.length === 0) this.emptyMsg('Your library is empty!');
     books.map(book => {
       const b = this.createBookView(book);
       this.parent.appendChild(b);
