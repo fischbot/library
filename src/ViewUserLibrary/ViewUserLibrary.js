@@ -11,7 +11,7 @@ class ViewUserLibrary extends ViewLibrary {
     isRead ? target.classList.remove('read') : target.classList.add('read');
   }
 
-  handleReadStatus(target, books, updateReadView) {
+  handleReadStatus(target, books) {
     for (let book of books) {
       if (book.id === target.parentNode.id) {
         book.hasRead = book.toggleReadStatus(book);
