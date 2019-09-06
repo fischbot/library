@@ -18,108 +18,42 @@
   </head>
 
   <body>
-    <div id="page">
-      <header id="header">
-        <h1>My Library</h1>
-        <nav>
-          <div class="container" id="menu-btn-container">
-            <button id="menu-btn">
-              <i id="menu-btn-icon" class="fas fa-angle-up"></i>
-            </button>
-          </div>
-          <div id="add-book-menu">
-            <div class="container">
-              <h2>Add a Book:</h2>
-              <ul>
-                <li>
-                  <button id="open-search-modal-btn">Search</button>
-                </li>
-                <li>
-                  <button id="open-form-modal-btn">Add Your Own</button>
-                </li>
-              </ul>
-            </div>
-            <!-- /.nav container -->
-          </div>
-          <!-- /#add-book-menu -->
-          <div id="sort">
-            <div class="container">
-              <h2>Sort by:</h2>
-              <ul>
-                <li><button id="sort-by-title">Title</button></li>
-                <!-- <li><button id="sort-by-author">Author</button></li> -->
-                <li><button id="sort-by-pages">Pages</button></li>
-                <li><button id="sort-by-recent">Recent</button></li>
-                <li><button id="sort-by-read">Read/Not Read</button></li>
-              </ul>
-            </div>
-          </div>
-          <!-- /#sort -->
-        </nav>
-      </header>
-
-      <div id="search-modal" class="hidden">
-        <header>
-          <button id="close-search-modal-btn">X</button>
-          <div id="search-input-container">
-            <input
-              type="search"
-              id="books"
-              placeholder="Enter a book title or author"
-            />
-            <button id="search-btn">Search</button>
-          </div>
-          <!-- /#search -->
-        </header>
-        <div id="search-results"></div>
-      </div>
-      <!-- /#search-modal -->
-      <div id="add-own-book-modal" class="hidden">
-        <button id="close-add-own-modal-btn">X</button>
-        <div id="add-own-book-form-container">
-          <label>Title: </label
-          ><input type="text" id="add-own-title" placeholder="Title" required />
-          <label>Author: </label
-          ><input type="text" id="add-own-authors" placeholder="Author" />
-          <label>Page Count: </label
-          ><input
-            type="number"
-            id="add-own-page-count"
-            placeholder="How many pages?"
-            min="1"
-          />
-          <label>Year Published: </label
-          ><input
-            type="date"
-            id="add-own-publish-date"
-            placeholder="Year Published"
-          />
-          <label>Image :</label
-          ><input type="text" id="add-own-img" placeholder="Image URL" />
-          <label>Description: </label
-          ><textarea id="add-own-description"></textarea>
-          <button id="submit-btn">Submit</button>
+    <header>
+      <h1>My Library</h1>
+      <nav>
+        <div class="add-book-menu menu-container">
+          <h2>Add a Book:</h2>
+          <button class="open-modal-btn" id="search">Search</button>
+          <button class="open-modal-btn" id="custom">Add Your Own</button>
         </div>
-      </div>
-      <!-- /#add-own-book-modal -->
+        <div class="sort-menu menu-container">
+          <h2>Sort by:</h2>
+          <button class="sort-btn" id="sort-by-title">Title</button>
+          <button class="sort-btn" id="sort-by-authors">Author</button>
+          <button class="sort-btn" id="sort-by-pages">Pages</button>
+          <!-- <button class="sort-btn" id="sort-by-recent">Recent</button>
+          <button class="sort-btn" id="sort-by-read">Read/Not Read</button> -->
+        </div>
+        <!-- /#sort -->
+      </nav>
+    </header>
 
-      <div class="main-container">
-        <div id="book-list"></div>
-      </div>
-      <!-- /.main-container -->
-      <button id="back-to-top-btn">Top</button>
-      <footer>
-        <p>
-          &copy;2018 Made by
-          <a href="https://github.com/robotspacefish" target="_blank"
-            >robotspacefish</a
-          >
-        </p>
-      </footer>
+    <div class="main-container">
+      <div id="book-list"></div>
     </div>
-    <!-- /#page -->
-    <!-- <script src="https://www.google.com/books/jsapi.js"></script>
-    <script src="js/main.js"></script> -->
+    <!-- /.main-container -->
+
+    <!-- <button id="back-to-top-btn">Top</button> -->
+
+    <footer>
+      <p>
+        &copy;2018 Made by
+        <a href="https://github.com/robotspacefish" target="_blank"
+          >robotspacefish</a
+        >
+      </p>
+    </footer>
+
     <script src="main.js"></script>
   </body>
 </html>
