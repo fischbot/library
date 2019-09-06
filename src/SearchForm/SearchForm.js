@@ -1,10 +1,12 @@
 import Form from '../Form/Form';
+import './SearchForm.styles.css';
 
 class SearchForm extends Form {
   constructor(parentId) {
     super(parentId);
     this.init();
     this.searchValue = '';
+    this.formClasses = ['search-form'];
   }
 
   init() {

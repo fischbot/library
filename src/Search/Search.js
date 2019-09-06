@@ -1,15 +1,12 @@
 import Book from '../Book/Book';
 import Library from '../Library/Library';
 import ViewLibrary from '../ViewLibrary/ViewLibrary';
-import Modal from '../Modal/Modal';
 
 class Search extends ViewLibrary {
-  constructor(searchInputId) {
-    super();
-    this.searchValue = document.getElementById(searchInputId).value;
+  constructor(parentId, searchValue) {
+    super(parentId);
+    this.searchValue = searchValue;
     this.results = new Library();
-    const modal = new Modal('search-results');
-    this.parent = modal.parent;
   }
 
   run() {
