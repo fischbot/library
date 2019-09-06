@@ -1,4 +1,5 @@
 import View from '../View/View';
+import ViewBook from '../ViewBook/ViewBook';
 
 class ViewLibrary extends View {
   constructor(parentId) {
@@ -20,41 +21,11 @@ class ViewLibrary extends View {
     this.parent.appendChild(emptyMsg);
   }
 
-  createBookView(book) {
-    const container = this.createViewElement('div', ['book'], book.id);
-    const values = [
-      this.createViewElement('h2', ['book-title'], '', book.title),
-      this.createViewElement('h3', ['book-author'], '', book.author),
-      this.createViewElement('img', ['book-img'], '', book.imgUrl),
-      this.createViewElement(
-        'p',
-        ['book-published-date'],
-        '',
-        `Published: ${book.publishedDate}`
-      ),
-      this.createViewElement(
-        'p',
-        ['book-page-count'],
-        '',
-        `${book.pages} pages`
-      ),
-      this.createViewElement('p', ['book-description'], '', book.description),
-      this.createViewElement(
-        'button',
-        ['book-has-read-btn', book.hasRead && 'read'],
-        '',
-        book.hasRead ? 'Read' : 'Not Read'
-      ),
-      this.createViewElement('button', ['book-delete-btn'], '', 'X')
-    ];
-    values.map(value => container.appendChild(value));
-    return container;
-  }
-
   render(books) {
     if (books.length === 0) this.emptyMsg('Your library is empty!');
     books.map(book => {
-      const b = this.createBookView(book);
+      const view = new ViewBook(false);
+      const b = view.createBookView(book);
       this.parent.appendChild(b);
     });
   }
