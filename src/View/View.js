@@ -24,6 +24,11 @@ class View {
       parent.removeChild(parent.lastChild);
     }
   }
+
+  emptyMsg(content) {
+    const emptyMsg = this.createViewElement('p', [], 'empty-msg', content);
+    this.parent.appendChild(emptyMsg);
+  }
 }
 
 export default View;
