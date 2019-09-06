@@ -15,3 +15,12 @@
   font-size: 2em;
   color: white;
 }
+
+#modal-content-container {
+  position: relative;
+  background: white;
+  padding: 40px;
+}
+
+.close-modal-btn {
+}
