@@ -1,5 +1,7 @@
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
@@ -8,51 +10,11 @@ body {
   margin: 0;
   font-family: 'Raleway', sans-serif;
   background: #fffef5;
-}
-
-/*  disable WebKit’s proprietary pseudoelements to
-    get rid of superfluous padding
-    https://css-tricks.com/webkit-html5-search-inputs/
- */
-input[type='search']::-webkit-search-decoration,
-input[type='search']::-webkit-search-cancel-button,
-input[type='search']::-webkit-search-results-button,
-input[type='search']::-webkit-search-results-decoration {
-  display: none;
-}
-
-ul {
-  padding: 0;
-}
-
-li {
-  list-style-type: none;
-  display: inline;
-}
-
-#page {
   display: flex;
   flex-direction: column;
+  align-items: center;
   min-height: 100vh;
   width: 100vw;
-}
-
-.container,
-.main-container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.main-container {
-  position: relative;
-  margin-top: 320px;
-  flex: 1;
-}
-
-.hidden,
-.closed-menu {
-  display: none !important;
 }
 
 h1,
@@ -72,403 +34,64 @@ h3 {
   letter-spacing: 1px;
 }
 
-h1,
-nav {
-  margin: 0;
-}
-
-#empty-library-msg {
-  text-align: center;
-  font-family: 'Raleway', sans-serif;
-  grid-column: 1 / -1;
-}
-/* ============= Header ================================== */
-#header {
-  text-align: center;
-  background: #70bf80;
-  color: #fff;
-  padding: 30px 0 0;
-  top: 0;
-  width: 100%;
-  position: fixed;
-  z-index: 1000;
-
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto auto auto;
-}
-
-/* ============= Nav ================================== */
-nav .container {
-  position: relative;
-}
-
-#add-book-menu {
-  background: #e2efd8;
-}
-
-#add-book-menu .container,
-#sort .container {
-  display: flex;
-  justify-content: center;
-  padding: 5px 0;
-  align-items: center;
-  padding: 0 1%;
-  font-size: 0.875em;
-}
-
-#menu-btn {
-  font-size: 2.2em;
-  padding: 5px 0;
-  margin: 0;
-}
-
-#menu-btn-icon:hover {
-  color: #3f6c4b;
-}
-
-#menu-btn-icon {
-  color: #fff;
-}
-
-nav h1,
-nav ul {
-  margin: 0;
-}
-
-nav h2,
-#sort h2 {
-  color: #222;
-  margin-right: 10px;
-}
-
-/* ============= Buttons ================================= */
-#back-to-top-btn {
-  display: none;
-  position: fixed;
-  bottom: 20px;
-  right: 30px;
-  z-index: 299;
-  border: none;
-  background-color: rgba(11, 77, 80, 0.3);
-  color: #fff;
-  padding: 10px;
-  border-radius: 4px;
-}
-
-#back-to-top-btn:hover {
-  background-color: rgba(11, 77, 80, 0.6);
-}
-
 button {
   cursor: pointer;
-  outline: none;
-  color: #fff;
-  background: none;
-  font-size: 1.2em;
-  padding: 7px;
-  border: none;
 }
 
-#submit-btn {
-  display: block;
+header {
+  background: #70bf80;
+  color: #fff;
   width: 100%;
-  background: #127a7f;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  text-align: center;
 }
 
-#submit-btn,
-#search-btn {
-  outline: initial;
+.menu-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-#submit-btn:hover,
-#search-btn:hover {
-  background: #0b4d50;
+.menu-btns-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
-.add-to-library-btn {
-  color: #fff;
-  background: #1dbdbf;
-}
-
-.add-to-library-btn:hover {
-  background: #117677;
-}
-
-.add-to-library-btn {
-  grid-column: 1 / -1;
-}
-
-#open-search-modal-btn,
-#open-form-modal-btn {
-  margin: 5px 10px;
-  background: none;
-  color: #808080;
-}
-
-.close-modal-btn {
-  position: absolute;
-  background-color: #b72d3b;
-  right: 10px;
-  top: 12px;
-  border-radius: 5px;
-  padding: 5px 10px;
-}
-
-#close-search-modal-btn:hover,
-#close-add-own-modal-btn:hover {
-  background: #6b1c25;
-}
-
-#sort button,
-#open-search-modal-btn,
-#open-form-modal-btn {
+.menu-btns-container button {
+  font-family: inherit;
+  font-size: 1.1em;
   background: #eee;
   border: 1px solid #b5b9bd;
   color: #999ea5;
   margin: 5px 10px;
+  padding: 0.4em;
 }
 
-#sort button:hover,
-#open-search-modal-btn:hover,
-#open-form-modal-btn:hover {
+.menu-btns-container button:hover {
   color: #474c53;
 }
 
-/* ============= Sort  ============================= */
-#sort {
-  background: #f7f7e7;
-  border-bottom: 3px solid #e9e9b7;
-}
-
-/* #sort:hover {
-  background: #E1E2D7;
-} */
-
-/* ============= Search Modal  ============================= */
-#overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  z-index: 1001;
-  background-color: #222;
-  filter: opacity(0.9);
-  -webkit-filter: opacity(0.9);
-}
-
-#search-modal,
-#custom-book-modal {
-  /* width: 96%;
-  max-width: 1200px;
-  margin: 100px auto 0; */
-  border: 3px solid #eee;
-  position: absolute;
-  z-index: 9999;
-  background: #fff;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  background: rgba(0, 0, 0, 0.8);
-}
-
-.flex-center {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-form {
-  width: 40%;
-  margin: 0 auto;
-  padding: 20px 40px;
-  background: white;
-  position: relative;
-}
-
-#search-modal header {
-  display: flex;
-  padding: 20px 0 40px;
-}
-
-#search-input-container,
-#custom-book-form-container {
-  width: 70%;
-  max-width: 600px;
-  margin: 0 auto;
-  justify-content: center;
-  align-content: center;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr;
-}
-
-/* .add-book-form {
-  width: 100vw;
-  height: 100vh;
-  background: red;
-} */
-
-input,
-textarea {
-  /* enable you to style input in safari */
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  font-size: 1em;
-  padding-left: 5px;
-  width: 100%;
-  height: 100%;
-  border: 0;
-  height: 30px;
-  border: 1px solid #eee;
-}
-
-#search-btn {
-  width: 100%;
-  background: #3f8dbf;
-}
-
-/* ============= Library and Search Result Entries ========================= */
-#search-results {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: 10px;
-  margin: 0 2%;
-}
-
-.search-result-item {
-  position: relative;
-  height: 400px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 3fr 30px;
-  grid-template-rows: 60px auto auto auto 1fr auto;
-  grid-row-gap: 10px;
-  border: 3px solid #7a7f7f;
-}
-
-.search-result-item {
-  background: #eee;
-}
-
-.search-result-item:hover {
-  box-shadow: 2px 1px 3px #a2a2a2;
-}
-
-h2.search-result-title {
-  background: #7a7f7f;
-  color: #fff;
-  text-align: center;
-  margin: 0;
-  padding-right: 20px;
-  font-size: 1.25em;
-  grid-column: 1 / -1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-h3.search-result-author {
-  font-size: 1.14em;
-  padding: 0 10px;
-  margin: 5px 0;
-  text-align: right;
-  grid-column: 1 / -1;
-}
-
-img.search-result-img {
-  height: auto;
-  width: 100px;
-  /* margin: 0 auto; */
-  grid-row: span 2;
-  grid-column: 1 / span 2;
-  justify-self: end;
-}
-
-.search-result-item p {
-  margin: 0;
-  grid-column: 3 / span 2;
-}
-
-p.search-result-publish-date {
-  align-self: end;
-}
-p.search-result-publish-date,
-p.search-result-page-count {
-  justify-self: center;
-}
-
-p.search-result-description {
-  padding: 0 10px;
-  line-height: 1.4em;
-  overflow-y: scroll;
-  grid-column: 1 / -1;
-}
-
-footer {
-  padding: 40px 0;
-  margin-top: 100px;
-  text-align: center;
-  color: #fff;
-  background: #1bbdbf;
-  font-size: 14px;
-  width: 100%;
-}
-
-footer a {
-  color: #fff;
-  text-decoration: none;
-}
-
-footer a:hover {
-  color: #2b4b81;
-  font-weight: bold;
-}
-
-/* ============================================================================
-                                MEDIA QUERIES
- ============================================================================ */
-@media screen and (min-width: 578px) {
-  nav .container {
-    font-size: 1em;
-  }
-
-  img.entry-img,
-  img.search-result-img {
-    width: 70px;
-  }
-
-  #search-input-container {
-    grid-template-columns: 1fr 17%;
-    grid-template-rows: 1fr;
-  }
-
-  #search-btn {
-    height: 30px;
-    padding: 0;
-  }
-
-  #book-list,
-  #search-results {
-    grid-template-columns: 1fr 1fr;
-  }
+.main-container {
+  flex: 1;
 }
 
 @media screen and (min-width: 768px) {
-  #book-list,
+  /* #book-list,
   #search-results {
     grid-template-columns: 1fr 1fr 1fr;
-  }
+  } */
 }
 
 @media screen and (min-width: 1000px) {
-  #book-list,
+  /* #book-list,
   #search-results {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     margin: 0;
-  }
+  } */
 }
