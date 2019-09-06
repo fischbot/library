@@ -27,8 +27,8 @@ sort.strings = (type, books) => {
 
 sort.byPages = (type, books) => {
   const sorted = [...books].sort((a, b) => {
-    const valueA = a[type];
-    const valueB = b[type];
+    const valueA = a[type] ? a[type] : 9999999;
+    const valueB = b[type] ? b[type] : 9999999;
     return compareValues(valueA, valueB, type);
   });
 
