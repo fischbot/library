@@ -17,7 +17,7 @@ function handleClick(e, library, searchQuery) {
 
     if (id === 'search') form = new SearchForm(modal.contentContainer.id);
 
-    // if (id === 'custom') form = new CustomForm('custom-modal');
+    if (id === 'custom') form = new CustomForm(modal.contentContainer.id);
 
     form.render();
   } else if (target.classList.contains('close-modal-btn')) {

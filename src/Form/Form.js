@@ -1,9 +1,10 @@
 import View from '../View/View';
 
 class Form extends View {
-  constructor(parentId) {
-    super(parentId);
+  constructor(containerId) {
+    super(containerId);
     this.elements = [];
+    this.formClasses = [];
   }
 
   input(type, name, classes, id, placeholder, required) {
@@ -12,19 +13,18 @@ class Form extends View {
     i.name = name;
     i.placeholder = placeholder;
     i.required = required;
-
-    this.storeElement(i);
+    return i;
   }
 
   button(classes, id, text) {
     const b = this.createViewElement('button', classes, id, text);
-    this.storeElement(b);
+    return b;
   }
 
   label(forName, classes, id, text) {
     const l = this.createViewElement('label', classes, id, text);
     l.for = forName; // ?? not showing up, but shows in debugger
-    this.storeElement(l);
+    return l;
   }
 
   textArea(name, classes, id, rows, cols) {}
@@ -34,9 +34,10 @@ class Form extends View {
   }
 
   render() {
-    const form = this.createViewElement('form');
+    const form = this.createViewElement('form', this.formClasses);
+
     this.elements.map(element => form.appendChild(element));
-    this.parent.appendChild(form);
+    this.containerId.appendChild(form);
   }
 }
 
