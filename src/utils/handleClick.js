@@ -3,45 +3,49 @@ import Modal from '../Modal/Modal';
 import SearchForm from '../SearchForm/SearchForm';
 
 let modal;
-let search;
+let resultsModal;
+let searchResults;
 let form;
-function handleClick(e, library, userLibraryView, searchQuery) {
+function handleClick(e, library, searchQuery) {
   const target = e.target;
   const id = target.id;
-  // if (target.id === 'search-btn') debugger;
-  console.log(id);
+
   if (target.classList.contains('book-has-read-btn')) {
-    // update read view
-    userLibraryView.handleClick(target, library.books);
+    library.handleReadStatus(target, library.books);
   } else if (target.classList.contains('open-modal-btn')) {
     modal = new Modal(id);
-    if (id === 'search') form = new SearchForm(modal.contentParent.id);
+
+    if (id === 'search') form = new SearchForm(modal.contentContainer.id);
 
     // if (id === 'custom') form = new CustomForm('custom-modal');
 
     form.render();
-  } else if (id === 'search-btn') {
-    searchQuery = form.getSearchValue();
-
-    modal.hide();
-    let resultsModal = new Modal('results');
-
-    search = new Search(resultsModal.contentParent.id, searchQuery);
-
-    // modal.clearView(modal.parent);
-
-    search.run();
   } else if (target.classList.contains('close-modal-btn')) {
     modal.remove();
     modal = undefined;
   } else if (target.classList.contains('sort-btn')) {
-    // sort library
-    userLibraryView.sort(id, library.books);
+    library.handleSort(id);
   } else if (target.classList.contains('book-delete-btn')) {
-    // delete the selected book
-    library.remove(target.parentNode.id);
-    userLibraryView.updateView(library.books);
+    library.handleRemove(target.parentNode.id);
+  } else if (id === 'search-btn') {
+    searchQuery = form.getSearchValue();
+
+    modal.remove();
+    modal = undefined;
+
+    resultsModal = new Modal('results');
+
+    searchResults = new Search(resultsModal.contentContainer.id, searchQuery);
+
+    searchResults.run();
+  } else if (target.classList.contains('add-to-library-btn')) {
+    // add book to user's library by grabbing matching id from results and re-render
+    library.handleAddBook(searchResults.results.books, target.parentNode.id);
+    // close modal
+    resultsModal.remove();
+    resultsModal = undefined;
   }
+
   e.preventDefault();
 }
 

@@ -1,17 +1,17 @@
-import Library from './Library/Library';
+import UserLibrary from './UserLibrary/UserLibrary';
 import ViewUserLibrary from './ViewUserLibrary/ViewUserLibrary';
 import handleClick from './utils/handleClick';
 import sampleData from './assets/sample_data';
 import './main.css';
 
 (function() {
-  const library = new Library(sampleData);
-  const userLibraryView = new ViewUserLibrary('book-list');
-  const { books } = library;
+  const library = new UserLibrary(sampleData);
+
+  let searchQuery = '';
+
   document.addEventListener(
     'click',
-    e => handleClick(e, library, userLibraryView),
+    e => handleClick(e, library, searchQuery),
     false
   );
-  userLibraryView.render(books);
 })();

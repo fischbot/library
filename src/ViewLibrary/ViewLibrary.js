@@ -2,21 +2,22 @@ import View from '../View/View';
 import ViewBook from '../ViewBook/ViewBook';
 
 class ViewLibrary extends View {
-  constructor(parentId) {
-    super(parentId);
+  constructor(containerId) {
+    super(containerId);
+    this.msg = 'Your library is empty!';
   }
 
   updateView(books) {
-    this.clearView(this.parent);
+    this.clearView(this.containerId);
     this.render(books);
   }
 
-  render(books) {
-    if (books.length === 0) this.emptyMsg('Your library is empty!');
+  render(books, isSearchResult) {
+    if (books.length === 0) this.emptyMsg(this.msg);
     books.map(book => {
-      const view = new ViewBook(false);
+      const view = new ViewBook(isSearchResult);
       const b = view.createBookView(book);
-      this.parent.appendChild(b);
+      this.containerId.appendChild(b);
     });
   }
 }

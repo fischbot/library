@@ -4,7 +4,6 @@ import sort from '../utils/sort';
 
 class UserLibrary extends Library {
   constructor(books) {
-    // this.books = [...books];
     super(books);
     this.view = new ViewUserLibrary('book-list');
     this.view.render(this.books);
@@ -36,6 +35,17 @@ class UserLibrary extends Library {
   handleRemove(id) {
     this.remove(id);
     this.view.updateView(this.books);
+  }
+
+  handleAddBook(books, bookId) {
+    const book = this.findBook(books, bookId);
+    this.add(book[0]);
+    // debugger;
+    this.view.updateView(this.books);
+  }
+
+  findBook(books, idToFind) {
+    return books.filter(book => book.id === idToFind);
   }
 
   sort(id, books) {

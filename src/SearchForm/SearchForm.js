@@ -2,8 +2,8 @@ import Form from '../Form/Form';
 import './SearchForm.styles.css';
 
 class SearchForm extends Form {
-  constructor(parentId) {
-    super(parentId);
+  constructor(containerId) {
+    super(containerId);
     this.init();
     this.searchValue = '';
     this.formClasses = ['search-form'];

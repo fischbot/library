@@ -1,12 +1,12 @@
 import Book from '../Book/Book';
 import Library from '../Library/Library';
-import ViewLibrary from '../ViewLibrary/ViewLibrary';
+import ViewSearchResults from '../ViewSearchResults/ViewSearchResults';
 
-class Search extends ViewLibrary {
-  constructor(parentId, searchValue) {
-    super(parentId);
+class Search {
+  constructor(containerId, searchValue) {
     this.searchValue = searchValue;
     this.results = new Library();
+    this.view = new ViewSearchResults(containerId, this.results);
   }
 
   run() {
@@ -16,29 +16,31 @@ class Search extends ViewLibrary {
       .then(response => response.json())
       .then(response => {
         books = response.items.map(item => {
-          const book = this.createBook(item);
+          const {
+            title,
+            authors,
+            publishedDate,
+            description,
+            imgUrl,
+            pageCount
+          } = item.volumeInfo;
+
+          const book = new Book(
+            title,
+            authors,
+            publishedDate,
+            description,
+            imgUrl,
+            pageCount
+          );
           this.results.add(book);
         });
-
-        this.render(this.results.books);
+        this.view.render(this.results.books, true);
       })
       .catch(error => {
-        this.emptyMsg('Something went wrong');
+        this.view.emptyMsg('Something went wrong');
         console.error('Error:', error);
       });
-  }
-
-  createBook(item) {
-    return new Book(
-      item.volumeInfo.title,
-      item.volumeInfo.authors,
-      item.volumeInfo.publishedDate,
-      item.volumeInfo.description,
-      item.volumeInfo.imgUrl,
-      item.volumeInfo.pageCount,
-      '',
-      false
-    );
   }
 }
 export default Search;

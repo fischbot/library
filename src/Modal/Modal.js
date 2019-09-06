@@ -4,19 +4,23 @@ import './Modal.styles.css';
 class Modal extends View {
   constructor(modalType) {
     super();
-    this.parent = '';
+    this.containerId = '';
     this.modalId = `${modalType}-modal`;
-    this.contentParent = this.createViewElement(
+    this.contentContainer = this.createViewElement(
       'div',
-      [],
-      'modal-content-container'
+      ['modal-content-container'],
+      `${modalType}-content`
     );
     this.render();
   }
 
   // remove the modal from the DOM
   remove() {
-    this.parent.parentNode.removeChild(this.parent);
+    this.containerId.parentNode.removeChild(this.containerId);
+  }
+
+  hide() {
+    this.containerId.style.display = 'none';
   }
 
   createCloseBtn(parent) {
@@ -32,13 +36,13 @@ class Modal extends View {
   render() {
     const body = document.querySelector('body');
 
-    this.parent = this.createViewElement('div', ['modal'], this.modalId);
+    this.containerId = this.createViewElement('div', ['modal'], this.modalId);
 
-    body.appendChild(this.parent);
+    body.appendChild(this.containerId);
 
-    this.parent.appendChild(this.contentParent);
+    this.containerId.appendChild(this.contentContainer);
 
-    this.createCloseBtn(this.contentParent);
+    this.createCloseBtn(this.contentContainer);
   }
 }
 
