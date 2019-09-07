@@ -11,7 +11,7 @@ class SearchForm extends Form {
 
   init() {
     // create an input
-    this.input(
+    const input = this.input(
       'search',
       'search',
       [],
@@ -21,7 +21,9 @@ class SearchForm extends Form {
     );
 
     // create a search/submit button
-    this.button([], 'search-btn', 'Search');
+    const btn = this.button([], 'search-btn', 'Search');
+
+    [input, btn].map(e => this.storeElement(e));
   }
 
   getSearchValue() {
