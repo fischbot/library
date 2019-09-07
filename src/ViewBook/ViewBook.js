@@ -41,7 +41,18 @@ class ViewBook extends View {
         ),
         this.createViewElement('button', ['book-delete-btn'], '', 'X')
       ];
+    } else {
+      values = [
+        ...values,
+        this.createViewElement(
+          'button',
+          ['add-to-library-btn'],
+          book.id,
+          'Add to Library'
+        )
+      ];
     }
+
     values.map(value => container.appendChild(value));
     return container;
   }
