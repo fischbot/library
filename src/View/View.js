@@ -1,8 +1,8 @@
 import './View.styles.css';
 
 class View {
-  constructor(parentId) {
-    this.parent = document.getElementById(parentId);
+  constructor(containerId) {
+    this.containerId = document.getElementById(containerId);
   }
 
   createViewElement(type, classes, id, content) {
@@ -19,15 +19,15 @@ class View {
     return document.getElementById(id);
   }
 
-  clearView(parent) {
-    while (parent.hasChildNodes()) {
-      parent.removeChild(parent.lastChild);
+  clearView(containerId) {
+    while (containerId.hasChildNodes()) {
+      containerId.removeChild(containerId.lastChild);
     }
   }
 
   emptyMsg(content) {
     const emptyMsg = this.createViewElement('p', [], 'empty-msg', content);
-    this.parent.appendChild(emptyMsg);
+    this.containerId.appendChild(emptyMsg);
   }
 }
 
