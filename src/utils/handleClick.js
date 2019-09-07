@@ -1,6 +1,7 @@
 import Search from '../Search/Search';
 import Modal from '../Modal/Modal';
 import SearchForm from '../SearchForm/SearchForm';
+import CustomForm from '../CustomForm/CustomForm';
 
 let modal;
 let resultsModal;
@@ -40,10 +41,18 @@ function handleClick(e, library, searchQuery) {
     searchResults.run();
   } else if (target.classList.contains('add-to-library-btn')) {
     // add book to user's library by grabbing matching id from results and re-render
-    library.handleAddBook(searchResults.results.books, target.parentNode.id);
+    library.handleAddBookFromSearch(
+      searchResults.results.books,
+      target.parentNode.id
+    );
     // close modal
     resultsModal.remove();
     resultsModal = undefined;
+  } else if (id === 'custom-submit-btn') {
+    modal.remove();
+    modal = undefined;
+    let book = form.handleSubmit(library.books);
+    library.addBookFromCustom(book);
   }
 
   e.preventDefault();

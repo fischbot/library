@@ -1,8 +1,10 @@
 import Form from '../Form/Form';
+import Book from '../Book/Book';
 
 class CustomForm extends Form {
   constructor(parentId) {
     super(parentId);
+    this.inputs = [];
     this.init();
     this.formClasses = ['custom-form'];
   }
@@ -37,7 +39,7 @@ class CustomForm extends Form {
         false
       ),
       this.addInputEntry(
-        'published-date',
+        'publishedDate',
         '',
         'Year Published',
         'date',
@@ -65,6 +67,8 @@ class CustomForm extends Form {
       )
     ];
     sections.map(section => this.createSection(section));
+    this.inputs = sections.map((section, i) => section[1]);
+
     this.storeElement(this.button([], 'custom-submit-btn', 'Submit'));
   }
 
@@ -94,6 +98,30 @@ class CustomForm extends Form {
     const div = this.createViewElement('div', ['custom-section']);
     args.map(e => div.appendChild(e));
     this.storeElement(div);
+  }
+
+  handleSubmit(books) {
+    const info = {};
+    this.inputs.map(input => {
+      let { name, value } = input;
+      info[name] = value;
+    });
+    const {
+      title,
+      authors,
+      publishedDate,
+      description,
+      imgUrl,
+      pageCount
+    } = info;
+    return new Book(
+      title,
+      authors,
+      publishedDate,
+      description,
+      imgUrl,
+      pageCount
+    );
   }
 }
 

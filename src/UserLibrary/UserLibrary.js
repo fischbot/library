@@ -37,10 +37,15 @@ class UserLibrary extends Library {
     this.view.updateView(this.books);
   }
 
-  handleAddBook(books, bookId) {
+  handleAddBookFromSearch(books, bookId) {
     const book = this.findBook(books, bookId);
     this.add(book[0]);
     // debugger;
+    this.view.updateView(this.books);
+  }
+
+  addBookFromCustom(book) {
+    this.add(book);
     this.view.updateView(this.books);
   }
 
