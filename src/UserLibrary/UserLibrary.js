@@ -5,7 +5,7 @@ import sort from '../utils/sort';
 class UserLibrary extends Library {
   constructor(books) {
     super(books);
-    this.view = new ViewUserLibrary('book-list');
+    this.view = new ViewUserLibrary('js-book-list');
     this.view.render(this.books);
   }
 

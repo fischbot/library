@@ -35,18 +35,23 @@ class ViewBook extends View {
         ...values,
         this.createViewElement(
           'button',
-          ['book-has-read-btn', book.hasRead && 'read'],
+          ['js-book__has-read-btn', book.hasRead && 'read'],
           '',
           book.hasRead ? 'Read' : 'Not Read'
         ),
-        this.createViewElement('button', ['book-delete-btn'], '', 'X')
+        this.createViewElement(
+          'button',
+          ['js-book__delete-btn', 'close-btn'],
+          '',
+          'X'
+        )
       ];
     } else {
       values = [
         ...values,
         this.createViewElement(
           'button',
-          ['add-to-library-btn'],
+          ['js-book_add-to-library-btn'],
           book.id,
           'Add to Library'
         )

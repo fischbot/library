@@ -9,24 +9,30 @@ let searchResults;
 let form;
 function handleClick(e, library, searchQuery) {
   const target = e.target;
-  const id = target.id;
+  let id = target.id;
 
-  if (target.classList.contains('book-has-read-btn')) {
+  if (target.classList.contains('js-book__has-read-btn')) {
     library.handleReadStatus(target, library.books);
-  } else if (target.classList.contains('open-modal-btn')) {
+  } else if (target.classList.contains('js-open-modal-btn')) {
     modal = new Modal(id);
 
-    if (id === 'search') form = new SearchForm(modal.contentContainer.id);
+    if (id === 'js-search') {
+      id = 'search';
+      form = new SearchForm(modal.contentContainer.id);
+    }
 
-    if (id === 'custom') form = new CustomForm(modal.contentContainer.id);
+    if (id === 'js-custom') {
+      id = 'custom';
+      form = new CustomForm(modal.contentContainer.id);
+    }
 
     form.render();
-  } else if (target.classList.contains('close-modal-btn')) {
+  } else if (target.classList.contains('js-modal__close-btn')) {
     modal.remove();
     modal = undefined;
-  } else if (target.classList.contains('sort-btn')) {
+  } else if (target.classList.contains('js-sort-btn')) {
     library.handleSort(id);
-  } else if (target.classList.contains('book-delete-btn')) {
+  } else if (target.classList.contains('js-book__delete-btn')) {
     library.handleRemove(target.parentNode.id);
   } else if (id === 'search-btn') {
     searchQuery = form.getSearchValue();
@@ -39,7 +45,7 @@ function handleClick(e, library, searchQuery) {
     searchResults = new Search(resultsModal.contentContainer.id, searchQuery);
 
     searchResults.run();
-  } else if (target.classList.contains('add-to-library-btn')) {
+  } else if (target.classList.contains('js-book_add-to-library-btn')) {
     // add book to user's library by grabbing matching id from results and re-render
     library.handleAddBookFromSearch(
       searchResults.results.books,
