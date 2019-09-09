@@ -1,11 +1,11 @@
 .modal {
   position: absolute;
   top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  background: rgba(0, 0, 0, 0.8);
   z-index: 1001;
+  background: rgba(0, 0, 0, 0.8);
+  border: none;
+  min-height: 100vh;
+  min-width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,11 +16,29 @@
   color: white;
 }
 
-#modal-content-container {
+.modal__content-container {
   position: relative;
   background: white;
   padding: 40px;
 }
 
-.close-modal-btn {
+.js-modal__close-btn {
+  position: absolute;
+  background-color: #b72d3b;
+  border-radius: 5px;
+  padding: 5px 10px;
+  border: none;
+  color: white;
+  font-size: 1.2em;
+  font-weight: bold;
+  top: 10px;
+  right: 10px;
+}
+
+.js-modal__close-btn:hover {
+  background-color: #7b1e28;
+}
+
+#modal__results-content {
+  margin: 20px;
 }
