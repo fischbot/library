@@ -1,10 +1,10 @@
 import UserLibrary from './UserLibrary/UserLibrary';
 import handleClick from './utils/handleClick';
-import sampleData from './assets/sample_data';
+import { checkStorage } from './utils/storage';
 import './main.scss';
 
 (function() {
-  const library = new UserLibrary(sampleData);
+  let library = new UserLibrary(checkStorage());
 
   let searchQuery = '';
 

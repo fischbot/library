@@ -9,7 +9,7 @@ let form;
 function handleClick(e, library, searchQuery) {
   const target = e.target;
   let id = target.id;
-
+  // if (id == 'custom-submit-btn') debugger;
   if (target.classList.contains('js-book__has-read-btn')) {
     library.handleReadStatus(target, library.books);
   } else if (target.classList.contains('js-open-modal-btn')) {

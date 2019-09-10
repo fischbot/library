@@ -19,7 +19,7 @@ const sampleData = [
     authors: ['J.R.R. Tolkien'],
     publishedDate: '',
     description: `
-      Aenean lacinia bibendum nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum.
+      [unavailable]
     `,
     imgUrl: '',
     pages: 492,
