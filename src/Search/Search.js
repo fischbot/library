@@ -12,6 +12,7 @@ class Search {
   run() {
     const API_URL = 'https://www.googleapis.com/books/v1/volumes?q=';
     let books = [];
+    this.view.toggleLoading();
     fetch(`${API_URL}${this.searchValue}`)
       .then(response => response.json())
       .then(response => {
@@ -26,6 +27,7 @@ class Search {
           );
           this.results.add(book);
         });
+        this.view.toggleLoading();
         this.view.render(this.results.books, true);
       })
       .catch(error => {
