@@ -46,7 +46,8 @@ class Form extends View {
 
     this.elements.map(element => form.appendChild(element));
     this.containerId.appendChild(form);
-
+    // prevent query from showing in URL
+    form.addEventListener('submit', () => false);
     // make sure input gets focus every time the form is rendered
     form.getElementsByTagName('input')[0].focus();
   }
