@@ -45,7 +45,8 @@ function handleClick(e, library, searchQuery) {
     searchResults = new Search(resultsModal.contentContainer.id, searchQuery);
 
     searchResults.run();
-  } else if (target.classList.contains('js-book_add-to-library-btn')) {
+    }
+  } else if (target.classList.contains('js-book__add-to-library-btn')) {
     // add book to user's library by grabbing matching id from results and re-render
     library.handleAddBookFromSearch(
       searchResults.results.books,

@@ -26,7 +26,7 @@ class ViewBook extends View {
         '',
         `${book.pages} pages`
       ),
-      this.createViewElement('p', ['book-description'], '', book.description)
+      this.createViewElement('p', ['book__description'], '', book.description)
     ];
 
     /// add 'close' and 'read/not read' buttons for books in user's library only
