@@ -1,4 +1,7 @@
 .book {
+  * {
+    transition: all 400ms ease;
+  }
   position: relative;
   border: 5px solid #1abdbf;
   background: #f6f6e4;
