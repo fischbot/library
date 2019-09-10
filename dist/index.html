@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>My Library</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Megrim|Raleway:400,700"
+      rel="stylesheet"
+    />
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"
+    ></script>
+  </head>
+
+  <body>
+    <header>
+      <h1>My Library</h1>
+      <div class="add-book-menu menu-container">
+        <h2>Add a Book:</h2>
+        <div class="add-book-menu__btns menu-btns-container">
+          <button class="js-open-modal-btn menu-btn" id="js-search">
+            Search
+          </button>
+          <button class="js-open-modal-btn menu-btn" id="js-custom">
+            Add Your Own
+          </button>
+        </div>
+      </div>
+      <div class="sort-menu menu-container">
+        <h2>Sort by:</h2>
+        <div class="sort-menu__btns menu-btns-container">
+          <button class="js-sort-btn menu-btn" id="js-sort-by-title">
+            Title
+          </button>
+          <button class="js-sort-btn menu-btn" id="js-sort-by-authors">
+            Author
+          </button>
+          <button class="js-sort-btn menu-btn" id="js-sort-by-pages">
+            Pages
+          </button>
+          <!-- <button class="sort-btn" id="js-sort-by-recent">Recent</button>
+                      <button class="sort-btn" id="js-sort-by-read">Read/Not Read</button> -->
+        </div>
+      </div>
+      <!-- /#sort -->
+    </header>
+
+    <div class="book-list" id="js-user-library"></div>
+
+    <footer>
+      <p>
+        &copy;2018 Made by
+        <a href="https://github.com/robotspacefish" target="_blank"
+          >robotspacefish</a
+        >
+      </p>
+    </footer>
+
+    <script src="main.js"></script>
+  </body>
+</html>

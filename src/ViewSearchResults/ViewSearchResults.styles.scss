@@ -1,0 +1,26 @@
+#modal__results-content {
+  width: 100%;
+  max-width: 1200px;
+  min-height: 80vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+#modal__results-content .book {
+  grid-template-rows: 60px auto 50px 60px auto 40px;
+  grid-template-areas: 'title title' 'author author' 'img published' 'img pages' 'description description' 'addBtn addBtn';
+  background: #eee;
+  border: 2px solid #7a7f7f;
+}
+.js-book__add-to-library-btn {
+  grid-area: addBtn;
+  background: #1dbdbf;
+  border: 0;
+  color: white;
+  font-size: 1.4em;
+  &:hover {
+    background: #117677;
+  }
+}

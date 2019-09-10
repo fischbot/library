@@ -1,0 +1,23 @@
+.modal {
+  * {
+    transition: all 400ms ease;
+  }
+  position: absolute;
+  top: 0;
+  z-index: 1001;
+  background: rgba(0, 0, 0, 0.8);
+  border: none;
+  min-height: 100vh;
+  min-width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .modal__content-container {
+    position: relative;
+    background: white;
+    padding: 40px;
+  }
+  .js-modal__close-btn {
+    background-color: #b72d3b;
+  }
+}

@@ -1,0 +1,109 @@
+.book {
+  * {
+    transition: all 400ms ease;
+  }
+  position: relative;
+  border: 5px solid #1abdbf;
+  background: #f6f6e4;
+  max-width: 350px;
+  height: 400px;
+  margin: 3% 1%;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: repeat(2, 50%);
+  grid-template-rows: 60px auto 50px 60px auto;
+  grid-template-areas: 'title title' 'author author' 'img published' 'img pages' 'description description';
+  &:hover {
+    box-shadow: 2px 1px 3px #a2a2a2;
+  }
+  .js-book__delete-btn {
+    opacity: 0;
+    background-color: rgba(183, 54, 45, 0.7);
+  }
+  &:hover .js-book__delete-btn {
+    opacity: 1;
+  }
+  .js-book__has-read-btn {
+    opacity: 0;
+    position: absolute;
+    bottom: 0;
+    border: none;
+    width: 100%;
+    padding: 10px 0;
+    height: 40px;
+    font-size: 1.4em;
+    background: #1abdbf;
+    color: #fff;
+    grid-area: read;
+  }
+  &:hover .js-book__has-read-btn {
+    opacity: 1;
+    background-color: rgba(1, 181, 186, 0.7);
+    &:hover {
+      background: #15a8ac;
+    }
+  }
+  &:hover .js-book__has-read-btn.read {
+    background-color: rgba(112, 191, 128, 0.8);
+  }
+  .js-book__has-read-btn.read {
+    background: #70bf80;
+    &:hover {
+      background: #6bae7c;
+    }
+  }
+}
+
+.book__title {
+  background: #7a7f7f;
+  border: none;
+  color: #fff;
+  font-size: 1.25em;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-area: title;
+}
+
+.book__author {
+  padding: 2%;
+  font-size: 1.14em;
+  text-align: right;
+  grid-area: author;
+}
+
+.book__img {
+  max-height: 100px;
+  height: auto;
+  width: auto;
+  grid-area: img;
+  justify-self: center;
+  align-self: center;
+}
+
+.book__published-date {
+  margin: 2% 0;
+  grid-area: published;
+  align-self: end;
+}
+
+.book__page-count {
+  grid-area: pages;
+}
+
+.book__description {
+  padding: 0 3% 10%;
+  font-size: 1.2em;
+  line-height: 1.4em;
+  grid-area: description;
+  overflow-y: scroll;
+}
+
+.scroll-Y {
+  overflow-y: scroll;
+}
+
+.read-border {
+  border: 5px solid #70bf80;
+}
