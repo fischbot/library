@@ -7,7 +7,7 @@
 }
 
 #modal__results-content .book {
-  grid-template-rows: 60px repeat(3, auto) 100px 40px;
+  grid-template-rows: 60px auto 50px 60px auto 40px;
   grid-template-areas: 'title title' 'author author' 'img published' 'img pages' 'description description' 'addBtn addBtn';
   background: #eee;
   border: 2px solid #7a7f7f;

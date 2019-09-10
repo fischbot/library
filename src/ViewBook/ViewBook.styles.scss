@@ -8,7 +8,7 @@
   overflow: hidden;
   display: grid;
   grid-template-columns: repeat(2, 50%);
-  grid-template-rows: 60px repeat(3, auto) 140px;
+  grid-template-rows: 60px auto 50px 60px auto;
   grid-template-areas: 'title title' 'author author' 'img published' 'img pages' 'description description';
   &:hover {
     box-shadow: 2px 1px 3px #a2a2a2;
@@ -71,7 +71,8 @@
 }
 
 .book__img {
-  height: 100px;
+  max-height: 100px;
+  height: auto;
   width: auto;
   grid-area: img;
   justify-self: center;
