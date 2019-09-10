@@ -8,12 +8,13 @@ class Form extends View {
     this.formClasses = [];
   }
 
-  input(type, name, classes, id, placeholder, required) {
+  input(type, name, classes, id, placeholder, required, autofocus) {
     const i = this.createViewElement('input', classes, id);
     i.type = type;
     i.name = name;
     i.placeholder = placeholder;
     i.required = required;
+    i.autofocus = autofocus;
     return i;
   }
 
@@ -27,8 +28,6 @@ class Form extends View {
     l.setAttribute('for', forName);
     return l;
   }
-
-  textArea(name, classes, id, rows, cols) {}
 
   storeElement(element) {
     this.elements = [...this.elements, element];
@@ -47,6 +46,9 @@ class Form extends View {
 
     this.elements.map(element => form.appendChild(element));
     this.containerId.appendChild(form);
+
+    // make sure input gets focus every time the form is rendered
+    form.getElementsByTagName('input')[0].focus();
   }
 }
 
