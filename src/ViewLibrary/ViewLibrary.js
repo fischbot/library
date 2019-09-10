@@ -13,12 +13,15 @@ class ViewLibrary extends View {
   }
 
   render(books, isSearchResult) {
-    if (books.length === 0) this.emptyMsg(this.msg);
-    books.map(book => {
-      const view = new ViewBook(isSearchResult);
-      const b = view.createBookView(book);
-      this.containerId.appendChild(b);
-    });
+    if (books.length === 0) {
+      this.emptyMsg(this.msg);
+    } else {
+      books.map(book => {
+        const view = new ViewBook(isSearchResult);
+        const b = view.createBookView(book);
+        this.containerId.appendChild(b);
+      });
+    }
   }
 }
 
