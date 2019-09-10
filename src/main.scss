@@ -49,6 +49,7 @@ header {
   right: 0;
   z-index: 1000;
   text-align: center;
+  padding-bottom: 10px;
 }
 
 .menu-container {
@@ -88,4 +89,8 @@ header {
   &:hover {
     background-color: #7b1e28;
   }
+}
+
+footer {
+  padding: 20px 0;
 }
