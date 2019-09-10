@@ -4,7 +4,6 @@ import SearchForm from '../SearchForm/SearchForm';
 import CustomForm from '../CustomForm/CustomForm';
 
 let modal;
-let resultsModal;
 let searchResults;
 let form;
 function handleClick(e, library, searchQuery) {
@@ -36,15 +35,15 @@ function handleClick(e, library, searchQuery) {
     library.handleRemove(target.parentNode.id);
   } else if (id === 'search-btn') {
     searchQuery = form.getSearchValue();
+    if (!searchQuery.trim()) {
+      form.error('Cannot be blank');
+    } else {
+      modal.remove();
+      modal = new Modal('results');
 
-    modal.remove();
-    modal = undefined;
+      searchResults = new Search(modal.contentContainer.id, searchQuery);
 
-    resultsModal = new Modal('results');
-
-    searchResults = new Search(resultsModal.contentContainer.id, searchQuery);
-
-    searchResults.run();
+      searchResults.run();
     }
   } else if (target.classList.contains('js-book__add-to-library-btn')) {
     // add book to user's library by grabbing matching id from results and re-render
@@ -53,13 +52,17 @@ function handleClick(e, library, searchQuery) {
       target.parentNode.id
     );
     // close modal
-    resultsModal.remove();
-    resultsModal = undefined;
-  } else if (id === 'custom-submit-btn') {
     modal.remove();
     modal = undefined;
+  } else if (id === 'custom-submit-btn') {
     let book = form.handleSubmit(library.books);
-    library.addBookFromCustom(book);
+    if (book === 'error') {
+      form.error('Title and Author are required');
+    } else {
+      modal.remove();
+      modal = undefined;
+      library.addBookFromCustom(book);
+    }
   }
 
   e.preventDefault();
