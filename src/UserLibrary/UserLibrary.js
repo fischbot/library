@@ -5,7 +5,7 @@ import sort from '../utils/sort';
 class UserLibrary extends Library {
   constructor(books) {
     super(books);
-    this.view = new ViewUserLibrary('js-book-list');
+    this.view = new ViewUserLibrary('js-user-library');
     this.view.render(this.books);
   }
 
@@ -15,6 +15,9 @@ class UserLibrary extends Library {
     const isRead = target.classList.contains('read');
     target.innerText = isRead ? 'Not Read' : 'Read';
     isRead ? target.classList.remove('read') : target.classList.add('read');
+    isRead
+      ? target.parentNode.classList.remove('read-border')
+      : target.parentNode.classList.add('read-border');
   }
 
   handleReadStatus(target, books) {
@@ -40,7 +43,6 @@ class UserLibrary extends Library {
   handleAddBookFromSearch(books, bookId) {
     const book = this.findBook(books, bookId);
     this.add(book[0]);
-    // debugger;
     this.view.updateView(this.books);
   }
 
