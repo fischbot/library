@@ -16,22 +16,13 @@ class Search {
       .then(response => response.json())
       .then(response => {
         books = response.items.map(item => {
-          const {
-            title,
-            authors,
-            publishedDate,
-            description,
-            imgUrl,
-            pageCount
-          } = item.volumeInfo;
-
           const book = new Book(
-            title,
-            authors,
-            publishedDate,
-            description,
-            imgUrl,
-            pageCount
+            item.volumeInfo.title,
+            item.volumeInfo.authors,
+            item.volumeInfo.publishedDate,
+            item.volumeInfo.description,
+            item.volumeInfo.imageLinks.thumbnail,
+            item.volumeInfo.pageCount
           );
           this.results.add(book);
         });
@@ -39,7 +30,6 @@ class Search {
       })
       .catch(error => {
         this.view.emptyMsg('Something went wrong');
-        console.error('Error:', error);
       });
   }
 }
