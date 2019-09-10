@@ -23,7 +23,7 @@ class CustomForm extends Form {
         true
       ),
       this.addInputEntry(
-        'author',
+        'authors',
         '',
         'Author(s)',
         'text',
@@ -108,10 +108,17 @@ class CustomForm extends Form {
 
   handleSubmit(books) {
     const info = {};
+
+    // set up input values to match Book format
     this.inputs.map(input => {
       let { name, value } = input;
-      info[name] = value;
+      if (name === 'authors') {
+        value = value.split(',');
+      }
+      return (info[name] = value);
     });
+
+    // destructure info
     const {
       title,
       authors,
@@ -120,6 +127,10 @@ class CustomForm extends Form {
       imgUrl,
       pageCount
     } = info;
+
+    // these fields are required
+    if (!title && authors.length === 0) return 'error';
+
     return new Book(
       title,
       authors,
