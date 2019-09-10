@@ -121,6 +121,18 @@ eval("\n\nvar stylesInDom = {};\n\nvar isOldIE = function isOldIE() {\n  var mem
 
 /***/ }),
 
+/***/ "./src/Book/Book.js":
+/*!**************************!*\
+  !*** ./src/Book/Book.js ***!
+  \**************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\nclass Book {\n  constructor(\n    title,\n    authors,\n    publishedDate,\n    description,\n    imgUrl,\n    pageCount,\n    id,\n    hasRead\n  ) {\n    this.title = title;\n    this.authors = authors;\n    this.publishedDate = publishedDate;\n    this.description = description;\n    this.imgUrl = imgUrl;\n    this.pageCount = pageCount;\n    this.id = id;\n    this.hasRead = hasRead;\n    debugger;\n  }\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Book);\n\n\n//# sourceURL=webpack:///./src/Book/Book.js?");
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
@@ -129,7 +141,7 @@ eval("\n\nvar stylesInDom = {};\n\nvar isOldIE = function isOldIE() {\n  var mem
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _main_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./main.css */ \"./src/main.css\");\n/* harmony import */ var _main_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_main_css__WEBPACK_IMPORTED_MODULE_0__);\nconsole.log('Hello from webpack');\n\n\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Book_Book__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Book/Book */ \"./src/Book/Book.js\");\n/* harmony import */ var _main_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./main.css */ \"./src/main.css\");\n/* harmony import */ var _main_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_main_css__WEBPACK_IMPORTED_MODULE_1__);\n\n\n\nconst book = new _Book_Book__WEBPACK_IMPORTED_MODULE_0__[\"default\"]('The Hobbit', 'JRR Tolkien');\n\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ }),
 
