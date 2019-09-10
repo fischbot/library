@@ -17,8 +17,9 @@ class CustomForm extends Form {
         '',
         'Title',
         'text',
-        'add-custom-title',
+        'custom-form__title',
         'Add Title',
+        true,
         true
       ),
       this.addInputEntry(
@@ -26,8 +27,8 @@ class CustomForm extends Form {
         '',
         'Author(s)',
         'text',
-        'add-custom-author',
-        'Add Author (if multiple, separate with a comma)',
+        'custom-form__author',
+        'Add Author',
         true
       ),
       this.addInputEntry(
@@ -35,7 +36,7 @@ class CustomForm extends Form {
         '',
         'Page Count',
         'number',
-        'add-custom-pages',
+        'custom-form__pages',
         'Add Page Count',
         false
       ),
@@ -44,7 +45,7 @@ class CustomForm extends Form {
         '',
         'Year Published',
         'date',
-        'add-custom-publish-date',
+        'custom-form__publish-date',
         'Add Year Published',
         false
       ),
@@ -53,7 +54,7 @@ class CustomForm extends Form {
         '',
         'Image URL',
         'text',
-        'add-custom-image',
+        'custom-form__image',
         'Add Custom Image URL',
         false
       ),
@@ -62,7 +63,7 @@ class CustomForm extends Form {
         '',
         'Description',
         'text',
-        'add-custom-description',
+        'custom-form__description',
         'Add Short Description',
         false
       )
@@ -70,7 +71,9 @@ class CustomForm extends Form {
     sections.map(section => this.createSection(section));
     this.inputs = sections.map((section, i) => section[1]);
 
-    this.storeElement(this.button([], 'custom-submit-btn', 'Submit'));
+    this.storeElement(
+      this.button(['form__submit-btn'], 'custom-submit-btn', 'Submit')
+    );
   }
 
   addInputEntry(
@@ -80,23 +83,25 @@ class CustomForm extends Form {
     inputType,
     inputId,
     inputPlaceholder,
-    InputRequired
+    InputRequired,
+    InputAutofocus
   ) {
     return [
       this.label(forName, ['custom-label'], labelId, labelText),
       this.input(
         inputType,
         forName,
-        ['custom-field'],
+        ['form__input', 'custom-form__field'],
         inputId,
         inputPlaceholder,
-        InputRequired
+        InputRequired,
+        InputAutofocus
       )
     ];
   }
 
   createSection(args) {
-    const div = this.createViewElement('div', ['custom-section']);
+    const div = this.createViewElement('div', ['custom-form__section']);
     args.map(e => div.appendChild(e));
     this.storeElement(div);
   }

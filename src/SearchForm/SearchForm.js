@@ -14,14 +14,15 @@ class SearchForm extends Form {
     const input = this.input(
       'search',
       'search',
-      [],
+      ['form__input'],
       'book-search',
       'Enter a book title or author',
+      true,
       true
     );
 
     // create a search/submit button
-    const btn = this.button([], 'search-btn', 'Search');
+    const btn = this.button(['form__submit-btn'], 'search-btn', 'Search');
 
     [input, btn].map(e => this.storeElement(e));
   }
