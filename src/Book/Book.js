@@ -11,7 +11,8 @@ class Book {
   ) {
     this.title = title || '[unavailable]';
     this.authors = authors || '[unavailable]';
-    this.publishedDate = publishedDate || '[unavailable]';
+    this.publishedDate =
+      new Date(publishedDate).getFullYear() || '[unavailable]';
     this.description = description || '[unavailable]';
     this.imgUrl = imgUrl || './img/none.jpg';
     this.pages = pages || '[unavailable]';

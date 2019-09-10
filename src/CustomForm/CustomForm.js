@@ -44,7 +44,7 @@ class CustomForm extends Form {
         'publishedDate',
         '',
         'Year Published',
-        'date',
+        'number',
         'custom-form__publish-date',
         'Add Year Published',
         false
@@ -131,10 +131,12 @@ class CustomForm extends Form {
     // these fields are required
     if (!title && authors.length === 0) return 'error';
 
+    // the '1-1-' is so Book can convert the publishedDate string to a Date correctly
+    // without it, it outputs the year prior to the one input
     return new Book(
       title,
       authors,
-      publishedDate,
+      '1-1-' + publishedDate,
       description,
       imgUrl,
       pageCount
