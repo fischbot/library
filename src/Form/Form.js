@@ -34,6 +34,14 @@ class Form extends View {
     this.elements = [...this.elements, element];
   }
 
+  error(text) {
+    const e = this.createViewElement('p', ['form__error-msg'], '', text);
+    this.containerId.appendChild(e);
+    setTimeout(() => {
+      e.remove();
+    }, 2000);
+  }
+
   render() {
     const form = this.createViewElement('form', this.formClasses);
 
