@@ -8,8 +8,8 @@ class Modal extends View {
     this.modalId = `${modalType}-modal`;
     this.contentContainer = this.createViewElement(
       'div',
-      ['modal-content-container'],
-      `${modalType}-content`
+      ['modal__content-container'],
+      `modal__${modalType}-content`
     );
     this.render();
   }
@@ -26,7 +26,7 @@ class Modal extends View {
   createCloseBtn(parent) {
     const closeBtn = this.createViewElement(
       'button',
-      ['close-modal-btn'],
+      ['js-modal__close-btn', 'close-btn'],
       '',
       'X'
     );
