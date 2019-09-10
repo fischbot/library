@@ -1,9 +1,11 @@
 #modal__results-content {
   width: 100%;
   max-width: 1200px;
+  min-height: 80vh;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
 }
 
 #modal__results-content .book {
