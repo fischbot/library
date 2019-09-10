@@ -1,5 +1,5 @@
 import Form from '../Form/Form';
-import './SearchForm.styles.css';
+import './SearchForm.styles.scss';
 
 class SearchForm extends Form {
   constructor(containerId) {

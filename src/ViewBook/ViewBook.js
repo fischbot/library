@@ -1,5 +1,5 @@
 import View from '../View/View';
-import './ViewBook.styles.css';
+import './ViewBook.styles.scss';
 
 class ViewBook extends View {
   constructor(isSearchResult) {

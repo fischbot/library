@@ -1,4 +1,4 @@
-import './View.styles.css';
+import './View.styles.scss';
 
 class View {
   constructor(containerId) {

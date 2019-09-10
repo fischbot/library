@@ -1,4 +1,5 @@
 import View from '../View/View';
+import './Form.styles.scss';
 
 class Form extends View {
   constructor(containerId) {

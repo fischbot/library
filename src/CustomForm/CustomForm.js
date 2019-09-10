@@ -1,5 +1,6 @@
 import Form from '../Form/Form';
 import Book from '../Book/Book';
+import './CustomForm.styles.scss';
 
 class CustomForm extends Form {
   constructor(parentId) {

@@ -1,4 +1,5 @@
 import ViewLibrary from '../ViewLibrary/ViewLibrary';
+import './ViewSearchResults.styles.scss';
 
 class ViewSearchResults extends ViewLibrary {
   constructor(containerId, results) {

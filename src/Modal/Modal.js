@@ -1,5 +1,5 @@
 import View from '../View/View';
-import './Modal.styles.css';
+import './Modal.styles.scss';
 
 class Modal extends View {
   constructor(modalType) {
