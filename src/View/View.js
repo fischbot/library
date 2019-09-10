@@ -26,7 +26,7 @@ class View {
   }
 
   emptyMsg(content) {
-    const emptyMsg = this.createViewElement('p', [], 'empty-msg', content);
+    const emptyMsg = this.createViewElement('p', ['empty-msg'], '', content);
     this.containerId.appendChild(emptyMsg);
   }
 }
