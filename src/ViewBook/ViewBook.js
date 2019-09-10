@@ -9,20 +9,33 @@ class ViewBook extends View {
   }
 
   createBookView(book) {
-    const container = this.createViewElement('div', ['book'], book.id);
+    let bookClasses = ['book'];
+    if (book.hasOwnProperty('hasRead') && book.hasRead) {
+      bookClasses = [...bookClasses, 'read-border'];
+    }
+    const container = this.createViewElement('div', bookClasses, book.id);
+
+    const sub = book.title.substring(0, 32);
+    const isTruncated = sub.length < book.title.length;
+    const title = isTruncated ? sub + '...' : sub;
     let values = [
-      this.createViewElement('h2', ['book-title'], '', book.title),
-      this.createViewElement('h3', ['book-author'], '', book.author),
-      this.createViewElement('img', ['book-img'], '', book.imgUrl),
+      this.createViewElement('h2', ['book__title'], '', title),
+      this.createViewElement(
+        'h3',
+        ['book__author'],
+        '',
+        `by ${book.authors[0]}`
+      ),
+      this.createViewElement('img', ['book__img'], '', book.imgUrl),
       this.createViewElement(
         'p',
-        ['book-published-date'],
+        ['book__published-date'],
         '',
         `Published: ${book.publishedDate}`
       ),
       this.createViewElement(
         'p',
-        ['book-page-count'],
+        ['book__page-count'],
         '',
         `${book.pages} pages`
       ),
@@ -51,7 +64,7 @@ class ViewBook extends View {
         ...values,
         this.createViewElement(
           'button',
-          ['js-book_add-to-library-btn'],
+          ['js-book__add-to-library-btn'],
           book.id,
           'Add to Library'
         )
