@@ -24,7 +24,7 @@ class Form extends View {
 
   label(forName, classes, id, text) {
     const l = this.createViewElement('label', classes, id, text);
-    l.for = forName; // ?? not showing up, but shows in debugger
+    l.setAttribute('for', forName);
     return l;
   }
 
