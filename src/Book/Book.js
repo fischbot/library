@@ -9,12 +9,12 @@ class Book {
     id,
     hasRead
   ) {
-    this.title = title;
-    this.authors = authors;
-    this.publishedDate = publishedDate;
-    this.description = description;
-    this.imgUrl = imgUrl;
-    this.pages = pages;
+    this.title = title || '[unavailable]';
+    this.authors = authors || '[unavailable]';
+    this.publishedDate = publishedDate || '[unavailable]';
+    this.description = description || '[unavailable]';
+    this.imgUrl = imgUrl || './img/none.jpg';
+    this.pages = pages || '[unavailable]';
     this.id = this.createId(`${title} ${publishedDate}`);
     this.hasRead = hasRead;
   }
