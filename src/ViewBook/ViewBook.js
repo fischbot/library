@@ -44,11 +44,13 @@ class ViewBook extends View {
 
     /// add 'close' and 'read/not read' buttons for books in user's library only
     if (!this.isSearchResult) {
+      let btnClasses = ['js-book__has-read-btn'];
+      if (book.hasRead) btnClasses = [...btnClasses, 'read'];
       values = [
         ...values,
         this.createViewElement(
           'button',
-          ['js-book__has-read-btn', book.hasRead && 'read'],
+          btnClasses,
           '',
           book.hasRead ? 'Read' : 'Not Read'
         ),
