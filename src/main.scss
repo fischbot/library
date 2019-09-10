@@ -2,7 +2,6 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  /* transition: all 300ms; */
 }
 
 body {
@@ -37,6 +36,7 @@ h3 {
 
 button {
   cursor: pointer;
+  font-family: inherit;
 }
 
 header {
@@ -61,18 +61,31 @@ header {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  button {
+    font-family: inherit;
+    font-size: 0.9em;
+    background: #eee;
+    border: 1px solid #b5b9bd;
+    color: #999ea5;
+    margin: 5px;
+    padding: 5px;
+    &:hover {
+      color: #474c53;
+    }
+  }
 }
 
-.menu-btns-container button {
-  font-family: inherit;
-  font-size: 0.9em;
-  background: #eee;
-  border: 1px solid #b5b9bd;
-  color: #999ea5;
-  margin: 5px;
-  padding: 5px;
-}
-
-.menu-btns-container button:hover {
-  color: #474c53;
+.close-btn {
+  position: absolute;
+  border-radius: 5px;
+  padding: 5px 10px;
+  border: none;
+  color: white;
+  font-size: 1.2em;
+  font-weight: bold;
+  top: 10px;
+  right: 10px;
+  &:hover {
+    background-color: #7b1e28;
+  }
 }

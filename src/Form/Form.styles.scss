@@ -1,0 +1,21 @@
+.form__submit-btn {
+  width: 100%;
+  padding: 5px;
+  background: #15a8ac;
+  color: white;
+  font-weight: bold;
+  border: 1px solid #15a8ac;
+  font-size: 1em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  &:hover {
+    background: #108083;
+  }
+}
+
+.form__input {
+  width: 100%;
+  border: 1px solid #7a7f7f;
+  padding: 5px;
+  font-size: 1em;
+}
