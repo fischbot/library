@@ -1,3 +1,5 @@
+import { generateId } from '../utils/helpers';
+
 class Book {
   constructor(
     title,
@@ -22,15 +24,9 @@ class Book {
     this.description = description || '[unavailable]';
     this.imgUrl = imgUrl || './img/none.jpg';
     this.pages = pages || '[unavailable]';
-    this.id = this.createId(`${title} ${publishedDate}`);
+    this.id = generateId(title);
     this.hasRead = hasRead || false;
-  }
-
-  createId(bookTitle) {
-    return bookTitle
-      .toLowerCase()
-      .split(' ')
-      .join('-');
+    this.sortId = 0;
   }
 
   toggleReadStatus(book) {
