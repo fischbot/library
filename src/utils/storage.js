@@ -27,7 +27,7 @@ function saveToLocalStorage(books) {
 function retrieveFromLocalStorage() {
   let data = window.localStorage.getItem('library');
   let localData = JSON.parse(data);
-  console.log(localData);
+
   return localData;
 }
 
