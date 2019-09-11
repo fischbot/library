@@ -1,12 +1,14 @@
 import Library from '../Library/Library';
 import ViewUserLibrary from '../ViewUserLibrary/ViewUserLibrary';
+import { updateLocalStorage } from '../utils/storage';
 import sort from '../utils/sort';
 
 class UserLibrary extends Library {
   constructor(books) {
     super(books);
+    this.update(this.createBooksFromObjects(books));
     this.view = new ViewUserLibrary('js-user-library');
-    this.view.render(this.books);
+    this.view.render(this.books, false);
   }
 
   createSortId() {}
@@ -28,6 +30,7 @@ class UserLibrary extends Library {
         break;
       }
     }
+    updateLocalStorage(books);
   }
 
   handleSort(id) {

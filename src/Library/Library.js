@@ -1,3 +1,5 @@
+import Book from '../Book/Book';
+
 class Library {
   constructor(books = []) {
     this.books = [...books];
@@ -13,6 +15,21 @@ class Library {
 
   update(books) {
     this.books = [...books];
+  }
+
+  createBooksFromObjects(books) {
+    return books.map(
+      b =>
+        new Book(
+          b.title,
+          b.authors,
+          b.publishedDate,
+          b.description,
+          b.imgUrl,
+          b.pages,
+          b.hasRead
+        )
+    );
   }
 }
 

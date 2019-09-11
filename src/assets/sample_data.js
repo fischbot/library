@@ -11,7 +11,6 @@ const sampleData = [
     imgUrl:
       'https://books.google.com/books/content?id=hFfhrCWiLSMC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',
     pages: 300,
-    id: '',
     hasRead: true
   },
   {
@@ -23,7 +22,6 @@ const sampleData = [
     `,
     imgUrl: '',
     pages: 492,
-    id: '',
     hasRead: false
   },
   {
@@ -36,31 +34,8 @@ const sampleData = [
     imgUrl:
       'https://books.google.com/books/content?id=mA8A4BYWB1IC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',
     pages: 3264,
-    id: '',
     hasRead: false
   }
 ];
 
-const books = sampleData.map(book => {
-  let {
-    title,
-    authors,
-    publishedDate,
-    description,
-    imgUrl,
-    pages,
-    id,
-    hasRead
-  } = book;
-  return new Book(
-    title,
-    authors,
-    publishedDate,
-    description,
-    imgUrl,
-    pages,
-    id,
-    hasRead
-  );
-});
-export default books;
+export default sampleData;
