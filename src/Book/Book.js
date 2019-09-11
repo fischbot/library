@@ -26,7 +26,6 @@ class Book {
     this.pages = pages || '[unavailable]';
     this.id = generateId(title);
     this.hasRead = hasRead || false;
-    this.sortId = 0;
   }
 
   toggleReadStatus(book) {
