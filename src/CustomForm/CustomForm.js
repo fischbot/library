@@ -133,14 +133,8 @@ class CustomForm extends Form {
 
     // the '1-1-' is so Book can convert the publishedDate string to a Date correctly
     // without it, it outputs the year prior to the one input
-    return new Book(
-      title,
-      authors,
-      '1-1-' + publishedDate,
-      description,
-      imgUrl,
-      pageCount
-    );
+    let published = publishedDate ? '1-1-' + publishedDate : '';
+    return new Book(title, authors, published, description, imgUrl, pageCount);
   }
 }
 
