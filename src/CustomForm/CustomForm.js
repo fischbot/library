@@ -28,7 +28,7 @@ class CustomForm extends Form {
         'Author(s)',
         'text',
         'custom-form__author',
-        'Add Author',
+        'Separate multiple authors with comma',
         true
       ),
       this.addInputEntry(

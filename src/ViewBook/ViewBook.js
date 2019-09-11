@@ -24,7 +24,7 @@ class ViewBook extends View {
         'h3',
         ['book__author'],
         '',
-        `by ${book.authors[0]}`
+        `by ${book.authors.join(', ')}`
       ),
       this.createViewElement('img', ['book__img'], '', book.imgUrl),
       this.createViewElement(
