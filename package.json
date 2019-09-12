@@ -2,7 +2,7 @@
   "name": "library",
   "version": "1.0.0",
   "private": true,
-  "repository": "git@github.com:robotspacefish/library.git",
+  "repository": "https://github.com/robotspacefish/library",
   "author": "robotspacefish <9095316+robotspacefish@users.noreply.github.com>",
   "license": "MIT",
   "dependencies": {
